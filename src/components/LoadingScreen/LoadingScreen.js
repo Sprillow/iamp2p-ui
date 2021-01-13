@@ -5,7 +5,7 @@ function LoadingScreen() {
   return (
     <div className='loading_screen_wrapper'>
       <div className='loading_screen'>
-        <img src='img/iamp2p-logo.svg' />
+        <img src='img/acorn-logo.svg' />
         <div>collecting your iamp2ps...</div>
       </div>
     </div>
