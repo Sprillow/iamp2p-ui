@@ -247,7 +247,7 @@ const howTosItems = [
               </div>
               <div className='guidebook-separate-line'>
                 Hierarchy adds another level of metadata to your goals. On
-                Acorn, there 4 hierarchy level options available inspired by a
+                IamP2P, there 4 hierarchy level options available inspired by a
                 tree mataphore: Root (primary goal) Trunk (high-level goal)
                 Branch (Sub-goal) Leaf (small goal) There is also the default
                 option of “no hierarchy”. Setting hierarchy for goals in a
@@ -303,7 +303,7 @@ const howTosItems = [
                 Click on “priority” button. You will be able to see the
                 aggregated votes for 4 factors that determine priority of the
                 card. For more information on how the prioritization system
-                works in Acorn see Prioritization.
+                works in IamP2P see Prioritization.
               </div>
             </div>
             <div className='guidebook-description-section'>
@@ -425,7 +425,7 @@ const howTosItems = [
             <div className='guidebook-description-section'>
               <div className='guidebook-separate-line'>
                 Point Connector is a feature that lets you connect your existing
-                cards quickly by connecting them 'point-to-point'. In Acorn
+                cards quickly by connecting them 'point-to-point'. In IamP2P
                 cards can only have one parent, but can have many children.
               </div>
             </div>
@@ -486,7 +486,7 @@ const howTosItems = [
                 Please note, the availablity of these selections depend on
                 existing realtionship(s) of your selected cards. You might need
                 to remove some existing connections first, to comply with the
-                one-parent-only rule in Acorn.
+                one-parent-only rule in IamP2P.
               </b>
             </div>
           </div>

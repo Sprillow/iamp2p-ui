@@ -18,7 +18,7 @@ import { cellIdToString } from 'connoropolous-hc-redux-middleware/build/main/lib
 
 // Local Imports
 import { PROFILES_APP_ID, PROFILES_DNA_NAME } from './holochainConfig'
-import acorn from './reducer'
+import iamp2p from './reducer'
 import signalsHandlers from './signalsHandlers'
 import { setProfilesCellId, setProjectsCellIds } from './cells/actions'
 import { fetchAgents } from './agents/actions'
@@ -42,9 +42,9 @@ const middleware = [holochainMiddleware(APP_WS_URL)]
 // which gives really awesome debugging for apps that use redux
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-// acorn is the top-level reducer. the second argument is custom Holochain middleware
+// iamp2p is the top-level reducer. the second argument is custom Holochain middleware
 let store = createStore(
-  acorn,
+  iamp2p,
   /* preloadedState, */ composeEnhancers(applyMiddleware(...middleware))
 )
 

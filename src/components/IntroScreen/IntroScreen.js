@@ -13,7 +13,7 @@ export default function IntroScreen() {
   const introScreensContents = [
     {
       image: 'img/intro-screen-image-1.svg',
-      title: 'Welcome to Acorn',
+      title: 'Welcome to IamP2P',
       description:
         'Collaborate with your team to accomplish your complex project by visualizing and managing your dreams, goals, and tasks',
     },
@@ -27,7 +27,7 @@ export default function IntroScreen() {
       image: 'img/intro-screen-image-3.svg',
       title: 'Make collaboration happen, peer-to-peer',
       description:
-        'Help your distributed team to stay on track of changes and updates, communicate easily, avoid double-work, and help each other accomplish your goals. Acorn is even built on peer-to-peer technology called Holochain.',
+        'Help your distributed team to stay on track of changes and updates, communicate easily, avoid double-work, and help each other accomplish your goals. IamP2P is even built on peer-to-peer technology called Holochain.',
     },
     {
       image: 'img/intro-screen-image-4.svg',

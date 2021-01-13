@@ -2,7 +2,7 @@
 
 import { SET_NAVIGATION_PREFERENCE } from './actions'
 
-const LOCAL_STORAGE_PREFIX = 'acorn-'
+const LOCAL_STORAGE_PREFIX = 'iamp2p-'
 const getLocalItem = key => {
   return localStorage.getItem(`${LOCAL_STORAGE_PREFIX}${key}`)
 }

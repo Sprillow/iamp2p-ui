@@ -195,8 +195,8 @@ class Header extends React.Component {
         <div className='header'>
           <div className='top-left-panel'>
             <NavLink to='/' className='home-link logo'>
-              <Icon name='acorn-logo-stroked.svg' className='not-hoverable' />
-              <p className='logo-name'>acorn</p>
+              <Icon name='iamp2p-logo-stroked.svg' className='not-hoverable' />
+              <p className='logo-name'>iamp2p</p>
             </NavLink>
             {this.props.whoami && (
               <Route path='/project'>

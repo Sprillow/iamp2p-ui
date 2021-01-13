@@ -78,14 +78,14 @@ echo "All finished!!!"
    template = ''
 {{ changelog }}
 
-This UI is useful only for the purposes of of running within acorn-release distribution. Do not download these files and try to run them directly, or standalone.
+This UI is useful only for the purposes of of running within iamp2p-release distribution. Do not download these files and try to run them directly, or standalone.
 '';
 
    # owner of the github repository that release are deployed to
    owner = "h-be";
 
    # repository name on github that release are deployed to
-   repo = "acorn-ui";
+   repo = "iamp2p-ui";
 
    # canonical local upstream name as per `git remote -v`
    upstream = "origin";

@@ -9,9 +9,9 @@ export default function ButtonWithPendingState({
   actionText,
 }) {
   return pending ? (
-    <span className='pending-acorn'>
+    <span className='pending-iamp2p'>
       <Icon
-        name='acorn-logo-stroked.svg'
+        name='iamp2p-logo-stroked.svg'
         className='white not-hoverable very-small'
       />
       <span>{pendingText}</span>

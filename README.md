@@ -1,6 +1,6 @@
-# acorn-ui
+# iamp2p-ui
 
-the user interface for Acorn app, see [acorn-hc](https://github.com/h-be/acorn-hc) for backend
+the user interface for IamP2P app, see [iamp2p-hc](https://github.com/h-be/iamp2p-hc) for backend
 
 ### UI
 
@@ -32,28 +32,29 @@ For documentation on the `src` code, check out the [README there](./src/README.m
 Use the nix shell to have npm installed and run npm install and start.
 
 ```shell
-nix-shell --run acorn-ui
+nix-shell --run iamp2p-ui
 ```
 
 #### Building For Release
 
 To set the version number for the release:
+
 1. update the `version.current` and `version.previous` properties of `config.nix`
 2. update the `version` property of `package.json` to the same thing as `version.current`
 
 Use the nix shell.
 
 ```shell
-nix-shell --run acorn-build
+nix-shell --run iamp2p-build
 ```
 
-Pass a version of acorn-hc release to build for that specific one (there is a default fallback)
+Pass a version of iamp2p-hc release to build for that specific one (there is a default fallback)
 
 ```shell
-nix-shell --run 'acorn-build 0.3.5'
+nix-shell --run 'iamp2p-build 0.3.5'
 ```
 
-This will produce a file under `dist/acorn-ui.zip` with all the assets
+This will produce a file under `dist/iamp2p-ui.zip` with all the assets
 
 #### UI Dev Resources
 

@@ -7,7 +7,7 @@ import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import './CreateProfilePage.css'
 
 function CreateProfilePage({ agentAddress, createWhoami }) {
-  const titleText = "First, let's set up your profile on Acorn."
+  const titleText = "First, let's set up your profile on IamP2P."
   const subText = "You'll be able to edit them later in your Profile Settings."
   const pendingText = 'Setting you up...'
   const submitText = 'Ready to Start'

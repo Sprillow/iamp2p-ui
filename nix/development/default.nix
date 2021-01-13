@@ -1,11 +1,11 @@
 { pkgs }:
 let
- acorn-ui = pkgs.writeShellScriptBin "acorn-ui"
+ iamp2p-ui = pkgs.writeShellScriptBin "iamp2p-ui"
  ''
  set -euxo pipefail
  ${pkgs.nodejs}/bin/npm start
  '';
 in
 {
- buildInputs = [ acorn-ui ];
+ buildInputs = [ iamp2p-ui ];
 }

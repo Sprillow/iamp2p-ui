@@ -1,10 +1,10 @@
-export const PROFILES_ZOME_NAME = 'acorn_profiles'
-export const PROJECTS_ZOME_NAME = 'acorn_projects'
+export const PROFILES_ZOME_NAME = 'iamp2p_profiles'
+export const PROJECTS_ZOME_NAME = 'iamp2p_projects'
 
 export const PROFILES_DNA_NAME = 'profiles.dna.gz'
 
 // THIS IS DEFINED IN holochain-run-dna
-// lib in use by acorn-hc
+// lib in use by iamp2p-hc
 export const PROFILES_APP_ID = __APP_NAME__
 
 console.log('PROFILES_APP_ID: ', PROFILES_APP_ID)

@@ -116,7 +116,7 @@ Whoami is information about the local authenticated user
 
   whoami: {
     dna_address: 'QmTVA7eBGDZ3bg3PYDqDN9voJ267XH3aWwRh8jWy3eXtAe',
-    dna_name: 'Acorn',
+    dna_name: 'IamP2P',
     agent_id: {
       nick: 'testAgent',
       pub_sign_key: 'HcSciGpYDHTaa5dmw583AO7Jy9kHz9K3gu6MtTsB8Nwbfe3y3hD8rOb9aj5B8za'
