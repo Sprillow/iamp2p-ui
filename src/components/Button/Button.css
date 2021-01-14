@@ -1,8 +1,8 @@
 .button {
-  border-radius: 25px;
-  background: #6600ff;
+  border-radius: 10px;
+  /* background: #6600ff; */
   border: 1px solid #6600ff;
-  color: #ffffff;
+  color: #000000;
   outline: none;
   border: none;
   font-size: 16px;
@@ -14,7 +14,7 @@
 }
 
 .button:hover {
-  background: #7c24ff;
+  /* background: #7c24ff; */
   border: 1px solid #7c24ff;
 }
 
@@ -32,16 +32,16 @@
 }
 
 .clear-button:hover {
-  color: #5f65ff;
+  /* color: #5f65ff; */
 }
 
 .button.purple {
-  background: #6600ff;
-  color: #ffffff;
+  /* background: #6600ff;
+  color: #ffffff; */
 }
 
 .button.purple:hover {
-  background: #7c24ff;
+  /* background: #7c24ff; */
 }
 
 .button.green {
@@ -54,7 +54,6 @@
 }
 
 .button.small {
-  border-radius: 25px;
   outline: none;
   border: none;
   font-size: 13px;
@@ -63,7 +62,6 @@
 }
 
 .button.medium {
-  border-radius: 25px;
   outline: none;
   border: none;
   font-size: 14px;
@@ -72,12 +70,11 @@
 }
 
 .button.large {
-  border-radius: 25px;
   outline: none;
   border: none;
-  font-size: 15px;
+  font-size: 20px;
   line-height: 18px;
-  padding: 15px 30px;
+  padding: 20px 36px;
   min-width: 135px;
 }
 

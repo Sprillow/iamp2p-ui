@@ -1,6 +1,6 @@
 .intro-screen-wrapper {
   height: 100vh;
-  background: white;
+  /* background: white; */
   display: flex;
   flex-direction: column;
 }
@@ -52,7 +52,7 @@
 
 .screen {
   margin: 0 75px;
-  text-align: center;
+  text-align: left;
   opacity: 0;
   transition: opacity 1s;
 }
@@ -69,9 +69,9 @@
   margin-bottom: 30px;
 }
 
-.intro-screen-image img {
+/* .intro-screen-image img {
   height: 190px;
-}
+} */
 
 .intro-screen-text {
   width: 750px;
@@ -89,7 +89,7 @@
   font-family: 'hk-grotesk-medium', Helvetica, sans-serif;
   color: #717171;
   line-height: 32px;
-  height: 165px;
+  /* height: 165px; */
 }
 
 .intro-screen-content-frame .button-back {

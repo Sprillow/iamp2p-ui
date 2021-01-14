@@ -18,6 +18,7 @@ import Preferences from '../components/Preferences/Preferences'
 
 // import new routes here
 import IntroScreen from '../components/IntroScreen/IntroScreen'
+import ConverseView from './ConverseView/ConverseView'
 import CreateProfilePage from './CreateProfilePage/CreateProfilePage'
 import Dashboard from './Dashboard/Dashboard'
 import ProjectView from './ProjectView/ProjectView'
@@ -57,16 +58,8 @@ function App(props) {
   return (
     <ErrorBoundaryScreen>
       <Router>
-        <Switch>
-          {/* Add new routes in here */}
-          <Route path='/intro' component={IntroScreen} />
-          <Route path='/register' component={CreateProfilePage} />
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/project/:projectId' component={ProjectView} />
-          <Route path='/' render={() => <Redirect to='/dashboard' />} />
-        </Switch>
-        {agentAddress && (
-          <Header
+        {/* Header Global */}
+        <Header
             activeEntryPoints={activeEntryPoints}
             projectName={projectName}
             whoami={whoami}
@@ -74,7 +67,17 @@ function App(props) {
             setShowProfileEditForm={setShowProfileEditForm}
             setShowPreferences={setShowPreferences}
           />
-        )}
+        <Switch>
+          {/* Add new routes in here */}
+          <Route path='/intro' component={IntroScreen} />
+          <Route path='/converse' component={ConverseView} />
+          {/* <Route path='/register' component={CreateProfilePage} />
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/project/:projectId' component={ProjectView} />
+          <Route path='/' render={() => <Redirect to='/dashboard' />} /> */}
+        </Switch>
+          
+
         {/* This will only show when 'active' prop is true */}
         {/* Modal for Profile Settings */}
         <Modal
@@ -95,9 +98,9 @@ function App(props) {
           setShowPreferences={setShowPreferences}
         />
         {!agentAddress && <LoadingScreen />}
-        {agentAddress && hasFetchedForWhoami && !whoami && (
+        {/* {agentAddress && hasFetchedForWhoami && !whoami && (
           <Redirect to='/intro' />
-        )}
+        )} */}
         {agentAddress && whoami && <Footer />}
       </Router>
     </ErrorBoundaryScreen>

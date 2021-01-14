@@ -1,0 +1,81 @@
+.converse-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  border-right: #000000 1px solid;
+  border-left: #000000 1px solid;
+}
+
+.message-history {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.chat-bubble-wrapper {
+  display: flex;
+}
+
+.chat-bubble-wrapper.software {
+  margin-bottom: 20px;
+  justify-content: left;
+}
+
+.chat-bubble-wrapper.human {
+  margin-bottom: 20px;
+  justify-content: right;
+}
+
+.chat-bubble {
+  position: relative;
+  padding: 20px;
+  background-color: #eddcdc;
+  max-width: 360px;
+}
+
+.human .chat-bubble {
+}
+
+.software .chat-bubble {
+  background-color: whitesmoke;
+}
+
+/* Options */
+
+.options-wrapper {
+  width: 500px;
+  z-index: 2;
+  position: absolute;
+  bottom: 20px;
+  margin: auto;
+}
+
+.chat-bubble-wrapper.option {
+  margin-bottom: 10px;
+  justify-items: center;
+  flex-direction: column;
+}
+
+.option-bubble {
+  background-color: whitesmoke;
+  width: 450px;
+  padding: 14px 14px 14px 40px;
+  cursor: pointer;
+}
+
+.select-one {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.chat-change-buttons {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  flex-direction: row;
+}
