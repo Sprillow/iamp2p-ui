@@ -1,0 +1,17 @@
+.progress-explainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.progress-explainer.progress-check-point {
+  border: 1px solid #00D0C0;
+}
+
+.progress-explainer-text {
+
+}
+
