@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -7,6 +7,8 @@ import './App.css'
 
 import { updateWhoami } from '../who-am-i/actions'
 import { setNavigationPreference } from '../local-preferences/actions'
+import { getAdminWs, getAppWs } from '../hcWebsockets'
+
 
 // import components here
 import Header from '../components/Header/Header'
@@ -42,6 +44,20 @@ function App (props) {
   } = props
   const [showProfileEditForm, setShowProfileEditForm] = useState(false)
   const [showPreferences, setShowPreferences] = useState(false)
+
+  const [inGame, setInGame] = useState(false)
+  const [hasCheckedInGame, setHasCheckedInGame] = useState(false)
+  useEffect(() => {
+    getAdminWs().then(async client => {
+      const dnas = await client.listDnas()
+      if (dnas.length > 0) {
+        setInGame(true)
+      } else {
+        setInGame(false)
+      }
+      setHasCheckedInGame(true)
+    })
+  }, [])
 
   const onProfileSubmit = async profile => {
     await updateWhoami(profile, whoami.address)
@@ -82,9 +98,9 @@ function App (props) {
           <Route path='/create-profile' component={CreateProfilePage} />
           <Route path='/intro' component={IntroScreen} />
           <Route path='/converse' component={ConverseView} />
-          {/*  <Route path='/dashboard' component={Dashboard} />
-          <Route path='/project/:projectId' component={ProjectView} />
-          <Route path='/' render={() => <Redirect to='/dashboard' />} /> */}
+          {/* <Route path='/dashboard' component={Dashboard} /> */}
+          {/* <Route path='/project/:projectId' component={ProjectView} /> */}
+          <Route path='/' render={() => <Redirect to='/intro' />} />
         </Switch>
 
         {/* This will only show when 'active' prop is true */}
@@ -107,9 +123,7 @@ function App (props) {
           showPreferences={showPreferences}
           setShowPreferences={setShowPreferences}
         />
-        {/* {agentAddress && hasFetchedForWhoami && !whoami && (
-          <Redirect to='/intro' />
-        )} */}
+        {!hasCheckedInGame && <LoadingScreen />}
         {agentAddress && whoami && <Footer />}
       </Router>
     </ErrorBoundaryScreen>
