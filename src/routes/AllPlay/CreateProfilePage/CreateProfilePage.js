@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { createWhoami } from '../../who-am-i/actions'
-import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
+import { createWhoami } from '../../../who-am-i/actions'
+import ProfileEditForm from '../../../components/ProfileEditForm/ProfileEditForm'
 import './CreateProfilePage.css'
 
 function CreateProfilePage({ agentAddress, createWhoami }) {
@@ -25,8 +25,6 @@ function CreateProfilePage({ agentAddress, createWhoami }) {
   return submitted ? (
     <Redirect to='/' />
   ) : (
-    <div className='create_profile_page'>
-      <div className='profile_create_wrapper'>
         <ProfileEditForm
           onSubmit={innerOnSubmit}
           whoami={null}
@@ -40,9 +38,6 @@ function CreateProfilePage({ agentAddress, createWhoami }) {
             agentAddress,
           }}
         />
-      </div>
-      {/* <div className='create_profile_splash_image' /> */}
-    </div>
   )
 }
 

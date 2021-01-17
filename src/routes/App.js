@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -7,6 +7,8 @@ import './App.css'
 
 import { updateWhoami } from '../who-am-i/actions'
 import { setNavigationPreference } from '../local-preferences/actions'
+import { getAdminWs, getAppWs } from '../hcWebsockets'
+
 
 // import components here
 import Header from '../components/Header/Header'
@@ -19,11 +21,8 @@ import Preferences from '../components/Preferences/Preferences'
 // import new routes here
 import IntroScreen from './IntroScreen/IntroScreen'
 import ConverseView from './ConverseView/ConverseView'
-import PlayIntroScreen from './PlayIntroScreen/PlayIntroScreen'
-import PlayScreen from './PlayScreen/PlayScreen'
+import AllPlay from './AllPlay/AllPlay'
 import GlossaryScreen from './GlossaryScreen/GlossaryScreen'
-import ProfileCreatedPage from './ProfileCreatedPage/ProfileCreatedPage'
-import CreateProfilePage from './CreateProfilePage/CreateProfilePage'
 import Dashboard from './Dashboard/Dashboard'
 import ProjectView from './ProjectView/ProjectView'
 import selectEntryPoints from '../projects/entry-points/select'
@@ -42,6 +41,20 @@ function App (props) {
   } = props
   const [showProfileEditForm, setShowProfileEditForm] = useState(false)
   const [showPreferences, setShowPreferences] = useState(false)
+
+  const [inGame, setInGame] = useState(false)
+  const [hasCheckedInGame, setHasCheckedInGame] = useState(false)
+  useEffect(() => {
+    getAdminWs().then(async client => {
+      const dnas = await client.listDnas()
+      if (dnas.length > 0) {
+        setInGame(true)
+      } else {
+        setInGame(false)
+      }
+      setHasCheckedInGame(true)
+    })
+  }, [])
 
   const onProfileSubmit = async profile => {
     await updateWhoami(profile, whoami.address)
@@ -75,16 +88,13 @@ function App (props) {
         />
         <Switch>
           {/* Add new routes in here */}
-          <Route path='/glossary' component={GlossaryScreen} />
-          <Route path='/play-intro' component={PlayIntroScreen} />
-          <Route path='/play' component={PlayScreen} />
-          <Route path='/profile-created' component={ProfileCreatedPage} />
-          <Route path='/create-profile' component={CreateProfilePage} />
           <Route path='/intro' component={IntroScreen} />
           <Route path='/converse' component={ConverseView} />
-          {/*  <Route path='/dashboard' component={Dashboard} />
-          <Route path='/project/:projectId' component={ProjectView} />
-          <Route path='/' render={() => <Redirect to='/dashboard' />} /> */}
+          <Route path='/play' component={AllPlay} />
+          <Route path='/glossary' component={GlossaryScreen} />
+          {/* <Route path='/dashboard' component={Dashboard} /> */}
+          {/* <Route path='/project/:projectId' component={ProjectView} /> */}
+          <Route path='/' render={() => <Redirect to='/intro' />} />
         </Switch>
 
         {/* This will only show when 'active' prop is true */}
@@ -107,9 +117,7 @@ function App (props) {
           showPreferences={showPreferences}
           setShowPreferences={setShowPreferences}
         />
-        {/* {agentAddress && hasFetchedForWhoami && !whoami && (
-          <Redirect to='/intro' />
-        )} */}
+        {!hasCheckedInGame && <LoadingScreen />}
         {agentAddress && whoami && <Footer />}
       </Router>
     </ErrorBoundaryScreen>

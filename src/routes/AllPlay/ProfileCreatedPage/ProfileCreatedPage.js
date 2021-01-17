@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './ProfileCreatedPage.css'
 
-import InviteMembersModal from '../../components/InviteMembersModal/InviteMembersModal'
+import InviteMembersModal from '../../../components/InviteMembersModal/InviteMembersModal'
 
 function ProfileCreatedPage () {
   const [showInviteMembersModal, setShowInviteMembersModal] = useState(null)
 
   return (
-    <div className='create_profile_page'>
-      <div className='profile_create_wrapper'>
+    <>
         <div>
           Perfect, you’re given 100 Cat Credits in your IamP2P wallet. For free
           :){' '}
@@ -28,9 +27,7 @@ function ProfileCreatedPage () {
           showModal={showInviteMembersModal}
           onClose={() => setShowInviteMembersModal(false)}
         />
-      </div>
-      {/* <div className='create_profile_splash_image' /> */}
-    </div>
+        </>
   )
 }
 
