@@ -6,7 +6,7 @@ import Button from '../Button/Button'
 
 import './Modal.css'
 
-function ModalContent({
+function ModalContent ({
   content,
   heading,
   icon,
@@ -58,17 +58,25 @@ function ModalContent({
 
 export { ModalContent }
 
-export default function Modal({ white, active, className, onClose, children }) {
+export default function Modal ({
+  white,
+  active,
+  className,
+  onClose,
+  children,
+}) {
   return (
     <CSSTransition in={active} timeout={100} unmountOnExit classNames='modal'>
       <div className={`modal ${white ? 'modal-white' : ''}`}>
         <div className={`${className} modal-wrapper`}>
-          {onClose && <Icon
-            name='x.svg'
-            size='small-close'
-            className='grey'
-            onClick={() => onClose()}
-          />}
+          {onClose && (
+            <Icon
+              name='x.svg'
+              size='large-close'
+              className='grey'
+              onClick={() => onClose()}
+            />
+          )}
           {children}
         </div>
       </div>

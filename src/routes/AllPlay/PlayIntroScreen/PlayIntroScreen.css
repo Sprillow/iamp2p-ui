@@ -100,27 +100,27 @@
   position: absolute;
 }
 
-.screen-dots-wrapper {
+/* .screen-dots-wrapper {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
   width: 76px;
-}
+} */
 
-.screen-dot {
+/* .screen-dot {
   background: #dedede;
   width: 15px;
   height: 15px;
   border-radius: 50%;
   margin: 2px;
   cursor: pointer;
-}
+} */
 
-.screen-dot.active-screen {
+/* .screen-dot.active-screen {
   background: #6600ff;
-}
+} */
 
-.sign-up-button {
-  text-align: center;
-  margin-top: 40px;
+.play-screen-buttons-wrapper {
+  display: flex;
+  flex-direction: row;
 }
