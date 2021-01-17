@@ -18,14 +18,17 @@ import Preferences from '../components/Preferences/Preferences'
 
 // import new routes here
 import IntroScreen from '../components/IntroScreen/IntroScreen'
+import PlayIntroScreen from '../components/PlayIntroScreen/PlayIntroScreen'
+import PlayScreen from '../components/PlayScreen/PlayScreen'
 import ConverseView from './ConverseView/ConverseView'
+import ProfileCreatedPage from './ProfileCreatedPage/ProfileCreatedPage'
 import CreateProfilePage from './CreateProfilePage/CreateProfilePage'
 import Dashboard from './Dashboard/Dashboard'
 import ProjectView from './ProjectView/ProjectView'
 import selectEntryPoints from '../projects/entry-points/select'
 import ErrorBoundaryScreen from '../components/ErrorScreen/ErrorScreen'
 
-function App(props) {
+function App (props) {
   const {
     activeEntryPoints,
     projectName,
@@ -34,7 +37,7 @@ function App(props) {
     hasFetchedForWhoami,
     updateWhoami,
     navigationPreference,
-    setNavigationPreference,
+    setNavigationPreference
   } = props
   const [showProfileEditForm, setShowProfileEditForm] = useState(false)
   const [showPreferences, setShowPreferences] = useState(false)
@@ -44,12 +47,14 @@ function App(props) {
     setShowProfileEditForm(false)
   }
   const updateStatus = async statusString => {
-    await updateWhoami({
-      ...whoami.entry,
-      status: statusString
-    }, whoami.address)
+    await updateWhoami(
+      {
+        ...whoami.entry,
+        status: statusString
+      },
+      whoami.address
+    )
   }
-
 
   const titleText = 'Profile Settings'
   const subText = ''
@@ -60,30 +65,33 @@ function App(props) {
       <Router>
         {/* Header Global */}
         <Header
-            activeEntryPoints={activeEntryPoints}
-            projectName={projectName}
-            whoami={whoami}
-            updateStatus={updateStatus}
-            setShowProfileEditForm={setShowProfileEditForm}
-            setShowPreferences={setShowPreferences}
-          />
+          activeEntryPoints={activeEntryPoints}
+          projectName={projectName}
+          whoami={whoami}
+          updateStatus={updateStatus}
+          setShowProfileEditForm={setShowProfileEditForm}
+          setShowPreferences={setShowPreferences}
+        />
         <Switch>
           {/* Add new routes in here */}
+          <Route path='/play-intro' component={PlayIntroScreen} />
+          <Route path='/play' component={PlayScreen} />
+          <Route path='/profile-created' component={ProfileCreatedPage} />
+          <Route path='/create-profile' component={CreateProfilePage} />
           <Route path='/intro' component={IntroScreen} />
           <Route path='/converse' component={ConverseView} />
-          {/* <Route path='/register' component={CreateProfilePage} />
-          <Route path='/dashboard' component={Dashboard} />
+          {/*  <Route path='/dashboard' component={Dashboard} />
           <Route path='/project/:projectId' component={ProjectView} />
           <Route path='/' render={() => <Redirect to='/dashboard' />} /> */}
         </Switch>
-          
 
         {/* This will only show when 'active' prop is true */}
         {/* Modal for Profile Settings */}
         <Modal
           white
           active={showProfileEditForm}
-          onClose={() => setShowProfileEditForm(false)}>
+          onClose={() => setShowProfileEditForm(false)}
+        >
           <ProfileEditForm
             onSubmit={onProfileSubmit}
             whoami={whoami ? whoami.entry : null}
@@ -97,7 +105,6 @@ function App(props) {
           showPreferences={showPreferences}
           setShowPreferences={setShowPreferences}
         />
-        {!agentAddress && <LoadingScreen />}
         {/* {agentAddress && hasFetchedForWhoami && !whoami && (
           <Redirect to='/intro' />
         )} */}
@@ -115,29 +122,29 @@ App.propTypes = {
     last_name: PropTypes.string,
     handle: PropTypes.string,
     avatar_url: PropTypes.string,
-    address: PropTypes.string,
+    address: PropTypes.string
   }),
-  updateWhoami: PropTypes.func,
+  updateWhoami: PropTypes.func
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     dispatch,
     setNavigationPreference: preference => {
       return dispatch(setNavigationPreference(preference))
-    },
+    }
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   const {
     ui: {
       hasFetchedForWhoami,
       activeProject,
       activeEntryPoints,
-      localPreferences: { navigation },
+      localPreferences: { navigation }
     },
-    cells: { profiles: profilesCellIdString },
+    cells: { profiles: profilesCellIdString }
   } = state
   // defensive coding for loading phase
   const activeProjectMeta = state.projects.projectMeta[activeProject] || {}
@@ -162,11 +169,11 @@ function mapStateToProps(state) {
     whoami: state.whoami,
     hasFetchedForWhoami,
     agentAddress: state.agentAddress,
-    navigationPreference: navigation,
+    navigationPreference: navigation
   }
 }
 
-function mergeProps(stateProps, dispatchProps, _ownProps) {
+function mergeProps (stateProps, dispatchProps, _ownProps) {
   const { profilesCellIdString } = stateProps
   const { dispatch } = dispatchProps
   return {
@@ -176,10 +183,10 @@ function mergeProps(stateProps, dispatchProps, _ownProps) {
       return dispatch(
         updateWhoami.create({
           payload: { entry, address },
-          cellIdString: profilesCellIdString,
+          cellIdString: profilesCellIdString
         })
       )
-    },
+    }
   }
 }
 

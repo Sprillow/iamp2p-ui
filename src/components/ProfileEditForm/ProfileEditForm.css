@@ -1,6 +1,6 @@
 .profile_edit_form {
-  width: 510px;
-  text-align: center;
+  width: 500px;
+  /* text-align: center; */
   margin: 0 auto;
 }
 
@@ -12,12 +12,12 @@
 }
 
 .profile_edit_form_title {
-  margin-bottom: 64px;
+  margin-bottom: 30px;
 }
 
 .profile_edit_form h1 {
   margin-bottom: 0;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 24px;
   color: #4d4d4d;
   font-family: 'gilroyextrabold', 'gilroyextrabold', Helvetica, sans-serif;
@@ -26,10 +26,11 @@
 }
 
 .profile_edit_form h4 {
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 16px;
+  line-height: 22px;
   color: #717171;
   font-weight: normal;
+  font-family: 'hk-grotesk-medium', Helvetica, sans-serif;
 }
 
 .help_text {
@@ -75,4 +76,8 @@
   .validating_form_input {
     margin-bottom: 30px;
   }
+}
+
+.create-profile-button {
+  text-align: center;
 }

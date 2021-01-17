@@ -1,7 +1,7 @@
 .button {
-  border-radius: 10px;
-  /* background: #6600ff; */
-  border: 1px solid #6600ff;
+  border-radius: 4px;
+  background: #ddd6be;
+  border: 2px solid #ddd6be;
   color: #000000;
   outline: none;
   border: none;

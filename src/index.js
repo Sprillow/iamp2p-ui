@@ -29,12 +29,17 @@ import {
   getAppWs,
   getAdminWs,
   setAgentPubKey,
-  APP_WS_URL,
+  APP_WS_URL
 } from './hcWebsockets'
 import { getProjectCellIdStrings } from './projectAppIds'
 
 // trigger caching of adminWs connection
 getAdminWs()
+
+// .then(async client => {
+//   const { port: appPort } = await client.attachAppInterface({ port: 8888 })
+//   console.log('success')
+// })
 
 const middleware = [holochainMiddleware(APP_WS_URL)]
 
@@ -49,8 +54,12 @@ let store = createStore(
 )
 
 // initialize the appWs with the signals handler
-getAppWs(signalsHandlers(store)).then(async client => {
-  const profilesInfo = await client.appInfo({ installed_app_id: PROFILES_APP_ID })
+// getAppWs(signalsHandlers(store))
+/*
+.then(async client => {
+  const profilesInfo = await client.appInfo({
+    installed_app_id: PROFILES_APP_ID
+  })
   const [cellId, _] = profilesInfo.cell_data.find(
     ([_cellId, dnaName]) => dnaName === PROFILES_DNA_NAME
   )
@@ -60,13 +69,14 @@ getAppWs(signalsHandlers(store)).then(async client => {
   const cellIdString = cellIdToString(cellId)
   store.dispatch(setProfilesCellId(cellIdString))
   // all functions of the Profiles DNA
-  store.dispatch(fetchAgents.create({ cellIdString, payload: null }))
-  store.dispatch(whoami.create({ cellIdString, payload: null }))
-  store.dispatch(fetchAgentAddress.create({ cellIdString, payload: null }))
+  // store.dispatch(fetchAgents.create({ cellIdString, payload: null }))
+  // store.dispatch(whoami.create({ cellIdString, payload: null }))
+  // store.dispatch(fetchAgentAddress.create({ cellIdString, payload: null }))
   // which projects do we have installed?
-  const projectCellIds = await getProjectCellIdStrings()
-  store.dispatch(setProjectsCellIds(projectCellIds))
+  // const projectCellIds = await getProjectCellIdStrings()
+  // store.dispatch(setProjectsCellIds(projectCellIds))
 })
+*/
 
 // By passing the `store` in as a wrapper around our React component
 // we make the state available throughout it

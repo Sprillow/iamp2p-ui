@@ -4,7 +4,7 @@
 }
 
 .validating_form_input {
-  margin-bottom: 38px;
+  margin-bottom: 28px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -14,17 +14,17 @@
 
 .validating_form_input label {
   color: #222222;
-  line-height: 19px;
-  font-size: 14px;
+  line-height: 22px;
+  font-size: 19px;
   margin-bottom: 7px;
   display: block;
   font-family: 'hk-grotesk-bold';
 }
 
 .validating_form_input .help_text {
-  color: #898989;
-  font-size: 12px;
-  line-height: 14px;
+  color: #707070;
+  font-size: 15px;
+  line-height: 20px; 
   margin: 0 0 10px 0;
   flex: 1;
 }
@@ -36,13 +36,13 @@
 }
 
 .validating_form_input .input_wrapper input {
-  border: 1.2px solid #e2e2e2;
+  border: 2px solid #ddd6be;
   outline: none;
   font-size: 14px;
   line-height: 21px;
   color: #222222;
   padding: 11px;
-  border-radius: 8px;
+  border-radius: 2px;
   display: block;
   flex: 1;
   font-family: 'hk-grotesk-medium', Helvetica, sans-serif;
@@ -51,22 +51,22 @@
 }
 
 .validating_form_input .input_wrapper input:focus {
-  border: 1.2px solid #5f65ff;
+  border: 2px solid #5f65ff;
 }
 
-.validating_form_input .input_wrapper input::placeholder {
+.validating_form_input .input_wrapper input ::placeholder {
   color: #d1d1d1;
 }
 
-.validating_form_input input.with_at_symbol {
+/* .validating_form_input input.with_at_symbol {
   padding-left: 26px;
-}
+} */
 
-.validating_form_input .at_symbol {
+/* .validating_form_input .at_symbol {
   position: absolute;
   top: 8px;
   left: 11px;
-}
+} */
 
 .error_text {
   color: #ff5d36;
@@ -76,11 +76,11 @@
 }
 
 .validating_form_input .input_wrapper input.invalid-input {
-  border: 1.2px solid #ff5d36;
+  border: 2px solid #ff5d36;
 }
 
 .validating_form_input .input_wrapper input.valid-input {
-  border: 1.2px solid #00d6c8;
+  border: 2px solid #00d6c8;
 }
 
 .validation-mark {

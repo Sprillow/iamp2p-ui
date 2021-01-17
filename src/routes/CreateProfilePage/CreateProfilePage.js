@@ -7,10 +7,10 @@ import ProfileEditForm from '../../components/ProfileEditForm/ProfileEditForm'
 import './CreateProfilePage.css'
 
 function CreateProfilePage({ agentAddress, createWhoami }) {
-  const titleText = "First, let's set up your profile on IamP2P."
-  const subText = "You'll be able to edit them later in your Profile Settings."
+  const titleText = "First off, create an IamP2P profile."
+  const subText = "It’s important to have a profile in a trust-based network so another human being you want to communicate or network with has an idea who is who (if more than 2 people exist in that network). Computers can identify each other without this step, but it’s difficult for humans to do so (unless you’re cool with memorizing a 39 character list of random numbers and letters to identity your friend Alex)."
   const pendingText = 'Setting you up...'
-  const submitText = 'Ready to Start'
+  const submitText = 'Create Profile'
   const canClose = false
   const [pending, setPending] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -41,7 +41,7 @@ function CreateProfilePage({ agentAddress, createWhoami }) {
           }}
         />
       </div>
-      <div className='create_profile_splash_image' />
+      {/* <div className='create_profile_splash_image' /> */}
     </div>
   )
 }

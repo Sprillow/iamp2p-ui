@@ -11,7 +11,7 @@ import ButtonWithPendingState from '../ButtonWithPendingState/ButtonWithPendingS
 
 const urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
 
-function ProfileEditForm({
+function ProfileEditForm ({
   pending,
   pendingText,
   onSubmit,
@@ -19,7 +19,7 @@ function ProfileEditForm({
   whoami,
   titleText,
   subText,
-  submitText,
+  submitText
 }) {
   const [firstName, setFirstName] = useState('')
   const [isValidFirstName, setisValidFirstName] = useState(true)
@@ -39,7 +39,7 @@ function ProfileEditForm({
         status: 'Online',
         avatar_url: avatarUrl,
         address: agentAddress,
-        handle,
+        handle
       })
     }
   }
@@ -106,8 +106,12 @@ function ProfileEditForm({
   }
 
   const usernameHelp =
-    'Choose something easy for your teammates to use and recall. Avoid space and @.'
+    'Choose something unique and easy for your friends to use and recall. Avoid space and @.'
   const avatarShow = avatarUrl || 'img/avatar_placeholder.png'
+
+  const avatarHelp = 'Optional but nice to have.'
+
+  const publicKeyHelp = `You don't need to memorize this, unless your friends can't recognize you by your username 😜`
 
   const actionButton = (
     <ButtonWithPendingState
@@ -124,7 +128,7 @@ function ProfileEditForm({
         <h4>{subText}</h4>
       </div>
       <form onSubmit={innerOnSubmit}>
-        <div className='row'>
+        {/* <div className='row'>
           <ValidatingFormInput
             value={firstName}
             onChange={setFirstName}
@@ -152,7 +156,7 @@ function ProfileEditForm({
             label='Last Name'
             placeholder='Potter'
           />
-        </div>
+        </div> */}
         <div className='row'>
           <ValidatingFormInput
             value={handle}
@@ -164,7 +168,7 @@ function ProfileEditForm({
             errorText={
               handle.length > 0 && !isValidUserName ? errorUsername : ''
             }
-            placeholder='harrypotter'
+            placeholder='frodobaggins'
             withAtSymbol
           />
         </div>
@@ -172,8 +176,8 @@ function ProfileEditForm({
           <ValidatingFormInput
             value={avatarUrl}
             onChange={setAvatarUrl}
-            label='Profile Picture'
-            placeholder='Paste in your profile picture URL here'
+            label='Avatar Image URL (optional but nice to have)'
+            placeholder='Paste in your avatar image URL here'
             invalidInput={avatarUrl.length > 0 && !isValidAvatarUrl}
             validInput={avatarUrl.length > 0 && isValidAvatarUrl}
             errorText={
@@ -190,11 +194,17 @@ function ProfileEditForm({
           <ValidatingFormInput
             value={agentAddress}
             readOnly
-            label='Your Public Key'
+            label='This is your public key (unique address)'
+            helpText={publicKeyHelp}
           />
         </div>
       </form>
-      <Button onClick={() => !pending && innerOnSubmit()} text={actionButton} />
+      <div className='create-profile-button'>
+        <Button
+          onClick={() => !pending && innerOnSubmit()}
+          text={actionButton}
+        />
+      </div>
     </div>
   )
 }
@@ -208,12 +218,12 @@ ProfileEditForm.propTypes = {
     first_name: PropTypes.string,
     last_name: PropTypes.string,
     handle: PropTypes.string,
-    avatar_url: PropTypes.string,
+    avatar_url: PropTypes.string
   }),
   titleText: PropTypes.string,
   subText: PropTypes.string,
   submitText: PropTypes.string,
-  canClose: PropTypes.bool,
+  canClose: PropTypes.bool
 }
 
 export default ProfileEditForm

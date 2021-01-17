@@ -46,7 +46,7 @@ function ValidatingFormInput({
           readOnly={readOnly}
         />
         {errorText && <div className='error_text'>{errorText}</div>}
-        {withAtSymbol && <div className='at_symbol'>@</div>}
+        {/* {withAtSymbol && <div className='at_symbol'>@</div>} */}
         {invalidInput && (
           <img src='img/invalid-mark.svg' className='validation-mark' />
         )}
