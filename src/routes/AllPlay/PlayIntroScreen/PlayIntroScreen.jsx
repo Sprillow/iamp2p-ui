@@ -121,12 +121,15 @@ function PlayIntroScreen({ dispatch }) {
           </div>
         </div>
 
-        <div className='sign-up-button'>
-          <Button onClick={joinGame} text={`Join a game`} />
+        <div className='play-screen-buttons-wrapper'>
+          <div className='play-screen-button'>
+            <Button onClick={joinGame} text={`Join a game`} />
+          </div>
+          <div className='play-screen-button'>
+            <Button onClick={createGame} text={`Start a Game`} />
+          </div>
         </div>
-        <div className='sign-up-button'>
-          <Button onClick={createGame} text={`Start a Game`} />
-        </div>
+
       </div>
       <Modal white active={isCreatingGame}>
         <CreatingGameModal step={creatingGameStep} />
