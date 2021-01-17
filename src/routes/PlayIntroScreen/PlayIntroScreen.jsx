@@ -37,8 +37,8 @@ function PlayIntroScreen({ dispatch }) {
   useEffect(() => {
     getAdminWs().then(async client => {
       const dnas = await client.listDnas()
-      setHasCheckedInGame(true)
       setInGame(false)
+      setHasCheckedInGame(true)
       // if (dnas.length > 0) {
       //   setInGame(true)
       // } else {
