@@ -63,12 +63,12 @@ export default function Modal({ white, active, className, onClose, children }) {
     <CSSTransition in={active} timeout={100} unmountOnExit classNames='modal'>
       <div className={`modal ${white ? 'modal-white' : ''}`}>
         <div className={`${className} modal-wrapper`}>
-          <Icon
+          {onClose && <Icon
             name='x.svg'
             size='small-close'
             className='grey'
             onClick={() => onClose()}
-          />
+          />}
           {children}
         </div>
       </div>
