@@ -21,11 +21,8 @@ import Preferences from '../components/Preferences/Preferences'
 // import new routes here
 import IntroScreen from './IntroScreen/IntroScreen'
 import ConverseView from './ConverseView/ConverseView'
-import PlayIntroScreen from './PlayIntroScreen/PlayIntroScreen'
-import PlayScreen from './PlayScreen/PlayScreen'
+import AllPlay from './AllPlay/AllPlay'
 import GlossaryScreen from './GlossaryScreen/GlossaryScreen'
-import ProfileCreatedPage from './ProfileCreatedPage/ProfileCreatedPage'
-import CreateProfilePage from './CreateProfilePage/CreateProfilePage'
 import Dashboard from './Dashboard/Dashboard'
 import ProjectView from './ProjectView/ProjectView'
 import selectEntryPoints from '../projects/entry-points/select'
@@ -91,13 +88,10 @@ function App (props) {
         />
         <Switch>
           {/* Add new routes in here */}
-          <Route path='/glossary' component={GlossaryScreen} />
-          <Route path='/play-intro' component={PlayIntroScreen} />
-          <Route path='/play' component={PlayScreen} />
-          <Route path='/profile-created' component={ProfileCreatedPage} />
-          <Route path='/create-profile' component={CreateProfilePage} />
           <Route path='/intro' component={IntroScreen} />
           <Route path='/converse' component={ConverseView} />
+          <Route path='/play' component={AllPlay} />
+          <Route path='/glossary' component={GlossaryScreen} />
           {/* <Route path='/dashboard' component={Dashboard} /> */}
           {/* <Route path='/project/:projectId' component={ProjectView} /> */}
           <Route path='/' render={() => <Redirect to='/intro' />} />

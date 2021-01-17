@@ -5,21 +5,21 @@ import { cellIdToString } from 'connoropolous-hc-redux-middleware/build/main/lib
 
 import './PlayIntroScreen.css'
 
-import Button from '../../components/Button/Button'
-import Icon from '../../components/Icon/Icon'
+import Button from '../../../components/Button/Button'
+import Icon from '../../../components/Icon/Icon'
 import { connect } from 'react-redux'
 
-import { PROJECTS_DNA_PATH, PROJECTS_ZOME_NAME } from '../../holochainConfig'
-import { passphraseToUuid } from '../../secrets'
+import { PROJECTS_DNA_PATH, PROJECTS_ZOME_NAME } from '../../../holochainConfig'
+import { passphraseToUuid } from '../../../secrets'
 import {
   createProjectMeta,
   fetchProjectMeta,
-} from '../../projects/project-meta/actions'
-import Modal from '../../components/Modal/Modal'
-import LoadingScreen from '../../components/LoadingScreen/LoadingScreen'
-import { fetchAgentAddress } from '../../agent-address/actions'
-import { getAdminWs } from '../../hcWebsockets'
-import ProgressExplainer from '../../components/ProgressExplainer/ProgressExplainer'
+} from '../../../projects/project-meta/actions'
+import Modal from '../../../components/Modal/Modal'
+import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
+import { fetchAgentAddress } from '../../../agent-address/actions'
+import { getAdminWs } from '../../../hcWebsockets'
+import ProgressExplainer from '../../../components/ProgressExplainer/ProgressExplainer'
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -80,44 +80,37 @@ function PlayIntroScreen({ dispatch }) {
 
   return (
     <>
-      <div className='intro-screen-wrapper'>
-        {/* <div className='skip-intro-button'>
-        <div onClick={goToRegister}>Skip Intro</div>
-      </div> */}
-        <div className='intro-screen-content-frame'>
-          {/* all 4 screens */}
-          <div className={`content-wrapper active-screen-${screenContent}`}>
-            <div className={`screen active-screen`}>
-              <div className='intro-screen-image'>
-                {/* <img src={screen.image} /> */}
-              </div>
-              <div className='intro-screen-text'>
-                <div className='intro-screen-title'>IamP2P Transact Game</div>
-                <div className='intro-screen-description'>
-                  <div>
-                    This little experimental game is meant to give you an
-                    example of how Holochain, as a peer-to-peer protocol
-                    functions in real life. You would be able to make
-                    transactions with friends in your network using an imaginary
-                    currency.
-                  </div>
-                  <div>
-                    If you have received a secret phrase from a friend of your,
-                    select Join a Game. If you want to initiate a game an invite
-                    friends, click Start a Game.
-                  </div>
-                  <br />
+      <div>
+        <div className={`content-wrapper active-screen-${screenContent}`}>
+          <div className={`screen active-screen`}>
+            <div className='intro-screen-image'>
+              {/* <img src={screen.image} /> */}
+            </div>
+            <div className='intro-screen-text'>
+              <div className='intro-screen-title'>IamP2P Transact Game</div>
+              <div className='intro-screen-description'>
+                <div>
+                  This little experimental game is meant to give you an example
+                  of how Holochain, as a peer-to-peer protocol functions in real
+                  life. You would be able to make transactions with friends in
+                  your network using an imaginary currency.
                 </div>
+                <div>
+                  If you have received a secret phrase from a friend of your,
+                  select Join a Game. If you want to initiate a game an invite
+                  friends, click Start a Game.
+                </div>
+                <br />
               </div>
             </div>
           </div>
+        </div>
 
-          <div className='sign-up-button'>
-            <Button onClick={goToConverse} text={`Join a game`} />
-          </div>
-          <div className='sign-up-button'>
-            <Button onClick={createGame} text={`Start a Game`} />
-          </div>
+        <div className='sign-up-button'>
+          <Button onClick={goToConverse} text={`Join a game`} />
+        </div>
+        <div className='sign-up-button'>
+          <Button onClick={createGame} text={`Start a Game`} />
         </div>
       </div>
       <Modal white active={isCreatingGame}>

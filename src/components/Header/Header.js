@@ -33,7 +33,7 @@ function Header () {
           </div>
           <div
             className='header-item'
-            onClick={() => history.push('/play-intro')}
+            onClick={() => history.push('/play/intro')}
           >
             Play
           </div>

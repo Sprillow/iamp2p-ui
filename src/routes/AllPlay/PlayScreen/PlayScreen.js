@@ -5,14 +5,14 @@ import { cellIdToString } from 'connoropolous-hc-redux-middleware/build/main/lib
 
 import './PlayScreen.css'
 
-import Button from '../../components/Button/Button'
-import Icon from '../../components/Icon/Icon'
+import Button from '../../../components/Button/Button'
+import Icon from '../../../components/Icon/Icon'
 import { connect } from 'react-redux'
 
-import { PROFILES_APP_ID, PROFILES_DNA_NAME } from '../../holochainConfig'
-import LoadingScreen from '../../components/LoadingScreen/LoadingScreen'
-import { fetchAgentAddress } from '../../agent-address/actions'
-import { getAdminWs, getAppWs } from '../../hcWebsockets'
+import { PROFILES_APP_ID, PROFILES_DNA_NAME } from '../../../holochainConfig'
+import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
+import { fetchAgentAddress } from '../../../agent-address/actions'
+import { getAdminWs, getAppWs } from '../../../hcWebsockets'
 
 function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   const history = useHistory()
@@ -54,7 +54,7 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
     return <LoadingScreen />
   }
   if (hasCheckedInGame && !inGame) {
-    return <Redirect to='/play-intro' />
+    return <Redirect to='/play/intro' />
   }
 
   return (
