@@ -17,43 +17,14 @@ import ButtonWithPendingState from '../ButtonWithPendingState/ButtonWithPendingS
 export default function JoinProjectModal({
   showModal,
   onClose,
-  onJoinProject,
+  onJoin,
+  failure
 }) {
-  const reset = () => {
-    setProjectSecret('')
-    setValidatingSecret(false)
-    setInvalidText('')
-  }
-  const onValidate = async () => {
-    setValidatingSecret(true)
-    try {
-      const projectExists = await onJoinProject(projectSecret)
-      if (!projectExists) {
-        setInvalidText('project does not exist or peers could not be found')
-      } else {
-        // it worked! reset and close
-        onDone()
-      }
-      setValidatingSecret(false)
-    } catch (e) {
-      setInvalidText('There was an error while joining project: ' + e.message)
-    }
-  }
-  const onDone = () => {
-    reset()
-    onClose()
-  }
-
   const [projectSecret, setProjectSecret] = useState('')
   const [invalidText, setInvalidText] = useState('')
 
-  const [validatingSecret, setValidatingSecret] = useState(false)
-
-  const validateButtonContent = <ButtonWithPendingState pending={validatingSecret} pendingText="Validating..." actionText="Join" />
-
   const onSecretChange = val => {
     setInvalidText('')
-    setValidatingSecret(false)
     setProjectSecret(val)
     if (!val) {
       setInvalidText('')
@@ -62,26 +33,35 @@ export default function JoinProjectModal({
     }
   }
 
+  const onDone = () => {
+    setProjectSecret('')
+    onClose()
+  }
+
+  const formInvalidText = failure ? 'It did\'nt work. Make sure your secret phrase is correct and the friend who invited you has their IamP2P app open.'
+   : invalidText
+
+
   return (
     <Modal
       white
       active={showModal}
       onClose={onDone}
       className='join-project-modal-wrapper'>
-      <ProjectModalHeading title='Join an existing project' />
+      <ProjectModalHeading title='Join a Game' />
       <ProjectModalContent>
         <ProjectModalContentSpacer>
           <ValidatingFormInput
             value={projectSecret}
             onChange={onSecretChange}
-            invalidInput={invalidText}
-            errorText={invalidText}
-            label='Project invitation secret'
-            helpText='Paste in the secret phrase the project host has shared with you.'
+            invalidInput={failure || invalidText}
+            errorText={formInvalidText}
+            label='Game invitation secret'
+            helpText='Paste in the secret phrase the game host has shared with you. Make sure the host has the app open and is online.'
           />
         </ProjectModalContentSpacer>
       </ProjectModalContent>
-      <ProjectModalButton text={validateButtonContent} onClick={onValidate} />
+      <ProjectModalButton text={'Join'} onClick={() => projectSecret.length && onJoin(projectSecret)} />
     </Modal>
   )
 }

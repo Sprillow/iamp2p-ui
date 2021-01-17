@@ -20,12 +20,20 @@ import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
 import { fetchAgentAddress } from '../../../agent-address/actions'
 import { getAdminWs } from '../../../hcWebsockets'
 import ProgressExplainer from '../../../components/ProgressExplainer/ProgressExplainer'
+import JoinProjectModal from '../../../components/JoinProjectModal/JoinProjectModal'
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 function PlayIntroScreen({ dispatch }) {
   const history = useHistory()
 
+  const [showJoinModal, setShowJoinModal] = useState(false)
+  // joining and join steps
+  const [joiningGameStep, setJoiningGameStep] = useState(0)
+  const [isJoiningGame, setIsJoiningGame] = useState(false)
+  const [invalidJoin, setInvalidJoin] = useState(false)
+
+  // creating and create steps
   const [creatingGameStep, setCreatingGameStep] = useState(0)
   const [isCreatingGame, setIsCreatingGame] = useState(false)
   const [inGame, setInGame] = useState(false)
@@ -57,9 +65,25 @@ function PlayIntroScreen({ dispatch }) {
     if (screenContent !== 3) setScreenContent(screenContent + 1)
   }
 
-  const goToConverse = () => {
-    // redirect
-    history.push('/converse')
+  const joinGame = async () => {
+    setShowJoinModal(true)
+  }
+
+  const onJoin = async (secretPhrase) => {
+    console.log(secretPhrase)
+    setShowJoinModal(false)
+    setIsJoiningGame(true)
+    setJoiningGameStep(6)
+
+    // do the project joining
+    // await holochainCreateGame(setCreatingGameStep, dispatch)
+    // leave 2 seconds for reading
+    await sleep(3000)
+    // in the case of a bad join
+    setIsJoiningGame(false)
+    // setShowJoinModal(true)
+    // setInvalidJoin(true)
+    history.push('/play/create-profile')
   }
 
   const createGame = async () => {
@@ -68,7 +92,7 @@ function PlayIntroScreen({ dispatch }) {
     // leave 2 seconds for reading
     await sleep(2000)
     setIsCreatingGame(false)
-    history.push('/create-profile')
+    history.push('/play/create-profile')
   }
 
   if (!hasCheckedInGame) {
@@ -96,7 +120,7 @@ function PlayIntroScreen({ dispatch }) {
                   your network using an imaginary currency.
                 </div>
                 <div>
-                  If you have received a secret phrase from a friend of your,
+                  If you have received a secret phrase from a friend of yours,
                   select Join a Game. If you want to initiate a game an invite
                   friends, click Start a Game.
                 </div>
@@ -107,20 +131,69 @@ function PlayIntroScreen({ dispatch }) {
         </div>
 
         <div className='sign-up-button'>
-          <Button onClick={goToConverse} text={`Join a game`} />
+          <Button onClick={joinGame} text={`Join a game`} />
         </div>
         <div className='sign-up-button'>
           <Button onClick={createGame} text={`Start a Game`} />
         </div>
       </div>
       <Modal white active={isCreatingGame}>
-        <CreateGameModal step={creatingGameStep} />
+        <CreatingGameModal step={creatingGameStep} />
       </Modal>
+      <Modal white active={isJoiningGame}>
+        <JoiningGameModal step={joiningGameStep} />
+      </Modal>
+      <JoinProjectModal
+        failure={invalidJoin}
+        onJoin={onJoin}
+        showModal={showJoinModal}
+        onClose={() => setShowJoinModal(false)}
+      />
     </>
   )
 }
 
-function CreateGameModal({ step }) {
+function CreatingGameModal({ step }) {
+  return (
+    <div>
+      {step >= 1 && (
+        <ProgressExplainer
+          text='Generating a private key and a public key for you'
+          done={step > 1}
+        />
+      )}
+      {step >= 2 && (
+        <ProgressExplainer
+          text='Generating a secret phrase for your unique game'
+          done={step > 2}
+        />
+      )}
+      {step >= 3 && (
+        <ProgressExplainer
+          text='Generating a personal source chain for your data history'
+          done={step > 3}
+        />
+      )}
+      {step >= 4 && (
+        <ProgressExplainer
+          text='Generating a Distributed Hash Table for data sharing'
+          done={step > 4}
+        />
+      )}
+      {step >= 5 && (
+        <ProgressExplainer
+          text='Starting up Holochain networking services'
+          done={step > 5}
+        />
+      )}
+      {step === 6 && (
+        <ProgressExplainer text='Game initiated' done={step === 6} />
+      )}
+    </div>
+  )
+}
+
+function JoiningGameModal({ step }) {
   return (
     <div>
       {step >= 1 && (
@@ -268,7 +341,7 @@ async function installProjectApp(
 }
 
 // JOIN
-async function joinProject(passphrase, dispatch) {
+async function joinGame(passphrase, dispatch) {
   // joinProject
   // join a DNA
   // then try to get the project metadata
