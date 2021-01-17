@@ -5,6 +5,7 @@ import {
   NavLink,
   useLocation,
   withRouter,
+  useHistory
 } from 'react-router-dom'
 // import { CSSTransition } from 'react-transition-group'
 // import onClickOutside from 'react-onclickoutside'
@@ -17,24 +18,43 @@ import './Header.css'
 // import Preferences from '../Preferences/Preferences'
 // import Modal from '../Modal/Modal'
 
-function Header() {
-  return <div className="header-wrapper">
-    <div className="header">
-        <div className="left-panel">
-          <div className="header-item">Converse</div>
-          <div className="header-item">Play</div>
-          <div className="header-item">Glossary</div>
+function Header () {
+  const history = useHistory()
+
+  return (
+    <div className='header-wrapper'>
+      <div className='header'>
+        <div className='left-panel'>
+          <div
+            className='header-item'
+            onClick={() => history.push('/converse')}
+          >
+            Converse
+          </div>
+          <div
+            className='header-item'
+            onClick={() => history.push('/play-intro')}
+          >
+            Play
+          </div>
+          <div
+            className='header-item'
+            onClick={() => history.push('/glossary')}
+          >
+            Glossary
+          </div>
         </div>
-        <div className="center-panel">
-          <div className="page-title">Page Title</div>
+        <div className='center-panel'>
+          <div className='page-title'>Page Title</div>
         </div>
-        <div className="right-panel">
-          <div className="header-item with-left-border">Invite a Friend</div>
-          <div className="header-item">Join a Game</div>
-          <div className="header-item">You</div>
+        <div className='right-panel'>
+          <div className='header-item with-left-border'>Invite a Friend</div>
+          <div className='header-item'>Join a Game</div>
+          <div className='header-item'>You</div>
         </div>
+      </div>
     </div>
-    </div>
+  )
 }
 
 export default withRouter(Header)

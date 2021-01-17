@@ -3,18 +3,17 @@ import { Redirect, useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { cellIdToString } from 'connoropolous-hc-redux-middleware/build/main/lib/actionCreator'
 
-import './PlayScreen.css'
+import './PlayIntroScreen.css'
 
-import Button from '../Button/Button'
-import Icon from '../Icon/Icon'
+import Button from '../../components/Button/Button'
+import Icon from '../../components/Icon/Icon'
 import { connect } from 'react-redux'
 
-import { PROFILES_APP_ID, PROFILES_DNA_NAME } from '../../holochainConfig'
-import LoadingScreen from '../LoadingScreen/LoadingScreen'
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen'
 import { fetchAgentAddress } from '../../agent-address/actions'
-import { getAdminWs, getAppWs } from '../../hcWebsockets'
+import { getAdminWs } from '../../hcWebsockets'
 
-function PlayScreen ({ agentAddress, fetchAgentAddress }) {
+function PlayIntroScreen () {
   const history = useHistory()
 
   const [inGame, setInGame] = useState(false)
@@ -53,8 +52,8 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   if (!hasCheckedInGame) {
     return <LoadingScreen />
   }
-  if (hasCheckedInGame && !inGame) {
-    return <Redirect to='/play-intro' />
+  if (hasCheckedInGame && inGame) {
+    return <Redirect to='/play' />
   }
 
   return (
@@ -100,29 +99,4 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   )
 }
 
-function mapStateToProps (state) {
-  return {
-    agentAddress: state.agentAddress
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    fetchAgentAddress: cellIdString => {
-      dispatch(fetchAgentAddress.create({ cellIdString, payload: null }))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayScreen)
-
-// getAppWs().then(async client => {
-//   const profilesInfo = await client.appInfo({
-//     installed_app_id: PROFILES_APP_ID
-//   })
-//   const [cellId, _] = profilesInfo.cell_data.find(
-//     ([_cellId, dnaName]) => dnaName === PROFILES_DNA_NAME
-//   )
-//   const cellIdString = cellIdToString(cellId)
-//   fetchAgentAddress(cellIdString)
-// })
+export default PlayIntroScreen

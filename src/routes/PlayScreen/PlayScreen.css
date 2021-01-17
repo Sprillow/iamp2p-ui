@@ -2,10 +2,17 @@
   height: 100vh;
   /* background: white; */
   display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 700px;
+  border-right: #000000 1px solid;
+  border-left: #000000 1px solid;
 }
 
-.skip-intro-button {
+/* .skip-intro-button {
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -19,12 +26,12 @@
 
 .skip-intro-button:hover {
   color: #5f65ff;
-}
+} */
 
 .intro-screen-content-frame {
   overflow: hidden;
   margin: auto auto;
-  width: 900px;
+  width: 600px;
   position: relative;
 }
 
@@ -51,7 +58,7 @@
 }
 
 .screen {
-  margin: 0 75px;
+  /* margin: 0 75px; */
   text-align: left;
   opacity: 0;
   transition: opacity 1s;
@@ -62,7 +69,7 @@
 }
 
 .screen p {
-  width: 750px;
+  width: 600px;
 }
 
 .intro-screen-image {

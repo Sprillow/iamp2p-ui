@@ -4,14 +4,13 @@ import PropTypes from 'prop-types'
 
 import './IntroScreen.css'
 
-import Button from '../Button/Button'
-import Icon from '../Icon/Icon'
+import Button from '../../components/Button/Button'
+import Icon from '../../components/Icon/Icon'
 
-export default function IntroScreen() {
+export default function IntroScreen () {
   const history = useHistory()
 
   const introScreensContents = [
-  
     // {
     //   image: 'img/intro-screen-image-2.svg',
     //   title: 'Help your team feel accomplished & aligned',
@@ -55,28 +54,32 @@ export default function IntroScreen() {
       <div className='intro-screen-content-frame'>
         {/* all 4 screens */}
         <div className={`content-wrapper active-screen-${screenContent}`}>
-
-              <div
-                className={`screen active-screen`}>
-                <div className='intro-screen-image'>
-                  {/* <img src={screen.image} /> */}
+          <div className={`screen active-screen`}>
+            <div className='intro-screen-image'>
+              {/* <img src={screen.image} /> */}
+            </div>
+            <div className='intro-screen-text'>
+              <div className='intro-screen-title'>Welcome to IamP2P,</div>
+              <div className='intro-screen-description'>
+                <div>
+                  which is me— the software you’ve just downloaded and opened.
+                  My purpose is to tell you a bit more about myself, and other
+                  P2P peers like me. I mean, this is the purpose of my{' '}
+                  <a>maker</a>, which is now my purpose too, if that makes
+                  sense.
                 </div>
-                <div className='intro-screen-text'>
-                  <div className='intro-screen-title'>Welcome to IamP2P,</div>
-                  <div className='intro-screen-description'>
-                  <div>which is me— the software you’ve just downloaded and opened. 
-                      My purpose is to tell you a bit more about myself, and other P2P peers like me. 
-                      I mean, this is the purpose of my <a>maker</a>, which is now my purpose too, if that makes sense.
-                  </div>
-                  <br/>
-                  <div>You know, I think we are a little less known to people using technology. It feels a bit lonely. 
-                      Maybe you would find me interesting, or perhaps intriguing, or useful. 
-                      Or maybe not. And that’s okay too. 
-                      <br/><br/>  Are you ready to dive in?
-                  </div>
-                  </div>
+                <br />
+                <div>
+                  You know, I think we are a little less known to people using
+                  technology. It feels a bit lonely. Maybe you would find me
+                  interesting, or perhaps intriguing, or useful. Or maybe not.
+                  And that’s okay too.
+                  <br />
+                  <br /> Are you ready to dive in?
                 </div>
               </div>
+            </div>
+          </div>
         </div>
         {/* forward and back buttons */}
         {/* <div className='intro-screen-buttons'>

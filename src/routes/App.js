@@ -17,10 +17,11 @@ import Modal from '../components/Modal/Modal'
 import Preferences from '../components/Preferences/Preferences'
 
 // import new routes here
-import IntroScreen from '../components/IntroScreen/IntroScreen'
-import PlayIntroScreen from '../components/PlayIntroScreen/PlayIntroScreen'
-import PlayScreen from '../components/PlayScreen/PlayScreen'
+import IntroScreen from './IntroScreen/IntroScreen'
 import ConverseView from './ConverseView/ConverseView'
+import PlayIntroScreen from './PlayIntroScreen/PlayIntroScreen'
+import PlayScreen from './PlayScreen/PlayScreen'
+import GlossaryScreen from './GlossaryScreen/GlossaryScreen'
 import ProfileCreatedPage from './ProfileCreatedPage/ProfileCreatedPage'
 import CreateProfilePage from './CreateProfilePage/CreateProfilePage'
 import Dashboard from './Dashboard/Dashboard'
@@ -74,6 +75,7 @@ function App (props) {
         />
         <Switch>
           {/* Add new routes in here */}
+          <Route path='/glossary' component={GlossaryScreen} />
           <Route path='/play-intro' component={PlayIntroScreen} />
           <Route path='/play' component={PlayScreen} />
           <Route path='/profile-created' component={ProfileCreatedPage} />
