@@ -1,10 +1,10 @@
 .button {
-  border-radius: 4px;
-  background: #ddd6be;
-  border: 2px solid #ddd6be;
+  border-radius: 1px;
+  background-color: #ddd6be;
+  /* border: 2px solid #ddd6be; */
   color: #000000;
   outline: none;
-  border: none;
+  border: 1.8px solid;
   font-size: 16px;
   line-height: 19px;
   padding: 16px 42px;
@@ -15,7 +15,8 @@
 
 .button:hover {
   /* background: #7c24ff; */
-  border: 1px solid #7c24ff;
+  background-color: #a8cc7f;
+  border: 1.8px solid;
 }
 
 .clear-button {
@@ -55,7 +56,6 @@
 
 .button.small {
   outline: none;
-  border: none;
   font-size: 13px;
   line-height: 16px;
   padding: 10px 20px;
@@ -63,7 +63,6 @@
 
 .button.medium {
   outline: none;
-  border: none;
   font-size: 14px;
   line-height: 18px;
   padding: 11px 28px;
@@ -71,7 +70,6 @@
 
 .button.large {
   outline: none;
-  border: none;
   font-size: 20px;
   line-height: 18px;
   padding: 20px 36px;

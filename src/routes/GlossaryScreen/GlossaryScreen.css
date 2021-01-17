@@ -33,7 +33,32 @@
 }
 
 .glossary-column-inner-wrapper a:hover {
-    color: green;
+    color: #3f7800;
+}
+
+/* Glossary Row */
+
+.glossary-row {
+    position: relative;
+    display: flex;
+    justify-items: flex-end;
+}
+
+.glossary-row.cryptography {
+    border-top: #000000 1px solid;
+    position: absolute;
+    top: 400px;
+    width: 100%;
+}
+
+.glossary-inner-row {
+    width: 100%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.glossary-inner-row.top {
+    padding-top: 0;
 }
 
 /* Overlay */
@@ -47,6 +72,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    z-index: 2;
 }
 
 .column-overlay-term {

@@ -166,8 +166,24 @@ export default function GlossaryScreen ({ match }) {
         <div className='glossary-screen-inner-wrapper'>
           <div className='glossary-column'>
             <Route path={`${match.path}/protocol`} component={Protocol} />
-            <div className='glossary-column-inner-wrapper'>
-              <NavLink to={`${match.path}/protocol`}>Protocol</NavLink>
+            <Route
+              path={`${match.path}/cryptography`}
+              component={Cryptography}
+            />
+            {/* Protocol */}
+            <div className='glossary-row'>
+              <div className='glossary-column-inner-wrapper'>
+                <NavLink to={`${match.path}/protocol`}>Protocol</NavLink>
+              </div>
+            </div>
+
+            {/* Cryptography */}
+            <div className='glossary-row cryptography'>
+              <div className='glossary-column-inner-wrapper'>
+                <NavLink to={`${match.path}/cryptography`}>
+                  Cryptography
+                </NavLink>
+              </div>
             </div>
           </div>
           <div className='glossary-column'>
@@ -175,11 +191,39 @@ export default function GlossaryScreen ({ match }) {
               path={`${match.path}/communications-protocol`}
               component={CommunicationsProtocol}
             />
+            <Route
+              path={`${match.path}/public-key`}
+              component={PublicKeyCryptography}
+            />
+            <Route path={`${match.path}/private-key`} component={PrivateKey} />
             <div className='glossary-column-inner-wrapper'>
               <NavLink to={`${match.path}/communications-protocol`}>
                 Communications Protocol
               </NavLink>
             </div>
+
+            {/* Public Key Cryptography */}
+            <div className='glossary-row cryptography'>
+              <div className='glossary-column-inner-wrapper'>
+                <div class='glossary-inner-row top'>
+                  <NavLink to={`${match.path}/public-key`}>
+                    Public Key Cryptography
+                  </NavLink>
+                </div>
+                <div class='glossary-inner-row'>
+                  <NavLink to={`${match.path}/private-key`}>
+                    Private Key
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+
+            {/* Private Key */}
+            {/* <div className='glossary-row'>
+              <div className='glossary-column-inner-wrapper'>
+                <NavLink to={`${match.path}/private-key`}>Private Key</NavLink>
+              </div>
+            </div> */}
           </div>
           <div className='glossary-column'>
             <Route
@@ -193,12 +237,24 @@ export default function GlossaryScreen ({ match }) {
             </div>
           </div>
           <div className='glossary-column'>
+            <Route
+              path={`${match.path}/application-layer`}
+              component={ApplicationLayer}
+            />
+            <Route
+              path={`${match.path}/transport-layer`}
+              component={TransportLayer}
+            />
+            <Route
+              path={`${match.path}/Internet-layer`}
+              component={InternetLayer}
+            />
+            <Route
+              path={`${match.path}/network-access-layer`}
+              component={NetworkAccessLayer}
+            />
             {/* Application Layer */}
             <div className='glossary-row'>
-              <Route
-                path={`${match.path}/application-layer`}
-                component={ApplicationLayer}
-              />
               <div className='glossary-column-inner-wrapper'>
                 <NavLink to={`${match.path}/application-layer`}>
                   Application Layer
@@ -207,10 +263,6 @@ export default function GlossaryScreen ({ match }) {
             </div>
             {/* Transport Layer */}
             <div className='glossary-row'>
-              <Route
-                path={`${match.path}/transport-layer`}
-                component={TransportLayer}
-              />
               <div className='glossary-column-inner-wrapper'>
                 <NavLink to={`${match.path}/transport-layer`}>
                   Transport Layer
@@ -219,10 +271,6 @@ export default function GlossaryScreen ({ match }) {
             </div>
             {/* Internet Layer */}
             <div className='glossary-row'>
-              <Route
-                path={`${match.path}/Internet-layer`}
-                component={InternetLayer}
-              />
               <div className='glossary-column-inner-wrapper'>
                 <NavLink to={`${match.path}/Internet-layer`}>
                   Internet Layer
@@ -231,10 +279,6 @@ export default function GlossaryScreen ({ match }) {
             </div>
             {/* Network Access Layer */}
             <div className='glossary-row'>
-              <Route
-                path={`${match.path}/network-access-layer`}
-                component={NetworkAccessLayer}
-              />
               <div className='glossary-column-inner-wrapper'>
                 <NavLink to={`${match.path}/network-access-layer`}>
                   Network Access Layer
@@ -247,10 +291,29 @@ export default function GlossaryScreen ({ match }) {
               path={`${match.path}/client-server`}
               component={ClientServer}
             />
-            <div className='glossary-column-inner-wrapper'>
-              <NavLink to={`${match.path}/client-server`}>
-                Client-Server
-              </NavLink>
+            <Route path={`${match.path}/peer-to-peer`} component={PeerToPeer} />
+            <Route path={`${match.path}/hybrid`} component={Hybrid} />
+            {/* Client-Server */}
+            <div className='glossary-row'>
+              <div className='glossary-column-inner-wrapper'>
+                <NavLink to={`${match.path}/client-server`}>
+                  Client-Server
+                </NavLink>
+              </div>
+            </div>
+            {/* P2P */}
+            <div className='glossary-row'>
+              <div className='glossary-column-inner-wrapper'>
+                <NavLink to={`${match.path}/peer-to-peer`}>
+                  Peer-to-Peer (P2P)
+                </NavLink>
+              </div>
+            </div>
+            {/* Hybrid */}
+            <div className='glossary-row'>
+              <div className='glossary-column-inner-wrapper'>
+                <NavLink to={`${match.path}/hybrid`}>Hybrid</NavLink>
+              </div>
             </div>
           </div>
           <div className='glossary-column'>

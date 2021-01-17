@@ -104,6 +104,9 @@
   position: absolute;
   bottom: 20px;
   display: flex;
+  flex-direction: column;
+  left: 20px;
+  font-family: 'hk-grotesk-semibold', Helvetica, sans-serif;
 }
 
 .software-is-typing {
