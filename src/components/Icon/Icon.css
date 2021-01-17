@@ -6,6 +6,7 @@
   cursor: pointer;
   position: relative;
 }
+
 .inner-icon {
   /* default: black */
   background-color: #000000;
@@ -57,6 +58,13 @@
   width: 20px;
   height: 20px;
   padding: 1px;
+  cursor: pointer;
+}
+
+.icon.large-close {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
   cursor: pointer;
 }
 

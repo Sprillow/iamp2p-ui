@@ -1,0 +1,64 @@
+.glossary-screen-wrapper {
+    height: 100%;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.glossary-screen-inner-wrapper {
+    height: 100%;
+    min-width: 1200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.glossary-column {
+    min-width: 200px;
+    border-right: #000000 1px solid;
+    font-size: 20px;
+    flex: 1;
+    position: relative;
+}
+
+.glossary-column-inner-wrapper {
+    width: 100%;
+    padding: 30px;
+    font-family: 'gilroyextrabold', Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+.glossary-column-inner-wrapper a {
+    text-decoration: none;
+    color: #2c2c2c;
+    transition: color 0.2s;
+}
+
+.glossary-column-inner-wrapper a:hover {
+    color: green;
+}
+
+/* Overlay */
+
+.column-overlay {
+    background-color: #a8cc7f;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.column-overlay-term {
+    font-size: 20px;
+    font-family: 'gilroyextrabold', Helvetica, sans-serif;
+    margin-bottom: 20px;
+}
+
+.column-overlay-close-button {
+    position: absolute;
+    padding: 5px;
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+}
