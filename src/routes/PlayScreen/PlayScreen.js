@@ -26,12 +26,12 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   useEffect(() => {
     getAdminWs().then(async client => {
       const dnas = await client.listDnas()
-      setHasCheckedInGame(true)
       if (dnas.length > 0) {
         setInGame(true)
       } else {
         setInGame(false)
       }
+      setHasCheckedInGame(true)
     })
   }, [])
 
@@ -58,44 +58,8 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   }
 
   return (
-    <div className='intro-screen-wrapper'>
-      {/* <div className='skip-intro-button'>
-        <div onClick={goToRegister}>Skip Intro</div>
-      </div> */}
-      <div className='intro-screen-content-frame'>
-        {/* all 4 screens */}
-        <div className={`content-wrapper active-screen-${screenContent}`}>
-          <div className={`screen active-screen`}>
-            <div className='intro-screen-image'>
-              {/* <img src={screen.image} /> */}
-            </div>
-            <div className='intro-screen-text'>
-              <div className='intro-screen-title'>IamP2P Transact Game</div>
-              <div className='intro-screen-description'>
-                <div>
-                  This little experimental game is meant to give you an example
-                  of how Holochain, as a peer-to-peer protocol functions in real
-                  life. You would be able to make transactions with friends in
-                  your network using an imaginary currency.
-                </div>
-                <div>
-                  If you have received a secret phrase from a friend of your,
-                  select Join a Game. If you want to initiate a game an invite
-                  friends, click Start a Game.
-                </div>
-                <br />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='sign-up-button'>
-          <Button onClick={goToConverse} text={`Join a game`} />
-        </div>
-        <div className='sign-up-button'>
-          <Button onClick={goToConverse} text={`Start a Game`} />
-        </div>
-      </div>
+    <div>
+      I am now playing a game
     </div>
   )
 }
