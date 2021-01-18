@@ -18,7 +18,8 @@ import {
 import Modal from '../../../components/Modal/Modal'
 import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
 import { fetchAgentAddress } from '../../../agent-address/actions'
-import { getAdminWs } from '../../../hcWebsockets'
+import { joinProjectCellId } from '../../../cells/actions'
+import { getAdminWs, getAppWs } from '../../../hcWebsockets'
 import ProgressExplainer from '../../../components/ProgressExplainer/ProgressExplainer'
 import JoinProjectModal from '../../../components/JoinProjectModal/JoinProjectModal'
 
@@ -44,10 +45,10 @@ function PlayIntroScreen({ dispatch }) {
   // in a game
   useEffect(() => {
     getAdminWs().then(async client => {
-      const dnas = await client.listDnas()
+      const activeApps = await client.listActiveApps()
       setInGame(false)
       setHasCheckedInGame(true)
-      // if (dnas.length > 0) {
+      // if (activeApps.length > 0) {
       //   setInGame(true)
       // } else {
       //   setInGame(false)
@@ -55,35 +56,25 @@ function PlayIntroScreen({ dispatch }) {
     })
   }, [])
 
-  const [screenContent, setScreenContent] = useState(0)
-
-  const goBack = () => {
-    if (screenContent !== 0) setScreenContent(screenContent - 1)
-  }
-
-  const goForward = () => {
-    if (screenContent !== 3) setScreenContent(screenContent + 1)
-  }
-
   const joinGame = async () => {
     setShowJoinModal(true)
   }
 
-  const onJoin = async (secretPhrase) => {
-    console.log(secretPhrase)
+  const onJoin = async passphrase => {
     setShowJoinModal(false)
     setIsJoiningGame(true)
-    setJoiningGameStep(6)
-
     // do the project joining
-    // await holochainCreateGame(setCreatingGameStep, dispatch)
+    const result = await holochainJoinGame(passphrase, setJoiningGameStep, dispatch)
     // leave 2 seconds for reading
-    await sleep(3000)
+    await sleep(2000)
     // in the case of a bad join
     setIsJoiningGame(false)
-    // setShowJoinModal(true)
-    // setInvalidJoin(true)
-    history.push('/play/create-profile')
+    if (!result) {
+      setShowJoinModal(true)
+      setInvalidJoin(true)
+    } else {
+      history.push('/play/create-profile')
+    }
   }
 
   const createGame = async () => {
@@ -105,7 +96,7 @@ function PlayIntroScreen({ dispatch }) {
   return (
     <>
       <div>
-        <div className={`content-wrapper active-screen-${screenContent}`}>
+        <div className={`content-wrapper active-screen-`}>
           <div className={`screen active-screen`}>
             <div className='intro-screen-image'>
               {/* <img src={screen.image} /> */}
@@ -208,30 +199,24 @@ function JoiningGameModal({ step }) {
       )}
       {step >= 2 && (
         <ProgressExplainer
-          text='Generating a secret phrase for your unique game'
+          text='Generating a personal source chain for your data history'
           done={step > 2}
         />
       )}
       {step >= 3 && (
         <ProgressExplainer
-          text='Generating a personal source chain for your data history'
+          text='Joining a Distributed Hash Table for data sharing'
           done={step > 3}
         />
       )}
       {step >= 4 && (
         <ProgressExplainer
-          text='Generating a Distributed Hash Table for data sharing'
+          text='Trying to join this game'
           done={step > 4}
         />
       )}
-      {step >= 5 && (
-        <ProgressExplainer
-          text='Starting up Holochain networking services'
-          done={step > 5}
-        />
-      )}
-      {step === 6 && (
-        <ProgressExplainer text='Game initiated' done={step === 6} />
+      {step === 5 && (
+        <ProgressExplainer text='Game joined' done={step === 5} />
       )}
     </div>
   )
@@ -264,7 +249,9 @@ async function holochainCreateGame(setCreatingGameStep, dispatch) {
     agentAddress,
     passphrase,
     adminWs,
-    setCreatingGameStep
+    setCreatingGameStep,
+    3,
+    4
   )
   const cellIdString = cellIdToString(installedApp.cell_data[0][0])
 
@@ -273,16 +260,6 @@ async function holochainCreateGame(setCreatingGameStep, dispatch) {
   await Promise.all([
     sleep(2000),
     (async () => {
-      // attach app interface
-      try {
-        await adminWs.attachAppInterface({ port: 8888 })
-      } catch (e) {
-        console.error('uhoh address already in use', e)
-      }
-      // because we are acting optimistically,
-      // because holochain is taking 18 s to respond to this first call
-      // we will directly set ourselves as a member of this cell
-      // await dispatch(setMember(cellIdString, { address: agentAddress }))
       const { Codec } = await import('@holo-host/cryptolib')
       await dispatch(
         createProjectMeta.create({
@@ -306,7 +283,9 @@ async function installProjectApp(
   agent_key,
   passphrase,
   adminWs,
-  setCreatingGameStep
+  setStep,
+  firstStepNumber,
+  secondStepNumber
 ) {
   const uuid = passphraseToUuid(passphrase)
   // add a bit of randomness so that
@@ -335,9 +314,9 @@ async function installProjectApp(
       return i
     })(),
     (async () => {
-      setCreatingGameStep(3)
+      setStep(firstStepNumber)
       await sleep(2000)
-      setCreatingGameStep(4)
+      setStep(secondStepNumber)
       await sleep(2000)
     })(),
   ])
@@ -345,57 +324,76 @@ async function installProjectApp(
 }
 
 // JOIN
-async function joinGame(passphrase, dispatch) {
+async function holochainJoinGame(passphrase, setJoiningGameStep, dispatch) {
   // joinProject
   // join a DNA
   // then try to get the project metadata
   // if that DOESN'T work, the attempt is INVALID
   // remove the instance again immediately
-  const installedApp = await installProjectApp(passphrase)
+
+  // TAKE AT LEAST 2 SECONDS FOR EACH STEP
+
+  const adminWs = await getAdminWs()
+  const appWs = await getAppWs()
+
+  // generate the agent keys
+  setJoiningGameStep(1)
+  const [agentAddress] = await Promise.all([
+    adminWs.generateAgentPubKey(),
+    sleep(2000),
+  ])
+
+  const installedApp = await installProjectApp(
+    agentAddress,
+    passphrase,
+    adminWs,
+    setJoiningGameStep,
+    2,
+    3
+  )
   const cellId = installedApp.cell_data[0][0]
   const cellIdString = cellIdToString(installedApp.cell_data[0][0])
-  const appWs = await getAppWs()
-  try {
-    await appWs.callZome({
-      cap: null,
-      cell_id: cellId,
-      zome_name: PROJECTS_ZOME_NAME,
-      fn_name: 'fetch_project_meta',
-      payload: null,
-      provenance: getAgentPubKey(), // FIXME: this will need correcting after holochain changes this
-    })
-    await dispatch(joinProjectCellId(cellIdString))
-    // trigger a side effect...
-    // this will let other project members know you're here
-    // without 'blocking' the thread or the UX
-    appWs
-      .callZome({
-        cap: null,
-        cell_id: cellId,
-        zome_name: PROJECTS_ZOME_NAME,
-        fn_name: 'init_signal',
-        payload: null,
-        provenance: getAgentPubKey(), // FIXME: this will need correcting after holochain changes this
-      })
-      .then(() => console.log('succesfully triggered init_signal'))
-      .catch(e => console.error('failed while triggering init_signal: ', e))
-    return true
-  } catch (e) {
-    // deactivate app
-    const adminWs = await getAdminWs()
-    await adminWs.deactivateApp({
-      installed_app_id: installedApp.installed_app_id,
-    })
-    if (
-      e.type === 'error' &&
-      e.data.type === 'ribosome_error' &&
-      e.data.data.includes('no project meta exists')
-    ) {
-      return false
-    } else {
-      throw e
-    }
+
+  setJoiningGameStep(4)
+  const [_, result] = await Promise.all([
+    // 2 second minimum
+    sleep(2000),
+    // fetch project meta
+    (async () => {
+      try {
+        await appWs.callZome({
+          cap: null,
+          cell_id: cellId,
+          zome_name: PROJECTS_ZOME_NAME,
+          fn_name: 'fetch_project_meta',
+          payload: null,
+          provenance: agentAddress, // FIXME: this will need correcting after holochain changes this
+        })
+        await dispatch(joinProjectCellId(cellIdString))
+        return true
+      } catch (e) {
+        // deactivate app, since joining failed
+        await adminWs.deactivateApp({
+          installed_app_id: installedApp.installed_app_id,
+        })
+        if (
+          e.type === 'error' &&
+          e.data.type === 'ribosome_error' &&
+          e.data.data.includes('no project meta exists')
+        ) {
+          return false
+        } else {
+          throw e
+        }
+      }
+    })(),
+  ])
+  if (!result) {
+    return false // false
   }
+  // DONE
+  setCreatingGameStep(5)
+  return true
 }
 
 function mapStateToProps(state) {
@@ -407,3 +405,18 @@ function mapDispatchToProps(dispatch) {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PlayIntroScreen)
+
+// trigger a side effect...
+// this will let other project members know you're here
+// without 'blocking' the thread or the UX
+// appWs
+//   .callZome({
+//     cap: null,
+//     cell_id: cellId,
+//     zome_name: PROJECTS_ZOME_NAME,
+//     fn_name: 'init_signal',
+//     payload: null,
+//     provenance: agentAddress, // FIXME: this will need correcting after holochain changes this
+//   })
+//   .then(() => console.log('succesfully triggered init_signal'))
+//   .catch(e => console.error('failed while triggering init_signal: ', e))

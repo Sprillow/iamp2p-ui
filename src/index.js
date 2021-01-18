@@ -34,24 +34,33 @@ import {
 import { getProjectCellIdStrings } from './projectAppIds'
 
 // trigger caching of adminWs connection
-getAdminWs()
+getAdminWs().then(async client => {
+  try {
+    await client.attachAppInterface({ port: 8888 })
+  } catch (e) {
+    console.log('address 8888 was already in use')
+  }
+  const middleware = [holochainMiddleware(APP_WS_URL)]
+  // This enables the redux-devtools browser extension
+  // which gives really awesome debugging for apps that use redux
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-// .then(async client => {
-//   const { port: appPort } = await client.attachAppInterface({ port: 8888 })
-//   console.log('success')
-// })
+  // iamp2p is the top-level reducer. the second argument is custom Holochain middleware
+  let store = createStore(
+    iamp2p,
+    /* preloadedState, */ composeEnhancers(applyMiddleware(...middleware))
+  )
+  // By passing the `store` in as a wrapper around our React component
+  // we make the state available throughout it
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('react')
+  )
+})
 
-const middleware = [holochainMiddleware(APP_WS_URL)]
 
-// This enables the redux-devtools browser extension
-// which gives really awesome debugging for apps that use redux
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-// iamp2p is the top-level reducer. the second argument is custom Holochain middleware
-let store = createStore(
-  iamp2p,
-  /* preloadedState, */ composeEnhancers(applyMiddleware(...middleware))
-)
 
 // initialize the appWs with the signals handler
 // getAppWs(signalsHandlers(store))
@@ -77,12 +86,3 @@ let store = createStore(
   // store.dispatch(setProjectsCellIds(projectCellIds))
 })
 */
-
-// By passing the `store` in as a wrapper around our React component
-// we make the state available throughout it
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('react')
-)

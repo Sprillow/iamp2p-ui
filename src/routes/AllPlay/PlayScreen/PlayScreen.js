@@ -25,8 +25,8 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   // in a game
   useEffect(() => {
     getAdminWs().then(async client => {
-      const dnas = await client.listDnas()
-      if (dnas.length > 0) {
+      const activeApps = await client.listActiveApps()
+      if (activeApps.length > 0) {
         setInGame(true)
       } else {
         setInGame(false)

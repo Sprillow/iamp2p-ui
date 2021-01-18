@@ -39,7 +39,7 @@ export default function JoinProjectModal ({
   }
 
   const formInvalidText = failure
-    ? "It did'nt work. Make sure your secret phrase is correct and the friend who invited you has their IamP2P app open."
+    ? "It didn't work. Make sure your secret phrase is correct and the friend who invited you has their IamP2P app open."
     : invalidText
 
   return (
