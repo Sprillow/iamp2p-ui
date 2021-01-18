@@ -14,11 +14,11 @@ import {
 } from '../ProjectModal/ProjectModal'
 import ButtonWithPendingState from '../ButtonWithPendingState/ButtonWithPendingState'
 
-export default function JoinProjectModal({
+export default function JoinProjectModal ({
   showModal,
   onClose,
   onJoin,
-  failure
+  failure,
 }) {
   const [projectSecret, setProjectSecret] = useState('')
   const [invalidText, setInvalidText] = useState('')
@@ -38,9 +38,9 @@ export default function JoinProjectModal({
     onClose()
   }
 
-  const formInvalidText = failure ? 'It did\'nt work. Make sure your secret phrase is correct and the friend who invited you has their IamP2P app open.'
-   : invalidText
-
+  const formInvalidText = failure
+    ? "It did'nt work. Make sure your secret phrase is correct and the friend who invited you has their IamP2P app open."
+    : invalidText
 
   return (
     <Modal
@@ -61,7 +61,10 @@ export default function JoinProjectModal({
           />
         </ProjectModalContentSpacer>
       </ProjectModalContent>
-      <ProjectModalButton text={'Join'} onClick={() => projectSecret.length && onJoin(projectSecret)} />
+      <ProjectModalButton
+        text={'Join'}
+        onClick={() => projectSecret.length && onJoin(projectSecret)}
+      />
     </Modal>
   )
 }

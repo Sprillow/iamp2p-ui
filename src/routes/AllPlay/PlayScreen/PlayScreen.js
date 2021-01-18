@@ -58,15 +58,20 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   }
 
   return (
-    <div>
-      I am now playing a game
-    </div>
+    <>
+      <div className='play-screen-header'>
+        <div className='your-wallet-wrapper'>Your Wallet</div>
+        <div className='your-network-wrapper'>Your Netowrk</div>
+        <div className='header-send-button-wrapper'>Send Cat Credits</div>
+      </div>
+      <div>I am now playing a game</div>
+    </>
   )
 }
 
 function mapStateToProps (state) {
   return {
-    agentAddress: state.agentAddress
+    agentAddress: state.agentAddress,
   }
 }
 
@@ -74,7 +79,7 @@ function mapDispatchToProps (dispatch) {
   return {
     fetchAgentAddress: cellIdString => {
       dispatch(fetchAgentAddress.create({ cellIdString, payload: null }))
-    }
+    },
   }
 }
 

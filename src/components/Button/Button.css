@@ -73,7 +73,8 @@
   font-size: 20px;
   line-height: 18px;
   padding: 20px 36px;
-  min-width: 135px;
+  /* min-width: 135px; */
+  width: 100%;
 }
 
 .button.stroke {

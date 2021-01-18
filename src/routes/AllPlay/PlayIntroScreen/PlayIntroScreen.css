@@ -80,12 +80,12 @@
   margin-bottom: 20px;
 }
 
-.intro-screen-description {
+.play-intro-screen-description {
   font-size: 20px;
   font-family: 'hk-grotesk-medium', Helvetica, sans-serif;
   color: #4e4e4e;
   line-height: 32px;
-  /* height: 165px; */
+  margin-bottom: 20px;
 }
 
 .intro-screen-content-frame .button-back {
@@ -123,4 +123,14 @@
 .play-screen-buttons-wrapper {
   display: flex;
   flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+
+.play-screen-button {
+  margin: 10px;
+}
+
+.play-screen-button .button.large {
+  min-width: 240px;
 }

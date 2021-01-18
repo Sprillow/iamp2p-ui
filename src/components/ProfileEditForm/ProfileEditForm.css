@@ -13,6 +13,7 @@
 
 .profile_edit_form_title {
   margin-bottom: 30px;
+  text-align: left;
 }
 
 .profile_edit_form h1 {
@@ -68,11 +69,11 @@
 }
 
 @media only screen and (max-height: 800px) {
-  .profile_edit_form {
+  /* .profile_edit_form {
     text-align: center;
     margin: 0 auto;
-  }
-
+    height: 100%;
+  } */
   .validating_form_input {
     margin-bottom: 30px;
   }

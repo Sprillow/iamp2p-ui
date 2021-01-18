@@ -9,10 +9,10 @@ import CreateProfilePage from './CreateProfilePage/CreateProfilePage'
 
 export default function AllPlay({ match }) {
   return (
-    <div className='game_wrapper'>
-      <div className='game_column_wrapper game_left_column_wrapper'>
+    <div className='game-wrapper'>
+      <div className='game-column-wrapper game-left-column-wrapper'>
       </div>
-      <div className='game_center_column_wrapper'>
+      <div className='game-center-column-wrapper'>
         <Switch>
           <Route path={`${match.path}/intro`} component={PlayIntroScreen} />
           <Route
@@ -26,7 +26,7 @@ export default function AllPlay({ match }) {
           <Route exact path={`${match.path}`} component={PlayScreen} />
         </Switch>
       </div>
-      <div className='game_column_wrapper game_right_column_wrapper'>
+      <div className='game-column-wrapper game-right-column-wrapper'>
       </div>
     </div>
   )

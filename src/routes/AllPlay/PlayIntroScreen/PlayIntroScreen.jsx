@@ -112,13 +112,14 @@ function PlayIntroScreen({ dispatch }) {
             </div>
             <div className='intro-screen-text'>
               <div className='intro-screen-title'>IamP2P Transact Game</div>
-              <div className='intro-screen-description'>
+              <div className='play-intro-screen-description'>
                 <div>
                   This little experimental game is meant to give you an example
                   of how Holochain, as a peer-to-peer protocol functions in real
                   life. You would be able to make transactions with friends in
                   your network using an imaginary currency.
                 </div>
+                <br/>
                 <div>
                   If you have received a secret phrase from a friend of yours,
                   select Join a Game. If you want to initiate a game an invite
