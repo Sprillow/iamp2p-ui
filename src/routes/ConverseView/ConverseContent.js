@@ -12,10 +12,14 @@ const optionMap = {
   s19: ['h6', 'h13'],
   s20: ['h10'],
   s21: ['h22', 'h23', 'h24', 'h25'],
-  s28: ['h5'],
-  s34: ['h5'],
+
+  s28: ['h23', 'h24', 'h5', 'h25'],
+
+  s33: ['h22', 'h24', 'h5', 'h25'],
+
+  s34: ['h5', 'h22', 'h23'],
   s37: ['h27'],
-  s38: ['h28', 'h29']
+  s38: ['h28', 'h29'],
 }
 
 // the dedicated list of answers from the software to a given human message
@@ -44,7 +48,7 @@ const replyMap = {
   h26: ['', ''],
   h27: ['s38'],
   h28: ['s3', 's4'],
-  h29: ['s39']
+  h29: ['s39'],
 }
 
 const softwareMessages = {
@@ -117,12 +121,12 @@ const softwareMessages = {
   s29: `Think when there is no “central” server serving “clients” in a network, 
   instead lots are “peers” acting as servers and clients for each other at the same time, 
   this shifts the way information is shared, moderated, the rules, and more importantly, 
-  the power dynamics, between the server and receiver. `,
+  the power dynamics, between the server and receiver. Think about these implications: `,
 
-  s30: `- Network neutrality`,
+  s30: `- network neutrality`,
   s31: `- content moderation (gatekeeper relationship, server defines the rules “protocols”) `,
   s32: `- relationship between “server” and “client”. Think of server as the landlord and the rest (clients) as renters.`,
-  s33: `- Resilience: hard to take down vs “switch on and off” effects of centralized models`,
+  s33: `- resilience: hard to take down vs “switch on and off” effects of centralized models`,
 
   //
 
@@ -135,7 +139,7 @@ const softwareMessages = {
 
   s38: `Great. Are you intereted in learning about peer-to-peer protocols?`,
 
-  s39: `All good. Just press "Undo" if you change your mind.`
+  s39: `All good. Just press "Undo" if you change your mind.`,
 }
 
 const humanMessages = {
@@ -176,7 +180,7 @@ const humanMessages = {
   h27: `Got it. `,
 
   h28: `Yes. What is a "peer-to-peer" protocol?`,
-  h29: `No, thanks.`
+  h29: `No, thanks.`,
 }
 
 export { softwareMessages, humanMessages, replyMap, optionMap }

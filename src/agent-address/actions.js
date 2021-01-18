@@ -7,12 +7,12 @@
 
 import { createZomeCallAsyncAction } from 'connoropolous-hc-redux-middleware'
 
-import { PROFILES_ZOME_NAME } from '../holochainConfig'
+import { ZOME_NAME } from '../holochainConfig'
 
 /* action creator functions */
 
 const fetchAgentAddress = createZomeCallAsyncAction(
-  PROFILES_ZOME_NAME,
+  ZOME_NAME,
   'fetch_agent_address'
 )
 

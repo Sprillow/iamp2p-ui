@@ -17,7 +17,7 @@
 
 .header-item {
   padding: 10px;
-  border-right: #000000 1px solid;
+  border-left: #000000 1px solid;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -175,6 +175,7 @@
   display: block;
   white-space: nowrap;
 }
+
 .export-list-wrapper a:hover {
   background: #f4f4f4 none repeat scroll 0% 0%;
   color: #5f65ff;
@@ -217,7 +218,7 @@
   visibility: hidden;
 }
 
-.active-entry-point:hover > .active-entry-point-close {
+.active-entry-point:hover>.active-entry-point-close {
   visibility: visible;
 }
 
@@ -306,19 +307,19 @@
   background-color: #f2f2f2;
 }
 
-.purple .avatar-container + span {
+.purple .avatar-container+span {
   background-color: #5f65ff;
 }
 
-.green .avatar-container + span {
+.green .avatar-container+span {
   background-color: #00d0c0;
 }
 
-.yellow .avatar-container + span {
+.yellow .avatar-container+span {
   background-color: #ffc400;
 }
 
-.gray .avatar-container + span {
+.gray .avatar-container+span {
   background-color: #d1d1d1;
 }
 

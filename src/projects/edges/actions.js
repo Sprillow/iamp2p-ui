@@ -4,7 +4,7 @@
   of constants defining all the types of actions
   that can be taken within that feature.
 */
-import { PROJECTS_ZOME_NAME } from '../../holochainConfig'
+import { ZOME_NAME } from '../../holochainConfig'
 import { createCrudActionCreators } from '../../crudRedux'
 
 /* action creator functions */
@@ -36,7 +36,7 @@ const [
   fetchEdges,
   updateEdge,
   archiveEdge,
-] = createCrudActionCreators(PROJECTS_ZOME_NAME, 'edge')
+] = createCrudActionCreators(ZOME_NAME, 'edge')
 
 export {
   PREVIEW_EDGES,

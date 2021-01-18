@@ -5,7 +5,7 @@ import './ErrorScreen.css'
 import Button from '../Button/Button'
 import Icon from '../Icon/Icon'
 
-function ErrorScreen({ stackTrace }) {
+function ErrorScreen ({ stackTrace }) {
   const [expanded, setExpanded] = useState(false)
   const expandClass = expanded ? 'active' : ''
 
@@ -17,12 +17,11 @@ function ErrorScreen({ stackTrace }) {
           <div className='error-screen-subtitle'>IamP2P has crashed</div>
           <div className='error-screen-description'>
             Please help us improve the app's performance by{' '}
-            <a
-              href='https://github.com/h-be/iamp2p-release/issues/new?assignees=&labels=bug&template=bug_report.md&title='
-              target='_blank'>
+            <a href='mailto:pegah@sprillow.com' target='_blank'>
               reporting the issue
             </a>
-            . Try pressing 'Reload' and if that doesn't work, try fully restarting the application.
+            . Try pressing 'Reload' and if that doesn't work, try fully
+            restarting the application.
           </div>
           <div className='show-stack-trace-wrapper'>
             <div
@@ -46,11 +45,16 @@ function ErrorScreen({ stackTrace }) {
           <div className='error-screen-buttons'>
             <a
               className='error-screen-report-issue-button'
-              href='https://github.com/h-be/iamp2p-release/issues/new?assignees=&labels=bug&template=bug_report.md&title='
+              href='mailto:pegah@sprillow.com'
               target='_blank'>
               <Button text='Report Issue' size='medium' className='green' />
             </a>
-            <Button text='Reload' size='medium' className='purple' onClick={() => window.location.reload()}/>
+            <Button
+              text='Reload'
+              size='medium'
+              className='purple'
+              onClick={() => window.location.reload()}
+            />
           </div>
         </div>
         <div className='error-screen-column-right'>
@@ -62,24 +66,24 @@ function ErrorScreen({ stackTrace }) {
 }
 
 class ErrorBoundary extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { hasError: false, errorText: null }
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError (error) {
     // Update state so the next render will show the fallback UI.
     return {
       hasError: true,
       errorText: error.message + '\n\n' + error.stack,
     }
   }
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch (error, errorInfo) {
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, errorInfo)
   }
 
-  render() {
+  render () {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return <ErrorScreen stackTrace={this.state.errorText} />

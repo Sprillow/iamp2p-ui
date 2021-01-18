@@ -5,7 +5,7 @@
   that can be taken within that feature.
 */
 
-import { PROJECTS_ZOME_NAME } from '../../holochainConfig'
+import { ZOME_NAME } from '../../holochainConfig'
 import { createCrudActionCreators } from '../../crudRedux'
 
 const [
@@ -13,7 +13,7 @@ const [
   fetchEntryPoints,
   updateEntryPoint,
   archiveEntryPoint,
-] = createCrudActionCreators(PROJECTS_ZOME_NAME, 'entry_point')
+] = createCrudActionCreators(ZOME_NAME, 'entry_point')
 
 export {
   createEntryPoint,

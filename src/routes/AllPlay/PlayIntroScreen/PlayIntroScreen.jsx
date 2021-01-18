@@ -9,7 +9,7 @@ import Button from '../../../components/Button/Button'
 import Icon from '../../../components/Icon/Icon'
 import { connect } from 'react-redux'
 
-import { PROJECTS_DNA_PATH, PROJECTS_ZOME_NAME } from '../../../holochainConfig'
+import { DNA_PATH, ZOME_NAME } from '../../../holochainConfig'
 import { passphraseToUuid } from '../../../secrets'
 import {
   createProjectMeta,
@@ -18,7 +18,7 @@ import {
 import Modal from '../../../components/Modal/Modal'
 import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
 import { fetchAgentAddress } from '../../../agent-address/actions'
-import { joinProjectCellId } from '../../../cells/actions'
+import { setCellId } from '../../../cells/actions'
 import { getAdminWs, getAppWs } from '../../../hcWebsockets'
 import ProgressExplainer from '../../../components/ProgressExplainer/ProgressExplainer'
 import JoinProjectModal from '../../../components/JoinProjectModal/JoinProjectModal'
@@ -46,13 +46,12 @@ function PlayIntroScreen({ dispatch }) {
   useEffect(() => {
     getAdminWs().then(async client => {
       const activeApps = await client.listActiveApps()
-      setInGame(false)
+      if (activeApps.length > 0) {
+        setInGame(true)
+      } else {
+        setInGame(false)
+      }
       setHasCheckedInGame(true)
-      // if (activeApps.length > 0) {
-      //   setInGame(true)
-      // } else {
-      //   setInGame(false)
-      // }
     })
   }, [])
 
@@ -95,7 +94,7 @@ function PlayIntroScreen({ dispatch }) {
 
   return (
     <>
-      <div>
+      <div className='play-intro-screen-wrapper'>
         <div className={`content-wrapper active-screen-`}>
           <div className={`screen active-screen`}>
             <div className='intro-screen-image'>
@@ -244,6 +243,7 @@ async function holochainCreateGame(setCreatingGameStep, dispatch) {
   setCreatingGameStep(2)
   const [passphrase] = await Promise.all([generatePassphrase(), sleep(2000)])
 
+  console.log(passphrase)
   // install the DNA
   const installedApp = await installProjectApp(
     agentAddress,
@@ -254,6 +254,7 @@ async function holochainCreateGame(setCreatingGameStep, dispatch) {
     4
   )
   const cellIdString = cellIdToString(installedApp.cell_data[0][0])
+  await dispatch(setCellId(cellIdString))
 
   // "networking services"
   setCreatingGameStep(5)
@@ -304,7 +305,7 @@ async function installProjectApp(
         dnas: [
           {
             nick: uuid,
-            path: PROJECTS_DNA_PATH,
+            path: DNA_PATH,
             properties: { uuid },
           },
         ],
@@ -364,12 +365,12 @@ async function holochainJoinGame(passphrase, setJoiningGameStep, dispatch) {
         await appWs.callZome({
           cap: null,
           cell_id: cellId,
-          zome_name: PROJECTS_ZOME_NAME,
+          zome_name: ZOME_NAME,
           fn_name: 'fetch_project_meta',
           payload: null,
           provenance: agentAddress, // FIXME: this will need correcting after holochain changes this
         })
-        await dispatch(joinProjectCellId(cellIdString))
+        await dispatch(setCellId(cellIdString))
         return true
       } catch (e) {
         // deactivate app, since joining failed
@@ -392,7 +393,7 @@ async function holochainJoinGame(passphrase, setJoiningGameStep, dispatch) {
     return false // false
   }
   // DONE
-  setCreatingGameStep(5)
+  setJoiningGameStep(5)
   return true
 }
 
@@ -413,7 +414,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(PlayIntroScreen)
 //   .callZome({
 //     cap: null,
 //     cell_id: cellId,
-//     zome_name: PROJECTS_ZOME_NAME,
+//     zome_name: ZOME_NAME,
 //     fn_name: 'init_signal',
 //     payload: null,
 //     provenance: agentAddress, // FIXME: this will need correcting after holochain changes this

@@ -19,7 +19,7 @@ function ProfileEditForm ({
   whoami,
   titleText,
   subText,
-  submitText
+  submitText,
 }) {
   const [firstName, setFirstName] = useState('')
   const [isValidFirstName, setisValidFirstName] = useState(true)
@@ -39,7 +39,7 @@ function ProfileEditForm ({
         status: 'Online',
         avatar_url: avatarUrl,
         address: agentAddress,
-        handle
+        handle,
       })
     }
   }
@@ -161,7 +161,7 @@ function ProfileEditForm ({
           <ValidatingFormInput
             value={handle}
             onChange={setHandle}
-            label='Username'
+            label='PeerName'
             helpText={usernameHelp}
             invalidInput={handle.length > 0 && !isValidUserName}
             validInput={handle.length > 0 && isValidUserName}
@@ -218,12 +218,12 @@ ProfileEditForm.propTypes = {
     first_name: PropTypes.string,
     last_name: PropTypes.string,
     handle: PropTypes.string,
-    avatar_url: PropTypes.string
+    avatar_url: PropTypes.string,
   }),
   titleText: PropTypes.string,
   subText: PropTypes.string,
   submitText: PropTypes.string,
-  canClose: PropTypes.bool
+  canClose: PropTypes.bool,
 }
 
 export default ProfileEditForm

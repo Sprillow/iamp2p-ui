@@ -7,7 +7,7 @@
 
 import { createZomeCallAsyncAction } from 'connoropolous-hc-redux-middleware'
 
-import { PROJECTS_ZOME_NAME } from '../../holochainConfig'
+import { ZOME_NAME } from '../../holochainConfig'
 
 // SET because it could be brand new, or an update, but treat it the same way
 const SET_MEMBER = 'set_member'
@@ -25,9 +25,6 @@ const setMember = (cellIdString, member) => {
   }
 }
 
-const fetchMembers = createZomeCallAsyncAction(
-    PROJECTS_ZOME_NAME,
-    FETCH_MEMBERS
-  )
+const fetchMembers = createZomeCallAsyncAction(ZOME_NAME, FETCH_MEMBERS)
 
 export { SET_MEMBER, FETCH_MEMBERS, setMember, fetchMembers }

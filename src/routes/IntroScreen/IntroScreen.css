@@ -24,7 +24,7 @@
 .intro-screen-content-frame {
   overflow: hidden;
   margin: auto auto;
-  width: 900px;
+  width: 500px;
   position: relative;
 }
 
@@ -34,7 +34,7 @@
   flex-direction: row;
 }
 
-.content-wrapper.active-screen-0 {
+/* .content-wrapper.active-screen-0 {
   transform: translateX(0%);
 }
 
@@ -48,7 +48,7 @@
 
 .content-wrapper.active-screen-3 {
   transform: translateX(-300%);
-}
+} */
 
 .screen {
   margin: 0 75px;

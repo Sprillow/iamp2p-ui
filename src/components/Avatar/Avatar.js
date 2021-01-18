@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import './Avatar.css'
 import { pickColorForString } from '../../styles'
 
-function Avatar({
-  first_name,
-  last_name,
+function Avatar ({
+  handle,
   avatar_url,
   highlighted,
   small,
@@ -24,7 +23,7 @@ function Avatar({
   if (clickable) classes.push('clickable')
 
   if (!avatar_url) {
-    const backgroundInitialsAvatar = pickColorForString(first_name)
+    const backgroundInitialsAvatar = pickColorForString(handle)
 
     //const backgroundInitialsAvatar = initialsAvatarcolors[0]
     const style = {
@@ -33,8 +32,7 @@ function Avatar({
     classes.push('initials-avatar')
     return (
       <div className={classes.join(' ')} onClick={onClick} style={style}>
-        {first_name[0].toUpperCase()}
-        {last_name[0].toUpperCase()}
+        {handle[0].toUpperCase()}
       </div>
     )
   }
@@ -43,16 +41,6 @@ function Avatar({
   return (
     <img src={avatar_url} className={classes.join(' ')} onClick={onClick} />
   )
-}
-
-Avatar.propTypes = {
-  avatar_url: PropTypes.string.isRequired,
-  highlighted: PropTypes.bool,
-  small: PropTypes.bool,
-  medium: PropTypes.bool,
-  large: PropTypes.bool,
-  clickable: PropTypes.bool,
-  onClick: PropTypes.func,
 }
 
 export default Avatar

@@ -3,7 +3,7 @@ import './ProjectSecret.css'
 import Icon from '../Icon/Icon'
 import ValidatingFormInput from '../ValidatingFormInput/ValidatingFormInput'
 
-export default function ProjectSecret({ passphrase }) {
+export default function ProjectSecret ({ passphrase }) {
   // Copied to clipboard message validation for project invitation secret
 
   const copyMessage = 'Secret copied to clipboard'
@@ -20,8 +20,8 @@ export default function ProjectSecret({ passphrase }) {
       <div className='project-secret-row'>
         <ValidatingFormInput
           value={passphrase}
-          label='Project invitation secret'
-          helpText='Share this secret phrase with people you want to invite to this project'
+          label='Game invitation secret'
+          helpText='Share this secret phrase with people you want to invite to the game.'
         />
         <div
           onClick={copySecretToClipboard}

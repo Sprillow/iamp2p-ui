@@ -69,14 +69,14 @@
 } */
 
 .error_text {
-  color: #ff5d36;
+  color: #dc2b00;
   font-size: 12px;
   position: absolute;
   top: 45px;
 }
 
 .validating_form_input .input_wrapper input.invalid-input {
-  border: 2px solid #ff5d36;
+  border: 2px solid #dc2b00;
 }
 
 .validating_form_input .input_wrapper input.valid-input {

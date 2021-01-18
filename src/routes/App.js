@@ -5,15 +5,18 @@ import { connect } from 'react-redux'
 
 import './App.css'
 
-import { updateWhoami } from '../who-am-i/actions'
+import { fetchProjectMeta } from '../projects/project-meta/actions'
+import { fetchAgents } from '../agents/actions'
+import { fetchAgentAddress } from '../agent-address/actions'
+import { whoami as whoamiAction, updateWhoami } from '../who-am-i/actions'
 import { setNavigationPreference } from '../local-preferences/actions'
 import { getAdminWs, getAppWs } from '../hcWebsockets'
-
 
 // import components here
 import Header from '../components/Header/Header'
 import ProfileEditForm from '../components/ProfileEditForm/ProfileEditForm'
 import LoadingScreen from '../components/LoadingScreen/LoadingScreen'
+import InviteMembersModal from '../components/InviteMembersModal/InviteMembersModal'
 import Footer from '../components/Footer/Footer'
 import Modal from '../components/Modal/Modal'
 import Preferences from '../components/Preferences/Preferences'
@@ -28,20 +31,15 @@ import ProjectView from './ProjectView/ProjectView'
 import selectEntryPoints from '../projects/entry-points/select'
 import ErrorBoundaryScreen from '../components/ErrorScreen/ErrorScreen'
 
-function App (props) {
-  const {
-    activeEntryPoints,
-    projectName,
-    agentAddress,
-    whoami, // .entry and .address
-    hasFetchedForWhoami,
-    updateWhoami,
-    navigationPreference,
-    setNavigationPreference
-  } = props
-  const [showProfileEditForm, setShowProfileEditForm] = useState(false)
-  const [showPreferences, setShowPreferences] = useState(false)
-
+function App ({
+  cellIdString,
+  agentAddress,
+  whoami,
+  hasFetchedForWhoami,
+  dispatch,
+  passphrase,
+}) {
+  const [showInviteMembersModal, setShowInviteMembersModal] = useState(false)
   const [inGame, setInGame] = useState(false)
   const [hasCheckedInGame, setHasCheckedInGame] = useState(false)
   useEffect(() => {
@@ -56,35 +54,23 @@ function App (props) {
     })
   }, [])
 
-  const onProfileSubmit = async profile => {
-    await updateWhoami(profile, whoami.address)
-    setShowProfileEditForm(false)
-  }
-  const updateStatus = async statusString => {
-    await updateWhoami(
-      {
-        ...whoami.entry,
-        status: statusString
-      },
-      whoami.address
-    )
-  }
-
-  const titleText = 'Profile Settings'
-  const subText = ''
-  const submitText = 'Save Changes'
+  useEffect(() => {
+    if (cellIdString) {
+      dispatch(fetchAgents.create({ cellIdString, payload: null }))
+      dispatch(whoamiAction.create({ cellIdString, payload: null }))
+      dispatch(fetchAgentAddress.create({ cellIdString, payload: null }))
+      dispatch(fetchProjectMeta.create({ cellIdString, payload: null }))
+    }
+  }, [cellIdString])
 
   return (
     <ErrorBoundaryScreen>
       <Router>
         {/* Header Global */}
         <Header
-          activeEntryPoints={activeEntryPoints}
-          projectName={projectName}
+          hasJoinedGame={!!cellIdString}
           whoami={whoami}
-          updateStatus={updateStatus}
-          setShowProfileEditForm={setShowProfileEditForm}
-          setShowPreferences={setShowPreferences}
+          openShowInviteModal={() => setShowInviteMembersModal(true)}
         />
         <Switch>
           {/* Add new routes in here */}
@@ -92,112 +78,47 @@ function App (props) {
           <Route path='/converse' component={ConverseView} />
           <Route path='/play' component={AllPlay} />
           <Route path='/glossary' component={GlossaryScreen} />
-          {/* <Route path='/dashboard' component={Dashboard} /> */}
-          {/* <Route path='/project/:projectId' component={ProjectView} /> */}
           <Route path='/' render={() => <Redirect to='/intro' />} />
         </Switch>
-
-        {/* This will only show when 'active' prop is true */}
-        {/* Modal for Profile Settings */}
-        <Modal
-          white
-          active={showProfileEditForm}
-          onClose={() => setShowProfileEditForm(false)}
-        >
-          <ProfileEditForm
-            onSubmit={onProfileSubmit}
-            whoami={whoami ? whoami.entry : null}
-            {...{ titleText, subText, submitText, agentAddress }}
-          />
-        </Modal>
-        {/* Modal for Preferences */}
-        <Preferences
-          navigation={navigationPreference}
-          setNavigationPreference={setNavigationPreference}
-          showPreferences={showPreferences}
-          setShowPreferences={setShowPreferences}
-        />
         {!hasCheckedInGame && <LoadingScreen />}
         {agentAddress && whoami && <Footer />}
+        <InviteMembersModal
+          passphrase={passphrase}
+          showModal={showInviteMembersModal}
+          onClose={() => setShowInviteMembersModal(false)}
+        />
       </Router>
     </ErrorBoundaryScreen>
   )
 }
 
-App.propTypes = {
-  projectName: PropTypes.string,
-  agentAddress: PropTypes.string,
-  whoami: PropTypes.shape({
-    first_name: PropTypes.string,
-    last_name: PropTypes.string,
-    handle: PropTypes.string,
-    avatar_url: PropTypes.string,
-    address: PropTypes.string
-  }),
-  updateWhoami: PropTypes.func
-}
-
 function mapDispatchToProps (dispatch) {
   return {
     dispatch,
-    setNavigationPreference: preference => {
-      return dispatch(setNavigationPreference(preference))
-    }
   }
 }
 
 function mapStateToProps (state) {
   const {
-    ui: {
-      hasFetchedForWhoami,
-      activeProject,
-      activeEntryPoints,
-      localPreferences: { navigation }
-    },
-    cells: { profiles: profilesCellIdString }
+    ui: { hasFetchedForWhoami },
+    cells: cellIdString,
+    whoami,
+    agentAddress,
   } = state
-  // defensive coding for loading phase
-  const activeProjectMeta = state.projects.projectMeta[activeProject] || {}
-  const projectName = activeProjectMeta.name || ''
 
-  const allProjectEntryPoints = activeProject
-    ? selectEntryPoints(state, activeProject)
-    : []
-  const activeEntryPointsObjects = activeEntryPoints
-    .map(address => {
-      return allProjectEntryPoints.find(
-        entryPoint => entryPoint.address === address
-      )
-    })
-    // cut out invalid ones
-    .filter(e => e)
+  const projectMeta = state.projects.projectMeta[cellIdString]
+  let passphrase
+  if (projectMeta) {
+    passphrase = projectMeta.passphrase
+  }
 
   return {
-    profilesCellIdString,
-    activeEntryPoints: activeEntryPointsObjects,
-    projectName,
-    whoami: state.whoami,
+    passphrase,
+    cellIdString,
+    whoami,
     hasFetchedForWhoami,
-    agentAddress: state.agentAddress,
-    navigationPreference: navigation
+    agentAddress,
   }
 }
 
-function mergeProps (stateProps, dispatchProps, _ownProps) {
-  const { profilesCellIdString } = stateProps
-  const { dispatch } = dispatchProps
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    updateWhoami: (entry, address) => {
-      return dispatch(
-        updateWhoami.create({
-          payload: { entry, address },
-          cellIdString: profilesCellIdString
-        })
-      )
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

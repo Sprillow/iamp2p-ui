@@ -13,7 +13,7 @@ import JoinProjectModal from '../../components/JoinProjectModal/JoinProjectModal
 import InviteMembersModal from '../../components/InviteMembersModal/InviteMembersModal'
 // import new modals here
 
-import { PROJECTS_DNA_PATH, PROJECTS_ZOME_NAME } from '../../holochainConfig'
+import { DNA_PATH, ZOME_NAME } from '../../holochainConfig'
 import { passphraseToUuid } from '../../secrets'
 import { getAdminWs, getAppWs, getAgentPubKey } from '../../hcWebsockets'
 import { fetchEntryPoints } from '../../projects/entry-points/actions'
@@ -25,9 +25,8 @@ import {
 import selectEntryPoints from '../../projects/entry-points/select'
 
 import DashboardListProject from './DashboardListProject'
-import { joinProjectCellId } from '../../cells/actions'
 
-function Dashboard({
+function Dashboard ({
   agentAddress,
   cells,
   projects,
@@ -172,7 +171,7 @@ function Dashboard({
   )
 }
 
-async function installProjectApp(passphrase) {
+async function installProjectApp (passphrase) {
   const uuid = passphraseToUuid(passphrase)
   // add a bit of randomness so that
   // the same passphrase can be tried multiple different times
@@ -180,7 +179,9 @@ async function installProjectApp(passphrase) {
   // in order to eventually find their peers
   // note that this will leave a graveyard of deactivated apps for attempted
   // joins
-  const installed_app_id = `${Math.random().toString().slice(-6)}-${uuid}`
+  const installed_app_id = `${Math.random()
+    .toString()
+    .slice(-6)}-${uuid}`
   const adminWs = await getAdminWs()
   const agent_key = getAgentPubKey()
   if (!agent_key) {
@@ -195,7 +196,7 @@ async function installProjectApp(passphrase) {
     dnas: [
       {
         nick: uuid,
-        path: PROJECTS_DNA_PATH,
+        path: DNA_PATH,
         properties: { uuid },
       },
     ],
@@ -205,7 +206,7 @@ async function installProjectApp(passphrase) {
   return installedApp
 }
 
-async function createProject(passphrase, projectMeta, agentAddress, dispatch) {
+async function createProject (passphrase, projectMeta, agentAddress, dispatch) {
   const installedApp = await installProjectApp(passphrase)
   const cellIdString = cellIdToString(installedApp.cell_data[0][0])
   // because we are acting optimistically,
@@ -220,7 +221,7 @@ async function createProject(passphrase, projectMeta, agentAddress, dispatch) {
   console.log('duration in MS over createProjectMeta ', b2 - b1)
 }
 
-async function joinProject(passphrase, dispatch) {
+async function joinProject (passphrase, dispatch) {
   // joinProject
   // join a DNA
   // then try to get the project metadata
@@ -234,12 +235,11 @@ async function joinProject(passphrase, dispatch) {
     await appWs.callZome({
       cap: null,
       cell_id: cellId,
-      zome_name: PROJECTS_ZOME_NAME,
+      zome_name: ZOME_NAME,
       fn_name: 'fetch_project_meta',
       payload: null,
       provenance: getAgentPubKey(), // FIXME: this will need correcting after holochain changes this
     })
-    await dispatch(joinProjectCellId(cellIdString))
     // trigger a side effect...
     // this will let other project members know you're here
     // without 'blocking' the thread or the UX
@@ -247,7 +247,7 @@ async function joinProject(passphrase, dispatch) {
       .callZome({
         cap: null,
         cell_id: cellId,
-        zome_name: PROJECTS_ZOME_NAME,
+        zome_name: ZOME_NAME,
         fn_name: 'init_signal',
         payload: null,
         provenance: getAgentPubKey(), // FIXME: this will need correcting after holochain changes this
@@ -273,7 +273,7 @@ async function joinProject(passphrase, dispatch) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     fetchEntryPoints: cellIdString => {
       return dispatch(fetchEntryPoints.create({ cellIdString, payload: null }))
@@ -298,7 +298,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     agentAddress: state.agentAddress,
     cells: state.cells.projects,

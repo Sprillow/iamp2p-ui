@@ -14,24 +14,22 @@ import JoinProjectModal from '../../components/JoinProjectModal/JoinProjectModal
 import InviteMembersModal from '../../components/InviteMembersModal/InviteMembersModal'
 // import new modals here
 
-import { PROJECTS_DNA_PATH, PROJECTS_ZOME_NAME } from '../../holochainConfig'
+import { PROJECTS_DNA_PATH, ZOME_NAME } from '../../holochainConfig'
 import { passphraseToUuid } from '../../secrets'
 import { getAdminWs, getAppWs, getAgentPubKey } from '../../hcWebsockets'
 import { fetchEntryPoints } from '../../projects/entry-points/actions'
 import { fetchMembers, setMember } from '../../projects/members/actions'
 import {
   createProjectMeta,
-  fetchProjectMeta
+  fetchProjectMeta,
 } from '../../projects/project-meta/actions'
 import selectEntryPoints from '../../projects/entry-points/select'
-
-import { joinProjectCellId } from '../../cells/actions'
 
 import {
   softwareMessages,
   humanMessages,
   replyMap,
-  optionMap
+  optionMap,
 } from './ConverseContent'
 
 // yellow is software
@@ -39,19 +37,19 @@ const graphSmessages = Object.keys(softwareMessages).map(sId => ({
   id: sId,
   label: sId,
   title: softwareMessages[sId],
-  color: sId === 's1' ? 'lightblue' : 'yellow'
+  color: sId === 's1' ? 'lightblue' : 'yellow',
 }))
 // green is human
 const graphHmessages = Object.keys(humanMessages).map(hId => ({
   id: hId,
   label: hId,
   title: humanMessages[hId],
-  color: '#2a905c'
+  color: '#2a905c',
 }))
 const optionEdges = Object.keys(optionMap).reduce((memo, sId) => {
   const list = optionMap[sId].map(hId => ({
     from: sId,
-    to: hId
+    to: hId,
   }))
   return memo.concat(list)
 }, [])
@@ -60,12 +58,12 @@ const softwareResponseEdges = Object.keys(replyMap).reduce((memo, hId) => {
     if (index === 0) {
       return {
         from: hId,
-        to: sId
+        to: sId,
       }
     } else {
       return {
         from: replyMap[hId][index - 1],
-        to: sId
+        to: sId,
       }
     }
   })
@@ -82,7 +80,7 @@ nodes.forEach(n => {
 })
 const graph = {
   nodes,
-  edges
+  edges,
 }
 
 function ConverseView () {
@@ -139,7 +137,7 @@ function ConverseView () {
       setImmediate(() => {
         messageHistoryRef.current.scrollTo({
           top: messageHistoryRef.current.scrollHeight,
-          behavior: 'smooth'
+          behavior: 'smooth',
         })
       })
     }
@@ -164,7 +162,7 @@ function ConverseView () {
               // add the response to the list of messages that
               // have been communicated
               let newMessages = messages.concat([
-                { type: 'human', id: optionId }
+                { type: 'human', id: optionId },
               ])
               setMessages(newMessages)
               // scroll their message

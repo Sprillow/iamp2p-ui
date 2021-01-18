@@ -1,4 +1,4 @@
-import { PROJECTS_ZOME_NAME } from '../../holochainConfig'
+import { ZOME_NAME } from '../../holochainConfig'
 import { createCrudActionCreators } from '../../crudRedux'
 
 const [
@@ -6,7 +6,7 @@ const [
   fetchGoalComments,
   updateGoalComment,
   archiveGoalComment,
-] = createCrudActionCreators(PROJECTS_ZOME_NAME, 'goal_comment')
+] = createCrudActionCreators(ZOME_NAME, 'goal_comment')
 
 export {
   createGoalComment,

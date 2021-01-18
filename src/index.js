@@ -17,39 +17,48 @@ import { holochainMiddleware } from 'connoropolous-hc-redux-middleware'
 import { cellIdToString } from 'connoropolous-hc-redux-middleware/build/main/lib/actionCreator'
 
 // Local Imports
-import { PROFILES_APP_ID, PROFILES_DNA_NAME } from './holochainConfig'
 import iamp2p from './reducer'
 import signalsHandlers from './signalsHandlers'
-import { setProfilesCellId, setProjectsCellIds } from './cells/actions'
-import { fetchAgents } from './agents/actions'
-import { whoami } from './who-am-i/actions'
-import { fetchAgentAddress } from './agent-address/actions'
+import { setCellId } from './cells/actions'
 import App from './routes/App'
-import {
-  getAppWs,
-  getAdminWs,
-  setAgentPubKey,
-  APP_WS_URL
-} from './hcWebsockets'
-import { getProjectCellIdStrings } from './projectAppIds'
+import { getAppWs, getAdminWs, APP_WS_URL } from './hcWebsockets'
 
 // trigger caching of adminWs connection
-getAdminWs().then(async client => {
+getAdminWs().then(async adminClient => {
   try {
-    await client.attachAppInterface({ port: 8888 })
+    await adminClient.attachAppInterface({ port: 8888 })
   } catch (e) {
     console.log('address 8888 was already in use')
   }
   const middleware = [holochainMiddleware(APP_WS_URL)]
   // This enables the redux-devtools browser extension
   // which gives really awesome debugging for apps that use redux
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
   // iamp2p is the top-level reducer. the second argument is custom Holochain middleware
   let store = createStore(
     iamp2p,
     /* preloadedState, */ composeEnhancers(applyMiddleware(...middleware))
   )
+
+  // initialize the appWs with the signals handler
+  getAppWs(signalsHandlers(store)).then(async appClient => {
+    const activeApps = await adminClient.listActiveApps()
+    if (activeApps.length > 0) {
+      const appId = activeApps[0]
+      const profilesInfo = await appClient.appInfo({
+        installed_app_id: appId,
+      })
+      const [cellId, _] = profilesInfo.cell_data[0]
+      const [_dnaHash, agentPubKey] = cellId
+      // cache buffer version of agentPubKey
+      // setAgentPubKey(agentPubKey)
+      const cellIdString = cellIdToString(cellId)
+      store.dispatch(setCellId(cellIdString))
+    }
+  })
+
   // By passing the `store` in as a wrapper around our React component
   // we make the state available throughout it
   ReactDOM.render(
@@ -59,30 +68,3 @@ getAdminWs().then(async client => {
     document.getElementById('react')
   )
 })
-
-
-
-// initialize the appWs with the signals handler
-// getAppWs(signalsHandlers(store))
-/*
-.then(async client => {
-  const profilesInfo = await client.appInfo({
-    installed_app_id: PROFILES_APP_ID
-  })
-  const [cellId, _] = profilesInfo.cell_data.find(
-    ([_cellId, dnaName]) => dnaName === PROFILES_DNA_NAME
-  )
-  const [_dnaHash, agentPubKey] = cellId
-  // cache buffer version of agentPubKey
-  setAgentPubKey(agentPubKey)
-  const cellIdString = cellIdToString(cellId)
-  store.dispatch(setProfilesCellId(cellIdString))
-  // all functions of the Profiles DNA
-  // store.dispatch(fetchAgents.create({ cellIdString, payload: null }))
-  // store.dispatch(whoami.create({ cellIdString, payload: null }))
-  // store.dispatch(fetchAgentAddress.create({ cellIdString, payload: null }))
-  // which projects do we have installed?
-  // const projectCellIds = await getProjectCellIdStrings()
-  // store.dispatch(setProjectsCellIds(projectCellIds))
-})
-*/

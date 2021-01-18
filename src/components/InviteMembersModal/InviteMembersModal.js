@@ -10,7 +10,11 @@ import {
 } from '../ProjectModal/ProjectModal'
 import ProjectSecret from '../ProjectSecret/ProjectSecret'
 
-export default function InviteMembersModal({ showModal, onClose, passphrase }) {
+export default function InviteMembersModal ({
+  showModal,
+  onClose,
+  passphrase,
+}) {
   const onDone = () => {
     onClose()
   }
@@ -21,7 +25,7 @@ export default function InviteMembersModal({ showModal, onClose, passphrase }) {
       active={showModal}
       onClose={onClose}
       className='join-project-modal-wrapper'>
-      <ProjectModalHeading title='Invite members to project' />
+      <ProjectModalHeading title='Invite friends to game' />
       <ProjectModalContent>
         <ProjectModalContentSpacer>
           <ProjectSecret passphrase={passphrase} />

@@ -1,7 +1,7 @@
 .profile_edit_form {
   width: 500px;
   /* text-align: center; */
-  margin: 0 auto;
+  margin: auto;
 }
 
 .profile_edit_form .small-close {

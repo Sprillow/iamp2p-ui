@@ -8,7 +8,7 @@ import Button from '../Button/Button'
 
 import EntryPointPicker from '../EntryPointPicker/EntryPointPicker'
 
-function Footer() {
+function Footer () {
   const projectPage = useRouteMatch('/project/:projectId')
   const projectId = projectPage ? projectPage.params.projectId : null
   const mapPage = useRouteMatch('/project/:projectId/map')
@@ -25,10 +25,8 @@ function Footer() {
   return (
     <div className='footer' ref={ref}>
       <div className='bottom-left-panel'>
-        <a
-          href='https://github.com/h-be/iamp2p-release/issues/new?assignees=&labels=bug&template=bug_report.md&title='
-          target='_blank'>
-          <Button text='Report Issue' size='small' className='green' />
+        <a href='mailto:pegah@sprillow.com' target='_blank'>
+          <Button text='Got Questions?' size='small' className='green' />
         </a>
         <Route path='/project'>
           <div className='bottom-left-panel-entry-points'>

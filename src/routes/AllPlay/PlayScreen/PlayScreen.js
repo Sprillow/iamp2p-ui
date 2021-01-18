@@ -9,14 +9,13 @@ import Button from '../../../components/Button/Button'
 import Icon from '../../../components/Icon/Icon'
 import { connect } from 'react-redux'
 
-import { PROFILES_APP_ID, PROFILES_DNA_NAME } from '../../../holochainConfig'
+import Avatar from '../../../components/Avatar/Avatar'
 import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
 import { fetchAgentAddress } from '../../../agent-address/actions'
 import { getAdminWs, getAppWs } from '../../../hcWebsockets'
 
-function PlayScreen ({ agentAddress, fetchAgentAddress }) {
+function PlayScreen ({ agents, agentAddress, fetchAgentAddress }) {
   const history = useHistory()
-
   const [inGame, setInGame] = useState(false)
   const [hasCheckedInGame, setHasCheckedInGame] = useState(false)
 
@@ -35,21 +34,6 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
     })
   }, [])
 
-  const [screenContent, setScreenContent] = useState(0)
-
-  const goBack = () => {
-    if (screenContent !== 0) setScreenContent(screenContent - 1)
-  }
-
-  const goForward = () => {
-    if (screenContent !== 3) setScreenContent(screenContent + 1)
-  }
-
-  const goToConverse = () => {
-    // redirect
-    history.push('/converse')
-  }
-
   if (!hasCheckedInGame) {
     return <LoadingScreen />
   }
@@ -60,11 +44,62 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
   return (
     <>
       <div className='play-screen-header'>
-        <div className='your-wallet-wrapper'>Your Wallet</div>
-        <div className='your-network-wrapper'>Your Netowrk</div>
-        <div className='header-send-button-wrapper'>Send Cat Credits</div>
+        <div className='your-network-send-button-wrapper'>
+          <div className='your-network-wrapper'>
+            <div className='your-network-title'>Your Network</div>
+            {agents.length === 0 && (
+              <div className='your-network-wrapper-note'>
+                Currently no one is in your network. <a>Invite a friend</a>.
+              </div>
+            )}
+            {agents.length > 0 && (
+              <div className='your-network-avatars'>
+                {agents.map((p, index) => {
+                  return (
+                    <Avatar
+                      key={p.address}
+                      handle={p.handle}
+                      avatar_url={p.avatar_url}
+                      small
+                      clickable={false}
+                    />
+                  )
+                })}
+              </div>
+            )}
+          </div>
+          <div className='header-send-button-wrapper'>Send Cat Credits</div>
+        </div>
+        <div className='your-wallet-wrapper'>
+          <div className='your-wallet-title-balance'>
+            <div className='your-wallet-title'>Your Wallet Balance</div>
+            <div className='your-wallet-balance'>100 Cat Credits</div>
+          </div>
+          <div className='your-wallet-history'>Wallet History</div>
+        </div>
       </div>
-      <div>I am now playing a game</div>
+      <div className='play-screen-content'>
+        <div className='activity-update'>
+          <div>
+            Your friend [….] has joined your network! Now you can start
+            transacting Cat Credits with each other.{' '}
+            <a>Send some CC to them now.</a>{' '}
+          </div>
+        </div>
+        <div className='send-cat-credits-wrapper'>
+          <div className='send-cat-credits-wrapper'>
+            <div className='send-cat-credits-title'>Send Cat Credits</div>
+            <div className='send-cat-credits-input'>
+              <label>Amount</label>
+              <input value={'amount'} />
+            </div>
+            <div className='send-cat-credits-input'>
+              <label>Recipient</label>
+              <input value={'recipient'} />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
@@ -72,6 +107,7 @@ function PlayScreen ({ agentAddress, fetchAgentAddress }) {
 function mapStateToProps (state) {
   return {
     agentAddress: state.agentAddress,
+    agents: Object.values(state.agents),
   }
 }
 
@@ -84,14 +120,3 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayScreen)
-
-// getAppWs().then(async client => {
-//   const profilesInfo = await client.appInfo({
-//     installed_app_id: PROFILES_APP_ID
-//   })
-//   const [cellId, _] = profilesInfo.cell_data.find(
-//     ([_cellId, dnaName]) => dnaName === PROFILES_DNA_NAME
-//   )
-//   const cellIdString = cellIdToString(cellId)
-//   fetchAgentAddress(cellIdString)
-// })

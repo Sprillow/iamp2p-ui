@@ -5,7 +5,7 @@ import {
   NavLink,
   useLocation,
   withRouter,
-  useHistory
+  useHistory,
 } from 'react-router-dom'
 // import { CSSTransition } from 'react-transition-group'
 // import onClickOutside from 'react-onclickoutside'
@@ -18,7 +18,7 @@ import './Header.css'
 // import Preferences from '../Preferences/Preferences'
 // import Modal from '../Modal/Modal'
 
-function Header () {
+function Header ({ openShowInviteModal, hasJoinedGame }) {
   const history = useHistory()
 
   return (
@@ -27,20 +27,17 @@ function Header () {
         <div className='left-panel'>
           <div
             className='header-item'
-            onClick={() => history.push('/converse')}
-          >
+            onClick={() => history.push('/converse')}>
             Converse
           </div>
           <div
             className='header-item'
-            onClick={() => history.push('/play/intro')}
-          >
+            onClick={() => history.push('/play/intro')}>
             Play
           </div>
           <div
             className='header-item'
-            onClick={() => history.push('/glossary')}
-          >
+            onClick={() => history.push('/glossary')}>
             Glossary
           </div>
         </div>
@@ -48,8 +45,14 @@ function Header () {
           <div className='page-title'>Page Title</div>
         </div>
         <div className='right-panel'>
-          <div className='header-item with-left-border'>Invite a Friend</div>
-          <div className='header-item'>Join a Game</div>
+          {hasJoinedGame && (
+            <div
+              className='header-item with-left-border'
+              onClick={openShowInviteModal}>
+              Invite a Friend
+            </div>
+          )}
+          {!hasJoinedGame && <div className='header-item'>Join a Game</div>}
           <div className='header-item'>You</div>
         </div>
       </div>
