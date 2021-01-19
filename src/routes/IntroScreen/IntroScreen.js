@@ -62,7 +62,7 @@ export default function IntroScreen () {
               <div className='intro-screen-title'>Welcome to IamP2P,</div>
               <div className='intro-screen-description'>
                 <div>
-                  which is me— the software you’ve just downloaded and opened.
+                  which is me— the software you've just downloaded and opened.
                   My purpose is to tell you a bit more about myself, and other
                   P2P peers like me. I mean, this is the purpose of my{' '}
                   <a href='https://sprillow.com/' target='_blank'>
@@ -75,7 +75,7 @@ export default function IntroScreen () {
                   You know, I think we are a little less known to people using
                   technology. It feels a bit lonely. Maybe you would find me
                   interesting, or perhaps intriguing, or useful. Or maybe not.
-                  And that’s okay too.
+                  And that's okay too.
                   <br />
                   <br /> Are you ready to dive in?
                 </div>

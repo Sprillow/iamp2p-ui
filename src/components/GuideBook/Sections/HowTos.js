@@ -117,7 +117,7 @@ const howTosItems = [
                 In Quick Edit Mode
               </div>
               <div className='guidebook-separate-line'>
-                Click on “status” button and select the status you want for the
+                Click on "status" button and select the status you want for the
                 card.
               </div>
             </div>
@@ -154,7 +154,7 @@ const howTosItems = [
                 In Quick Edit Mode
               </div>
               <div className='guidebook-separate-line'>
-                Click on “squirrels” button and select the members that you want
+                Click on "squirrels" button and select the members that you want
                 to associate with the card from the list.
               </div>
             </div>
@@ -203,7 +203,7 @@ const howTosItems = [
                 In Quick Edit Mode
               </div>
               <div className='guidebook-separate-line'>
-                Click on “timeframe” button and select or type in Start Date and
+                Click on "timeframe" button and select or type in Start Date and
                 End Date.
               </div>
             </div>
@@ -213,7 +213,7 @@ const howTosItems = [
               </div>
               <div className='guidebook-separate-line'>Either:</div>
               <li>
-                Click on the grey field under “timeframe” and select or type in
+                Click on the grey field under "timeframe" and select or type in
                 Start Date and End Date.
               </li>
               <li>
@@ -250,7 +250,7 @@ const howTosItems = [
                 IamP2P, there 4 hierarchy level options available inspired by a
                 tree mataphore: Root (primary goal) Trunk (high-level goal)
                 Branch (Sub-goal) Leaf (small goal) There is also the default
-                option of “no hierarchy”. Setting hierarchy for goals in a
+                option of "no hierarchy". Setting hierarchy for goals in a
                 complex project would help you and your team to be able to see
                 how bigger goals can break down to smaller units. While having
                 the bigger goals in the vision, your team would be able to
@@ -300,7 +300,7 @@ const howTosItems = [
                 In Quick Edit Mode
               </div>
               <div className='guidebook-separate-line'>
-                Click on “priority” button. You will be able to see the
+                Click on "priority" button. You will be able to see the
                 aggregated votes for 4 factors that determine priority of the
                 card. For more information on how the prioritization system
                 works in IamP2P see Prioritization.
@@ -340,8 +340,8 @@ const howTosItems = [
                 In Quick Edit Mode
               </div>
               <div className='guidebook-separate-line'>
-                Click on “priority” button. Then click on the "Weigh In" button.
-                The default vote is “medium” for all 4 factors. You can slide
+                Click on "priority" button. Then click on the "Weigh In" button.
+                The default vote is "medium" for all 4 factors. You can slide
                 the factor bars to set your own. For more information about
                 prioritization go to Priority View Mode.
               </div>
@@ -351,8 +351,8 @@ const howTosItems = [
                 In Expanded View Mode
               </div>
               <div className='guidebook-separate-line'>
-                Click on “priority” button. Then click on the "Weigh In" button.
-                The default vote is “medium” for all 4 factors. You can slide
+                Click on "priority" button. Then click on the "Weigh In" button.
+                The default vote is "medium" for all 4 factors. You can slide
                 the factor bars to set your own. For more information about
                 prioritization go to Priority View Mode.
               </div>
@@ -665,9 +665,9 @@ const howTosItems = [
                 </text>{' '}
                 integration is another way of prioritizing goals.{' '}
                 <a href='https://zapier.com/blog/how-to-prioritize/'>
-                  “In the effort-impact matrix, you evaluate tasks based on how
-                  much effort they’ll require to complete and the impact that
-                  completing them will have.”
+                  "In the effort-impact matrix, you evaluate tasks based on how
+                  much effort they'll require to complete and the impact that
+                  completing them will have."
                 </a>
                 The items in the left quadrants, which are both "More Impact",
                 are where you would start to work on tasks from, depending on
@@ -676,12 +676,12 @@ const howTosItems = [
               <div className='guidebook-separate-line'>
                 In complex projects as the number of goals (and sometimes number
                 of team members) expands, it gets more difficult to determine
-                ‘what to focus on next’.
+                ‘what to focus on next'.
               </div>
               <div className='guidebook-separate-line'>
                 All the team members (who have editing permssion) would be able
-                to “weigh in” their vote for these 4 factors for each goal
-                (either in map view or priority view) The “aggregated priority”
+                to "weigh in" their vote for these 4 factors for each goal
+                (either in map view or priority view) The "aggregated priority"
                 that results from this collective poll will determine where each
                 goal will stand on the priority view mode.
               </div>
@@ -720,7 +720,7 @@ const howTosItems = [
               important and impact x effort), single priority factors (feature
               in developement), or uncategorized (not voted on) goals. This
               gives you the flexibility to take action based on a specific
-              factor determining a goal’s priority.
+              factor determining a goal's priority.
             </div>
           </ol>
         ),
@@ -731,13 +731,13 @@ const howTosItems = [
         description: (
           <ol>
             <div className='guidebook-description-section'>
-              If you haven’t voted for the priority of the goal, When hovering
-              over goals in the priority view, “Weigh In” button apprears.
+              If you haven't voted for the priority of the goal, When hovering
+              over goals in the priority view, "Weigh In" button apprears.
             </div>
             <div className='guidebook-description-section'>
               If you have already voted for the priority of a goal, a purple dot
-              shows up under the goal title and when hovering on the goal, “See
-              My Vote” button appears.
+              shows up under the goal title and when hovering on the goal, "See
+              My Vote" button appears.
             </div>
           </ol>
         ),

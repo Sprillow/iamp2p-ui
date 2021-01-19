@@ -24,19 +24,19 @@ Folders:
   - event-listeners
     - These should be "broken out" into separate files, rather than all stuck in here together, but all these event listeners get set up when the page first loads.
 
-Folders are, in general, organized according to “features”, which relates to slices of the redux state. Such as “keyboard”.
-Within the “keyboard” folder is “actions.js” which defines the action types, and “action creators” for those action types
+Folders are, in general, organized according to "features", which relates to slices of the redux state. Such as "keyboard".
+Within the "keyboard" folder is "actions.js" which defines the action types, and "action creators" for those action types
 https://redux.js.org/basics/actions#action-creators
-Also within “keyboard” is “reducer.js” which defines the reducer which acts as the primary handler for those actions.
+Also within "keyboard" is "reducer.js" which defines the reducer which acts as the primary handler for those actions.
 
-Heavy use of “spread” (…) operators in reducers is used, to give immutability: https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns#immutable-update-patterns
+Heavy use of "spread" (…) operators in reducers is used, to give immutability: https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns#immutable-update-patterns
 
 Installing redux dev-tools is highly recommended, to inspect the state and actions and see how the app behaves.
 https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
 
 All the reducers from the different folders are combined in src/reducer.js
 
-The aspects of redux which interact asynchronously with Holochain, use a library called “hc-redux-middleware”
+The aspects of redux which interact asynchronously with Holochain, use a library called "hc-redux-middleware"
 https://www.npmjs.com/package/connoropolous-hc-redux-middleware
 
 ---
@@ -66,13 +66,13 @@ This is a sample snapshot of the redux state
 
 This entire part (agents, goals, edges, goalMembers, whoami) of the redux state is data from Holochain
 
-Agents are essentially the “users”. More data needs to be fetched from Holochain and stored here
+Agents are essentially the "users". More data needs to be fetched from Holochain and stored here
 
   agents: [
     'HcSciGpYDHTaa5dmw583AO7Jy9kHz9K3gu6MtTsB8Nwbfe3y3hD8rOb9aj5B8za'
   ],
 
-“Goals” are the primary content type of the app. They’re fetched from Holochain and stored and updated here in the state
+"Goals" are the primary content type of the app. They're fetched from Holochain and stored and updated here in the state
 
   goals: {
     QmacZTkPm6qNf7sHFuHa8HEg8EPVJ6kcBi4ZyHLr1JrVCN: {
@@ -108,7 +108,7 @@ Edges are the links between goals, that define a hierarchy in the data
     }
   },
 
-Goal Members are associations between “agents” and “goals”, that relate to who has claimed/assigned to which Goals
+Goal Members are associations between "agents" and "goals", that relate to who has claimed/assigned to which Goals
 
   goalMembers: {},
 
@@ -158,14 +158,14 @@ Which relevant keyboard keys are pressed
       gKeyDown: false
     },
 
-What’s the size of the screen (needs to update on resize)
+What's the size of the screen (needs to update on resize)
 
     screensize: {
       width: 914,
       height: 1906
     },
 
-Relating to the HTML5 Canvas element, how has the “viewport” been “panned” (translated) and “zoomed” (scaled)
+Relating to the HTML5 Canvas element, how has the "viewport" been "panned" (translated) and "zoomed" (scaled)
 
     viewport: {
       translate: {

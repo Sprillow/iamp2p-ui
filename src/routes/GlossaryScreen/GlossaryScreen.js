@@ -16,11 +16,11 @@ function Protocol () {
       <b>Etymology</b>
       <br />
       <br />
-      Borrowed from Middle French protocolle, protocole (“document, record”),
-      from Late Latin protocollum (“the first sheet of a volume (on which
-      contents and errata were written)”), from Byzantine Greek πρωτόκολλον
-      (prōtókollon, “first sheet glued onto a manuscript”), from πρῶτος (prôtos,
-      “first”) + κόλλα (kólla, “glue”).
+      Borrowed from Middle French protocolle, protocole ("document, record"),
+      from Late Latin protocollum ("the first sheet of a volume (on which
+      contents and errata were written)"), from Byzantine Greek πρωτόκολλον
+      (prōtókollon, "first sheet glued onto a manuscript"), from πρῶτος (prôtos,
+      "first") + κόλλα (kólla, "glue").
     </ColumnOverlay>
   )
 }

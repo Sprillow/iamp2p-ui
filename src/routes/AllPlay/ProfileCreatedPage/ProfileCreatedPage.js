@@ -23,7 +23,7 @@ function ProfileCreatedPage ({ dispatch, passphrase }) {
             <div className='intro-screen-text'>
               <div className='intro-screen-title'>
                 Perfect!
-                <br /> You’re given 100 Cat Credits in your IamP2P wallet. For
+                <br /> You're given 100 Cat Credits in your IamP2P wallet. For
                 free :)
               </div>
               <div className='play-intro-screen-description'>

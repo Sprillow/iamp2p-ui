@@ -58,9 +58,9 @@ const softwareMessages = {
   // first interactions
   s1: (
     <>
-      Let me introduce myself. I’m IamP2P, a software built on a peer-to-peer{' '}
+      Let me introduce myself. I'm IamP2P, a software built on a peer-to-peer{' '}
       <NavLink to='/glossary/protocol'>protocol</NavLink> and application
-      architecture called Holochain. I am a “self-conscious” software. It means
+      architecture called Holochain. I am a "self-conscious" software. It means
       I am built to explain and reveal what I am built on, instead of concealing
       my infrastructure.
     </>
@@ -70,7 +70,7 @@ const softwareMessages = {
   s2: `In computing field, a protocol is defined as: a computer language allowing computers that are connected to each other to communicate. 
   So think language, with a set of rules defining how entities communicate. `,
 
-  s3: `My characteristics and affordances are different from other protocols, like the “client-server” model, which is what probably you’ve mostly used before.`,
+  s3: `My characteristics and affordances are different from other protocols, like the "client-server" model, which is what probably you've mostly used before.`,
 
   s4: `Peer-to-peer (P2P) computing or networking is a distributed application 
   architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. 
@@ -82,7 +82,7 @@ const softwareMessages = {
       <NavLink to='/glossary/internet-protocol-suite'>
         Internet Protocol Suite/Stack{' '}
       </NavLink>{' '}
-      layers aka “the Internet”?
+      layers aka "the Internet"?
     </>
   ),
 
@@ -99,8 +99,8 @@ const softwareMessages = {
     </>
   ),
 
-  s7: `Of course. Since I’m built on a communication protocol, I’m meant to show off 
-  my affordances in the context of connecting with a “peer”, aka another human being or machine.`,
+  s7: `Of course. Since I'm built on a communication protocol, I'm meant to show off 
+  my affordances in the context of connecting with a "peer", aka another human being or machine.`,
 
   s8: `Invite someone you know to do a little experimental transaction game with you here in IamP2P.`,
 
@@ -110,14 +110,14 @@ const softwareMessages = {
 
   s10: `Think of it like a building that has a foundation, first floor, second floor, etc. stacked on top of each other.`,
 
-  s11: `The top layer is the “application layer”. It interacts with software applications (like me!) to implement a communicating component.`,
+  s11: `The top layer is the "application layer". It interacts with software applications (like me!) to implement a communicating component.`,
 
-  s12: `One of the most common application layer protocols you’ve probably used is HTTP (and HTTPS). That’s how you access web browsers, for example Blackwood gallery’s website. That’s probably how you’ve found me ;)`,
+  s12: `One of the most common application layer protocols you've probably used is HTTP (and HTTPS). That's how you access web browsers, for example Blackwood gallery's website. That's probably how you've found me ;)`,
 
-  s13: `Peer-to-peer protocols are another kind of possible protocols in the application layer. They provide a different kind of networking than the application layer protocols you’ve seen or used.`,
+  s13: `Peer-to-peer protocols are another kind of possible protocols in the application layer. They provide a different kind of networking than the application layer protocols you've seen or used.`,
 
-  s14: `Most likely all the websites you know are “hosted” on a centralized data server,
-   which follows a “client-server” model.`,
+  s14: `Most likely all the websites you know are "hosted" on a centralized data server,
+   which follows a "client-server" model.`,
 
   s15: (
     <>
@@ -169,7 +169,7 @@ const softwareMessages = {
     </>
   ),
 
-  s22: `- responsibility, liability (who is “user” and who is the “provider”)`,
+  s22: `- responsibility, liability (who is "user" and who is the "provider")`,
   s23: `- privacy and anonymity `,
   s24: `- energy consumption: less compared to centralized data transfer models`,
   s25: `- economically, client-server is more expensive than p2p to implement`,
@@ -181,15 +181,15 @@ const softwareMessages = {
     </>
   ),
 
-  s29: `Think when there is no “central” server serving “clients” in a network, 
-  instead lots of “peers” are acting as servers and clients for each other at the same time, 
+  s29: `Think when there is no "central" server serving "clients" in a network, 
+  instead lots of "peers" are acting as servers and clients for each other at the same time, 
   this shifts the way information is shared, moderated, the rules, and more importantly, 
   the power dynamics, between the server and receiver. Think about these implications: `,
 
   s30: `- network neutrality`,
-  s31: `- content moderation (gatekeeper relationship, server defines the rules “protocols”) `,
-  s32: `- relationship between “server” and “client”. Think of server as the landlord and the rest (clients) as renters.`,
-  s33: `- resilience: hard to take down vs “switch on and off” effects of centralized models`,
+  s31: `- content moderation (gatekeeper relationship, server defines the rules "protocols") `,
+  s32: `- relationship between "server" and "client". Think of server as the landlord and the rest (clients) as renters.`,
+  s33: `- resilience: hard to take down vs "switch on and off" effects of centralized models`,
 
   //
 
@@ -197,8 +197,8 @@ const softwareMessages = {
 
   s35: (
     <>
-      Well, my makers haven’t built any more question-answering capacity in me
-      yet. If you’ve become interested in learning more about P2P, maybe here is
+      Well, my makers haven't built any more question-answering capacity in me
+      yet. If you've become interested in learning more about P2P, maybe here is
       a good place to start. -{' '}
       <a
         href='https://en.wikibooks.org/wiki/The_World_of_Peer-to-Peer_(P2P)/What_is_Peer-to-Peer_(P2P)'
@@ -206,9 +206,9 @@ const softwareMessages = {
     </>
   ),
 
-  s36: `Don’t forget to try out the transaction game that's built in. Start a game, invite friends and play!`,
+  s36: `Don't forget to try out the transaction game that's built in. Start a game, invite friends and play!`,
 
-  s37: `On the top right corner of the window, find the button “Start a Game”. Click on that and follow the instructions to create a profile and send an invitation to a friend. `,
+  s37: `On the top right corner of the window, find the button "Start a Game". Click on that and follow the instructions to create a profile and send an invitation to a friend. `,
 
   s38: `Great. Are you interested in learning about peer-to-peer protocols?`,
 
@@ -218,8 +218,8 @@ const softwareMessages = {
 const humanMessages = {
   // s1 responses
   h1: 'What is a protocol?',
-  h2: `So how are you different from, let’s say other apps or websites I’ve used before (you kind of look normal)?`,
-  h3: `What do you mean by ‘peer-to-peer’?`,
+  h2: `So how are you different from, let's say other apps or websites I've used before (you kind of look normal)?`,
+  h3: `What do you mean by ‘peer-to-peer'?`,
   h4: 'What can you do for me?',
   h5: 'Can you show me an example of how you function?',
   // s2 responses
@@ -231,16 +231,16 @@ const humanMessages = {
 
   // s3 responses
 
-  h10: `What does this distinction between “client-server” model and “peer-to-peer” model entail? `,
+  h10: `What does this distinction between "client-server" model and "peer-to-peer" model entail? `,
   // s4 responses
-  h13: `Yeah, but I haven’t dealt with Peer-to-peer protocols before. `,
+  h13: `Yeah, but I haven't dealt with Peer-to-peer protocols before. `,
   // s5 responses
-  h15: `Ok, I think I’m getting it a bit more now. What are implications of this type of networking architecture in P2P? `,
+  h15: `Ok, I think I'm getting it a bit more now. What are implications of this type of networking architecture in P2P? `,
 
   // s6 responses
   h17: `Nothing. Start from scratch.`,
   h18: `A bit. Like I know that things like GoogleDrive or Dropbox are based on cloud model, and I have used BitTorrent before to download things. `,
-  h19: `I have researched a good amount about P2P, but I’m no techie. `,
+  h19: `I have researched a good amount about P2P, but I'm no techie. `,
   h20: `I am a technologist, and have dealt with protocols a bunch.`,
   // s7 responses
 

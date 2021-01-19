@@ -55,22 +55,22 @@ const gettingStartedItems = [
                 <text className='guidebook-description-bold'>
                   effort-impact
                 </text>{' '}
-                intergration is another way of prioritizing goals. “In the
+                intergration is another way of prioritizing goals. "In the
                 effort-impact matrix, you evaluate tasks based on how much
-                effort they’ll require to complete and the impact that
+                effort they'll require to complete and the impact that
                 completing them will have. The tasks in the two right-side
-                quadrants are your priorities.” Quote from
+                quadrants are your priorities." Quote from
                 https://zapier.com/blog/how-to-prioritize/
               </div>
               <div className='guidebook-separate-line'>
                 As in complex projects the number of goals (and sometimes number
                 of team members) expands, it gets more difficult to determine
-                ‘what to focus on next’.
+                ‘what to focus on next'.
               </div>
               <div className='guidebook-separate-line'>
                 All the team members (who have editing permssion) would be able
-                to “weigh in” their vote for these 4 facotrs for each goal
-                (either in map view or priority view) The “aggregated protiory”
+                to "weigh in" their vote for these 4 facotrs for each goal
+                (either in map view or priority view) The "aggregated protiory"
                 that results from this collective poll will detremince where
                 each goal will stand on the priority view mode.
               </div>
@@ -110,7 +110,7 @@ const gettingStartedItems = [
               These tabs help you swtich between piority matrixes (unrgent x
               imprtnat and impact x effort), signle priorty facors, or
               uncategorazied goals. This gives you the flexiblty to take action
-              based on a specifc factor determining a goal’s priority.
+              based on a specifc factor determining a goal's priority.
             </div>
           </ol>
         ),
@@ -125,7 +125,7 @@ const gettingStartedItems = [
               These tabs help you swtich between piority matrixes (unrgent x
               imprtnat and impact x effort), signle priorty metrics, or
               uncategorazied goals. This gives you the flexiblty to take action
-              based on a specifc factor determining a goal’s priority.
+              based on a specifc factor determining a goal's priority.
             </div>
           </ol>
         ),
@@ -137,11 +137,11 @@ const gettingStartedItems = [
         description: (
           <ol>
             <div className='guidebook-description-section'>
-              When hovering over goals in the priority view, “Weigh in” button
-              apprears if you haven’t voted for the priority of the goal on
+              When hovering over goals in the priority view, "Weigh in" button
+              apprears if you haven't voted for the priority of the goal on
               hover state. If you have already voted for the priority of a goal,
               a purple dot shows up under the goal title and when hovering on
-              the goal, “See my vote” button appears.
+              the goal, "See my vote" button appears.
             </div>
           </ol>
         ),
