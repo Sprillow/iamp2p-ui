@@ -26,9 +26,9 @@ import { getAppWs, getAdminWs, APP_WS_URL } from './hcWebsockets'
 // trigger caching of adminWs connection
 getAdminWs().then(async adminClient => {
   try {
-    await adminClient.attachAppInterface({ port: 8888 })
+    await adminClient.attachAppInterface({ port: __APP_PORT__ })
   } catch (e) {
-    console.log('address 8888 was already in use')
+    console.log(`address ${__APP_PORT__} was already in use`)
   }
   const middleware = [holochainMiddleware(APP_WS_URL)]
   // This enables the redux-devtools browser extension
