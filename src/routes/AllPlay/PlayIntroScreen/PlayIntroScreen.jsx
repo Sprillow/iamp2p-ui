@@ -406,18 +406,3 @@ function mapDispatchToProps(dispatch) {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PlayIntroScreen)
-
-// trigger a side effect...
-// this will let other project members know you're here
-// without 'blocking' the thread or the UX
-// appWs
-//   .callZome({
-//     cap: null,
-//     cell_id: cellId,
-//     zome_name: ZOME_NAME,
-//     fn_name: 'init_signal',
-//     payload: null,
-//     provenance: agentAddress, // FIXME: this will need correcting after holochain changes this
-//   })
-//   .then(() => console.log('succesfully triggered init_signal'))
-//   .catch(e => console.error('failed while triggering init_signal: ', e))

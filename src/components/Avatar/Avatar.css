@@ -10,9 +10,9 @@
 }
 
 .avatar.medium {
-  height: 32px;
-  width: 32px;
-  border-radius: 16px;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
   object-fit: cover;
 }
 
@@ -60,9 +60,9 @@
 }
 
 .initials-avatar.medium {
-  height: 32px;
-  width: 32px;
-  border-radius: 16px;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
   object-fit: cover;
 }
 

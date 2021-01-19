@@ -51,7 +51,7 @@
 } */
 
 .screen {
-  margin: 0 75px;
+  /* margin: 0 75px; */
   text-align: left;
   opacity: 0;
   transition: opacity 1s;
@@ -65,16 +65,16 @@
   width: 750px;
 }
 
-.intro-screen-image {
+/* .intro-screen-image {
   margin-bottom: 30px;
-}
+} */
 
 /* .intro-screen-image img {
   height: 190px;
 } */
 
 .intro-screen-title {
-  font-size: 36px;
+  font-size: 34px;
   font-family: 'gilroyextrabold', Helvetica, sans-serif;
   color: #222222;
   margin-bottom: 20px;

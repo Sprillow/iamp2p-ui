@@ -58,7 +58,7 @@ function ErrorScreen ({ stackTrace }) {
           </div>
         </div>
         <div className='error-screen-column-right'>
-          <img src='img/error-screen-image.png' />
+          {/* <img src='img/error-screen-image.png' /> */}
         </div>
       </div>
     </div>

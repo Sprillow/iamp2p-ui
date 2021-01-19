@@ -8,6 +8,9 @@ of how ACTIONS affect STATE
 
 import { combineReducers } from 'redux'
 
+import dismissedNotifs from './dismissed-notifs/reducer'
+import trx from './trx/reducer'
+import converseMessages from './converse-messages/reducer'
 import cells from './cells/reducer'
 import agents from './agents/reducer'
 import whoami, { hasFetchedForWhoami } from './who-am-i/reducer'
@@ -30,12 +33,15 @@ import edgeConnector from './edge-connector/reducer'
 
 // combine reducers from each feature to create the top-level reducer
 export default combineReducers({
+  trx,
   cells,
   agents,
   projects,
   whoami,
   agentAddress,
   ui: combineReducers({
+    dismissedNotifs,
+    converseMessages,
     hasFetchedForWhoami,
     edgeConnector,
     localPreferences,

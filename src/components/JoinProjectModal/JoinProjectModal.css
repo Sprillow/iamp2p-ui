@@ -1,8 +1,12 @@
 .join-project-modal-wrapper {
   width: 564px;
-  height: 564px;
+  /* height: 564px; */
   overflow: hidden;
   position: relative;
+}
+
+.join-project-modal-wrapper .project-modal-content {
+  margin-bottom: 30px;
 }
 
 .project-modal-button .button.large {

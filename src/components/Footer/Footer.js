@@ -26,7 +26,7 @@ function Footer () {
     <div className='footer' ref={ref}>
       <div className='bottom-left-panel'>
         <a href='mailto:pegah@sprillow.com' target='_blank'>
-          <Button text='Got Questions?' size='small' className='green' />
+          <Button text='Got Questions?' size='small' className='' />
         </a>
         <Route path='/project'>
           <div className='bottom-left-panel-entry-points'>

@@ -26,23 +26,8 @@
   padding: 20px;
 }
 
-/* .create_profile_splash_image {
-  background-image: url('img/splash-image.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 50%;
-} */
-
-/* @media only screen and (max-height: 800px) {
-  .validating_form_input {
-    margin-bottom: 35px;
-  }
-
-  .profile_edit_form_title {
-    margin-bottom: 46px; 
-  }
-
-  .profile_edit_form h4 {
-    margin-top: 12px;
-  }
-} */
+.cat-credit-drawing {
+  width: 120px;
+  margin: 0 auto;
+  display: block;
+}

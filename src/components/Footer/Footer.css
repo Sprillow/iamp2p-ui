@@ -1,12 +1,11 @@
-.footer {
-}
+.footer {}
 
 /* Buttom Left Panel */
 
 .bottom-left-panel {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -32,6 +31,7 @@
 }
 
 /* when Entry Point Icon is open: */
+
 .bottom-left-panel-entry-points .icon.active .inner-icon {
   background-color: #5f65ff;
 }

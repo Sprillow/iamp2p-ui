@@ -1,0 +1,37 @@
+.you-screen-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    flex: 1;
+    margin: auto;
+    width: 660px;
+    border-right: #000000 1px solid;
+    border-left: #000000 1px solid;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile_edit_form.you-screen {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: auto;
+    justify-content: center;
+}
+
+/* .create_profile_page .profile_create_wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow-y: scroll;
+    padding: 20px;
+} */
+
+.divider-line {
+    border-bottom: #ddd6be 1.5px solid;
+    height: 1px;
+    margin-bottom: 20px;
+}

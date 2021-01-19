@@ -1,29 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { cellIdToString } from 'connoropolous-hc-redux-middleware/build/main/lib/actionCreator'
-import { CSSTransition } from 'react-transition-group'
-import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Graph from 'react-graph-vis'
+// import Graph from 'react-graph-vis'
 
 import './ConverseView.css'
-import Icon from '../../components/Icon/Icon'
-import DashboardEmptyState from '../../components/DashboardEmptyState/DashboardEmptyState'
-
-import CreateProjectModal from '../../components/CreateProjectModal/CreateProjectModal'
-import JoinProjectModal from '../../components/JoinProjectModal/JoinProjectModal'
-import InviteMembersModal from '../../components/InviteMembersModal/InviteMembersModal'
 // import new modals here
 
-import { PROJECTS_DNA_PATH, ZOME_NAME } from '../../holochainConfig'
-import { passphraseToUuid } from '../../secrets'
-import { getAdminWs, getAppWs, getAgentPubKey } from '../../hcWebsockets'
-import { fetchEntryPoints } from '../../projects/entry-points/actions'
-import { fetchMembers, setMember } from '../../projects/members/actions'
-import {
-  createProjectMeta,
-  fetchProjectMeta,
-} from '../../projects/project-meta/actions'
-import selectEntryPoints from '../../projects/entry-points/select'
+import { setConverseMessages } from '../../converse-messages/actions'
 
 import {
   softwareMessages,
@@ -83,23 +65,24 @@ const graph = {
   edges,
 }
 
-function ConverseView () {
+function ConverseView ({ messages, setMessages }) {
   // will show a typing indicator on the computer side
   // if set to true
-  const [softwareIsTyping, setSoftwareIsTyping] = useState(true)
-  const [messages, setMessages] = useState([])
+  const [softwareIsTyping, setSoftwareIsTyping] = useState(false)
 
   // this callback will only be called once
   // when this component loads
   useEffect(() => {
-    sendMessageFromSoftware(
-      setSoftwareIsTyping,
-      [],
-      setMessages,
-      scroll,
-      's1', // the ID of the message to send from the software
-      2000 // delay
-    )
+    if (messages.length === 0) {
+      sendMessageFromSoftware(
+        setSoftwareIsTyping,
+        [],
+        setMessages,
+        scroll,
+        's1', // the ID of the message to send from the software
+        2000 // delay
+      )
+    }
   }, [])
 
   const lastMessage = messages[messages.length - 1]
@@ -143,8 +126,41 @@ function ConverseView () {
     }
   }
 
+  const undo = () => {
+    const messagesReversed = messages.slice().reverse()
+    const indexOfLastHumanMessage = messagesReversed.findIndex(
+      message => message.type === 'human'
+    )
+    if (indexOfLastHumanMessage) {
+      const newMessages = messagesReversed.slice(indexOfLastHumanMessage + 1)
+      setMessages(newMessages.reverse())
+    }
+  }
+  const refresh = () => {
+    sendMessageFromSoftware(
+      setSoftwareIsTyping,
+      [],
+      setMessages,
+      scroll,
+      's1', // the ID of the message to send from the software
+      0 // delay
+    )
+  }
+
   return (
     <div className='converse-view-wrapper'>
+      <div className='chat-change-buttons'>
+        {!softwareIsTyping && (
+          <>
+            <div className='chat-undo-button' onClick={undo}>
+              Undo
+            </div>
+            <div className='chat-refresh-button' onClick={refresh}>
+              Refresh
+            </div>
+          </>
+        )}
+      </div>
       {/* <div className='graph-helper-overlay'>
         <Graph graph={graph} />
       </div> */}
@@ -236,11 +252,6 @@ function ConverseView () {
         {/* 20px is how far up off the bottom of the screen the overlay is */}
         <div style={{ height: optionsHeight + 20 }} />
       </div>
-
-      <div className='chat-change-buttons'>
-        <div className='chat-undo-button'>Undo</div>
-        <div className='chat-back-button'>Refresh</div>
-      </div>
     </div>
   )
 }
@@ -251,8 +262,11 @@ async function sendMessageFromSoftware (
   setMessages,
   scroll,
   replyId,
-  delay = 1000
+  delay
 ) {
+  if (!delay) {
+    delay = Math.max(softwareMessages[replyId].length * 20, 2000)
+  }
   await new Promise(resolve => {
     // show the typing indicator
     setSoftwareIsTyping(true)
@@ -270,4 +284,16 @@ async function sendMessageFromSoftware (
   })
 }
 
-export default ConverseView
+function mapStateToProps (state) {
+  return {
+    messages: state.ui.converseMessages,
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    setMessages: messages => dispatch(setConverseMessages(messages)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConverseView)

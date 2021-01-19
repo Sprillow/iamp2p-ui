@@ -68,6 +68,13 @@
   cursor: pointer;
 }
 
+.icon.medium-close {
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  cursor: pointer;
+}
+
 .icon.small-close {
   width: 18px;
   height: 18px;

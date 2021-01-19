@@ -17,14 +17,13 @@
 
 .header-item {
   padding: 10px;
-  border-left: #000000 1px solid;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.header-item:hover {
-  background-color: goldenrod;
+.header-item:hover, .header-item.active-header-item {
+  background-color: #DAA520;
 }
 
 .header-item.with-left-border {
@@ -33,6 +32,7 @@
 
 .page-title {
   padding: 10px;
+  font-family: 'gilroyextrabold';
 }
 
 /* Top Right Panel */
@@ -40,6 +40,10 @@
 .right-panel {
   position: relative;
   display: flex;
+}
+
+.right-panel .header-item {
+  border-left: #000000 1px solid;
 }
 
 /* Top Left Panel */
@@ -51,7 +55,10 @@
 
 .left-panel .header-item {
   min-width: 80px;
+  border-right: #000000 1px solid;
 }
+
+.left-panel .header-item .last {}
 
 /* Top Center Panel */
 

@@ -29,8 +29,13 @@ function ProfileCreatedPage ({ dispatch, passphrase }) {
               <div className='play-intro-screen-description'>
                 <div>
                   Cat Credit is an imaginary currency. If I were to draw it, it
-                  looks like this
+                  would look like this:
                 </div>
+                <br />
+                <img
+                  className='cat-credit-drawing'
+                  src='img/iamp2p-cat-credit.png'
+                />
                 <br />
                 <div>Now let's invite friends to join you in the game.</div>
                 <br />

@@ -3,17 +3,17 @@ import './ButtonWithPendingState.css'
 
 import Icon from '../Icon/Icon'
 
-export default function ButtonWithPendingState({
+export default function ButtonWithPendingState ({
   pending,
   pendingText,
   actionText,
 }) {
   return pending ? (
     <span className='pending-iamp2p'>
-      <Icon
+      {/* <Icon
         name='acorn-logo-stroked.svg'
         className='white not-hoverable very-small'
-      />
+      /> */}
       <span>{pendingText}</span>
     </span>
   ) : (

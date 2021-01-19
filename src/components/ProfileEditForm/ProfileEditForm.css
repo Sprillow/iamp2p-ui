@@ -2,6 +2,7 @@
   width: 500px;
   /* text-align: center; */
   margin: auto;
+  padding: 20px 0px;
 }
 
 .profile_edit_form .small-close {
@@ -19,11 +20,13 @@
 .profile_edit_form h1 {
   margin-bottom: 0;
   font-size: 30px;
-  line-height: 24px;
-  color: #4d4d4d;
+  line-height: 36px;
+  /* color: #4d4d4d; */
+  color: #222222;
   font-family: 'gilroyextrabold', 'gilroyextrabold', Helvetica, sans-serif;
   font-weight: normal;
   letter-spacing: 0.5px;
+  margin-top: 0;
 }
 
 .profile_edit_form h4 {
@@ -54,7 +57,7 @@
 }
 
 .profile_edit_form .profile_edit_form_avatar {
-  margin-top: 26px;
+  margin-top: 30px;
   margin-left: 6px;
   height: 40px;
   width: 40px;

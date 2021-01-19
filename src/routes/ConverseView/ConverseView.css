@@ -100,15 +100,6 @@
   font-size: 20px;
 }
 
-.chat-change-buttons {
-  position: absolute;
-  bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  left: 20px;
-  font-family: 'hk-grotesk-semibold', Helvetica, sans-serif;
-}
-
 .software-is-typing {
   border-radius: 5px;
   background: whitesmoke;
@@ -198,4 +189,21 @@
   100% {
     background: rgba(150, 150, 150, 1);
   }
+}
+
+.chat-change-buttons {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  right: 20px;
+  font-family: 'hk-grotesk-semibold', Helvetica, sans-serif;
+  text-align: right;
+}
+
+.chat-undo-button, .chat-refresh-button {
+  cursor: pointer;
+  border: 1px solid;
+  padding: 5px 10px;
+  margin-left: 10px;
 }

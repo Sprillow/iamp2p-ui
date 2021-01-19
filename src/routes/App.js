@@ -26,6 +26,7 @@ import IntroScreen from './IntroScreen/IntroScreen'
 import ConverseView from './ConverseView/ConverseView'
 import AllPlay from './AllPlay/AllPlay'
 import GlossaryScreen from './GlossaryScreen/GlossaryScreen'
+import YouScreen from './YouScreen/YouScreen'
 import Dashboard from './Dashboard/Dashboard'
 import ProjectView from './ProjectView/ProjectView'
 import selectEntryPoints from '../projects/entry-points/select'
@@ -78,6 +79,7 @@ function App ({
           <Route path='/converse' component={ConverseView} />
           <Route path='/play' component={AllPlay} />
           <Route path='/glossary' component={GlossaryScreen} />
+          <Route path='/you' component={YouScreen} />
           <Route path='/' render={() => <Redirect to='/intro' />} />
         </Switch>
         {!hasCheckedInGame && <LoadingScreen />}

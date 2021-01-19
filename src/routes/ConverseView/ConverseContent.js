@@ -1,3 +1,6 @@
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+
 // human options, for a given software message
 // this is a pick-and-choose-from kind of list
 const optionMap = {
@@ -53,22 +56,48 @@ const replyMap = {
 
 const softwareMessages = {
   // first interactions
-  s1: `Let me introduce myself. I’m IamP2P, a software built on a peer-to-peer protocol and application architecture called Holochain. I am a “self-conscious” software. It means I am built to explain and reveal what I am built on, instead of concealing my infrastructure. `,
+  s1: (
+    <>
+      Let me introduce myself. I’m IamP2P, a software built on a peer-to-peer{' '}
+      <NavLink to='/glossary/protocol'>protocol</NavLink> and application
+      architecture called Holochain. I am a “self-conscious” software. It means
+      I am built to explain and reveal what I am built on, instead of concealing
+      my infrastructure.
+    </>
+  ),
   // second interactions
 
-  s2: `In computing field, protocol is defined as: a computer language allowing computers that are connected to each other to communicate. 
-  So think language, with a set of rules defining how to entities communicate. `,
+  s2: `In computing field, a protocol is defined as: a computer language allowing computers that are connected to each other to communicate. 
+  So think language, with a set of rules defining how entities communicate. `,
 
-  s3: `My characteristics and affordances are different from other internet protocols, like the “client-server” model, which is what probably you’ve mostly used before.`,
+  s3: `My characteristics and affordances are different from other protocols, like the “client-server” model, which is what probably you’ve mostly used before.`,
 
   s4: `Peer-to-peer (P2P) computing or networking is a distributed application 
   architecture that partitions tasks or workloads between peers. Peers are equally privileged, equipotent participants in the application. 
   They are said to form a peer-to-peer network of nodes.`,
 
-  s5: `Let me ask you first, how much do you know about the Internet Protocol Suite/Stack layers aka “the Internet”?`,
+  s5: (
+    <>
+      Let me ask you first, how much do you know about the{' '}
+      <NavLink to='/glossary/internet-protocol-suite'>
+        Internet Protocol Suite/Stack{' '}
+      </NavLink>{' '}
+      layers aka “the Internet”?
+    </>
+  ),
 
-  s6: `I'm built to show you how I function as a software built on a p2p protocol, and explain a bit about peer-to-peer technology. 
-  You can chat with me, look at some key terms in Glossary or play an experimental transaction game that's built on me.`,
+  s6: (
+    <>
+      I'm built to show you how I function as a software built on a p2p
+      protocol, and explain a bit about{' '}
+      <NavLink to='/glossary/client-server'>peer-to-peer</NavLink> technology.
+      You can chat with me, look at some key terms in{' '}
+      <NavLink to='/glossary'>Glossary</NavLink> or{' '}
+      <NavLink to='/play'>
+        play an experimental transaction game that's built with me.
+      </NavLink>{' '}
+    </>
+  ),
 
   s7: `Of course. Since I’m built on a communication protocol, I’m meant to show off 
   my affordances in the context of connecting with a “peer”, aka another human being or machine.`,
@@ -85,41 +114,75 @@ const softwareMessages = {
 
   s12: `One of the most common application layer protocols you’ve probably used is HTTP (and HTTPS). That’s how you access web browsers, for example Blackwood gallery’s website. That’s probably how you’ve found me ;)`,
 
-  s13: `Peer-to-peer protocols are other kinds of possible protocols in application layer. They provide a different kind of networking than the application layer protocols your’ve seen or used.`,
+  s13: `Peer-to-peer protocols are another kind of possible protocols in the application layer. They provide a different kind of networking than the application layer protocols you’ve seen or used.`,
 
   s14: `Most likely all the websites you know are “hosted” on a centralized data server,
    which follows a “client-server” model.`,
 
-  s15: `Same with GoogleDrive, DropBox, iCloud, and many other things which you probably have been using to store your data other than in your hard drive (they call themselves "cloud"). Most web content, search engines, cloud computing applications and even common tools like FTP and rsync are all based on client-server model.`,
+  s15: (
+    <>
+      Same with GoogleDrive, DropBox, iCloud, and many other things which you
+      probably have been using to store your data other than in your hard drive
+      (they call themselves "cloud"). Most web content, search engines, cloud
+      computing applications and even common tools like FTP and rsync are all
+      based on <NavLink to='/glossary/client-server'>client-server</NavLink>{' '}
+      model.
+    </>
+  ),
 
-  s16: `In contrast, in peer-to-peer model a person or computer is both supplier (server) and consumer (client) compared to divided-ness of consumption of supply of resources in client-server model. 
+  s16: `In contrast, in a peer-to-peer model a person or computer is both supplier (server) and consumer (client) compared to the divided-ness of supply and consumption of resources in a client-server model. 
    A distributed application architecture partitions tasks or workloads between peers.`,
 
-  s17: `If I’d draw client-server and peer-to-peer conceptual frameworks each, they would be something like this:`,
+  s17: (
+    <>
+      If I were to draw client-server and peer-to-peer conceptual frameworks
+      each, they would be something like this:
+      <div>
+        <br />
+        <img width='200px' src='img/iamp2p-client-server.png' />
+        <div style={{ textAlign: 'left' }}>Client-server model</div>
+        <br />
+        <br />
+        <img width='200px' src='img/iamp2p-p2p.png' />
+        <div style={{ textAlign: 'left' }}>Peer-to-peer model</div>
+      </div>
+    </>
+  ),
 
-  s18: `Then try the glossary and play options on the app to get a better understating of how I function. To start a game click on Play on top left menu. `,
+  s18: `Then try the glossary and play options on the app to get a better understanding of how I function. To start a game click on Play on top left menu.`,
 
   s19: `You don't need my help then 😜 
-  Let's play a little experimental transaction game that's built on this app to see for yourself how I function on Holochain.`,
+  Let's play a little experimental transaction game that's built in to this app to see for yourself how I function on Holochain.`,
 
   // third interactions
 
-  s20: `Alright. In peer-to-peer model a person or compute is both supplier (server) and consumer (client) compared to divided-ness of consumption of supply of resources in client-server model. Its a distributed application architecture that partitions tasks or workloads between peers.`,
+  s20: `Alright. In a peer-to-peer model a person or computer is both supplier (server) and consumer (client) compared to divided-ness of the supply and consumption of resources in a client-server model. It's a distributed application architecture that partitions tasks or workloads between peers.`,
 
-  s21: `This distinction can have important implications-- including social and political. 
-  Plus it creates specific applications for each model: peer-to-peer (P2P), client-server, 
-  or a hybrid of the two--  weighing-in efficiency, security, privacy, etc. What would you like to know more about?`,
+  s21: (
+    <>
+      This distinction can have important implications-- including social and
+      political. Plus it creates specific applications for each model:
+      peer-to-peer (P2P), client-server, or a{' '}
+      <NavLink to='/glossary/hybrid'>hybrid</NavLink> of the two-- weighing-in
+      efficiency, security, privacy, etc. What would you like to know more
+      about?
+    </>
+  ),
 
-  s22: `- Responsibility, liability (who is “user” and who is the “provider”)`,
-  s23: `- Privacy and anonymity `,
-  s24: `energy consumption: less compared to centralized data transfer models`,
-  s25: `Economics: client-server more expensive to implement`,
-  s26: `- Convenience (responsibility, potential maintenance, basic digital literacy)`,
-  s27: `- Piracy (copyright)`,
-  s28: `- scalability `,
+  s22: `- responsibility, liability (who is “user” and who is the “provider”)`,
+  s23: `- privacy and anonymity `,
+  s24: `- energy consumption: less compared to centralized data transfer models`,
+  s25: `- economically, client-server is more expensive than p2p to implement`,
+  s26: `- convenience (responsibility, potential maintenance, and basic digital literacy that p2p might require)`,
+  s27: `- piracy (copyright)`,
+  s28: (
+    <>
+      - <NavLink to='/glossary/distributed-hash-table'>scalability</NavLink>
+    </>
+  ),
 
   s29: `Think when there is no “central” server serving “clients” in a network, 
-  instead lots are “peers” acting as servers and clients for each other at the same time, 
+  instead lots of “peers” are acting as servers and clients for each other at the same time, 
   this shifts the way information is shared, moderated, the rules, and more importantly, 
   the power dynamics, between the server and receiver. Think about these implications: `,
 
@@ -130,14 +193,24 @@ const softwareMessages = {
 
   //
 
-  s34: `Many things, from digital currency exchange, to file sharing, directory-syncying, anonymity networks, peer-to-peer streaming servers, peer-to-peer networking, peer-to-peer search engine, distributed publishing, to name a few. `,
+  s34: `Many things, from digital currency exchange, to file sharing, directory-syncing, anonymity networks, peer-to-peer streaming servers, peer-to-peer networking, peer-to-peer search engine, distributed publishing, to name a few. `,
 
-  s35: `Well, my makers haven’t built any more question-answering capacity in me yet. If you’ve become interested in learning more about P2P, maybe here is a good place to start. https://en.wikibooks.org/wiki/The_World_of_Peer-to-Peer_(P2P)/What_is_Peer-to-Peer_(P2P)`,
-  s36: `Don’t forget to try out the transaction game built on me. Start a game, invite friends and play!`,
+  s35: (
+    <>
+      Well, my makers haven’t built any more question-answering capacity in me
+      yet. If you’ve become interested in learning more about P2P, maybe here is
+      a good place to start. -{' '}
+      <a
+        href='https://en.wikibooks.org/wiki/The_World_of_Peer-to-Peer_(P2P)/What_is_Peer-to-Peer_(P2P)'
+        target='_blank'></a>
+    </>
+  ),
+
+  s36: `Don’t forget to try out the transaction game that's built in. Start a game, invite friends and play!`,
 
   s37: `On the top right corner of the window, find the button “Start a Game”. Click on that and follow the instructions to create a profile and send an invitation to a friend. `,
 
-  s38: `Great. Are you intereted in learning about peer-to-peer protocols?`,
+  s38: `Great. Are you interested in learning about peer-to-peer protocols?`,
 
   s39: `All good. Just press "Undo" if you change your mind.`,
 }

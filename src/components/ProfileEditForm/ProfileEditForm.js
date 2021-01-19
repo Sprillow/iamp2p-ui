@@ -21,22 +21,16 @@ function ProfileEditForm ({
   subText,
   submitText,
 }) {
-  const [firstName, setFirstName] = useState('')
-  const [isValidFirstName, setisValidFirstName] = useState(true)
-  const [isValidLastName, setIsValidLastName] = useState(true)
   const [isValidUserName, setIsValidUserName] = useState(true)
   const [errorUsername, setErrorUsername] = useState('')
   const [isValidAvatarUrl, setIsValidAvatarUrl] = useState(true)
 
-  const [lastName, setLastName] = useState('')
   const [handle, setHandle] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
   const innerOnSubmit = () => {
-    if (isValidUserName && isValidFirstName && isValidLastName) {
+    if (isValidUserName) {
       onSubmit({
-        first_name: firstName,
-        last_name: lastName,
-        status: 'Online',
+        created_at: Date.now(),
         avatar_url: avatarUrl,
         address: agentAddress,
         handle,
@@ -46,8 +40,6 @@ function ProfileEditForm ({
 
   useEffect(() => {
     if (whoami) {
-      setFirstName(whoami.first_name)
-      setLastName(whoami.last_name)
       setHandle(whoami.handle)
       setAvatarUrl(whoami.avatar_url)
     }
@@ -56,26 +48,6 @@ function ProfileEditForm ({
     Object.values(state.agents).map(agent => agent.handle)
   )
   if (whoami && handle != whoami.handle && userNames.includes(handle)) {
-    if (!/^[A-Z]+$/i.test(firstName)) {
-      if (isValidFirstName) {
-        setisValidFirstName(false)
-      }
-    } else {
-      if (!isValidFirstName) {
-        setisValidFirstName(true)
-      }
-    }
-
-    if (!/^[A-Z]+$/i.test(lastName)) {
-      if (isValidLastName) {
-        setIsValidLastName(false)
-      }
-    } else {
-      if (!isValidLastName) {
-        setIsValidLastName(true)
-      }
-    }
-
     if (isValidUserName) {
       setErrorUsername('Username is already in use.')
 
@@ -111,7 +83,7 @@ function ProfileEditForm ({
 
   const avatarHelp = 'Optional but nice to have.'
 
-  const publicKeyHelp = `You don't need to memorize this, unless your friends can't recognize you by your username 😜`
+  const publicKeyHelp = `You don't need to memorize this, unless your friends can't recognize you by your PeerName 😜`
 
   const actionButton = (
     <ButtonWithPendingState
@@ -128,35 +100,6 @@ function ProfileEditForm ({
         <h4>{subText}</h4>
       </div>
       <form onSubmit={innerOnSubmit}>
-        {/* <div className='row'>
-          <ValidatingFormInput
-            value={firstName}
-            onChange={setFirstName}
-            invalidInput={firstName.length > 0 && !isValidFirstName}
-            validInput={firstName.length > 0 && isValidFirstName}
-            errorText={
-              firstName.length > 0 && !isValidFirstName
-                ? 'First name is not valid.'
-                : ''
-            }
-            label='First Name'
-            placeholder='Harry'
-          />
-          <div style={{ flex: 0.1 }} />
-          <ValidatingFormInput
-            value={lastName}
-            onChange={setLastName}
-            invalidInput={lastName.length > 0 && !isValidLastName}
-            validInput={lastName.length > 0 && isValidLastName}
-            errorText={
-              lastName.length > 0 && !isValidLastName
-                ? 'Last name is not valid.'
-                : ''
-            }
-            label='Last Name'
-            placeholder='Potter'
-          />
-        </div> */}
         <div className='row'>
           <ValidatingFormInput
             value={handle}
@@ -207,23 +150,6 @@ function ProfileEditForm ({
       </div>
     </div>
   )
-}
-
-ProfileEditForm.propTypes = {
-  agentAddress: PropTypes.string,
-  onSubmit: PropTypes.func,
-  onClose: PropTypes.func,
-  whoami: PropTypes.shape({
-    address: PropTypes.string,
-    first_name: PropTypes.string,
-    last_name: PropTypes.string,
-    handle: PropTypes.string,
-    avatar_url: PropTypes.string,
-  }),
-  titleText: PropTypes.string,
-  subText: PropTypes.string,
-  submitText: PropTypes.string,
-  canClose: PropTypes.bool,
 }
 
 export default ProfileEditForm

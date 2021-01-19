@@ -3,7 +3,7 @@ import './PickerTemplate.css'
 
 import Icon from '../Icon/Icon'
 
-export default function PickerTemplate({
+export default function PickerTemplate ({
   className,
   children,
   heading,
@@ -11,13 +11,13 @@ export default function PickerTemplate({
 }) {
   return (
     <div className={`${className} picker-popup`}>
-      <Icon
+      {/* <Icon
         className='vertical_action_close'
         name='x.svg'
-        size='small-close'
+        size='medium-close'
         className='grey'
         onClick={() => onClose()}
-      />
+      /> */}
       <div className='picker-popup-heading'>{heading}</div>
       {children}
     </div>

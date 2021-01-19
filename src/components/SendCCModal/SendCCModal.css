@@ -1,0 +1,18 @@
+.join-project-modal-wrapper {
+    width: 564px;
+    /* height: 564px; */
+    overflow: hidden;
+    position: relative;
+}
+
+.validating_form_input.recipient {
+    margin-bottom: 0;
+}
+
+.help-text {
+    color: #4e4e4e;
+    font-size: 16px;
+    line-height: 22px;
+    margin: 0 0 10px 0;
+    flex: 1;
+}

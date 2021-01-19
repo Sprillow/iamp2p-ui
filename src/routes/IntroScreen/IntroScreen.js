@@ -65,8 +65,10 @@ export default function IntroScreen () {
                   which is me— the software you’ve just downloaded and opened.
                   My purpose is to tell you a bit more about myself, and other
                   P2P peers like me. I mean, this is the purpose of my{' '}
-                  <a>maker</a>, which is now my purpose too, if that makes
-                  sense.
+                  <a href='https://sprillow.com/' target='_blank'>
+                    makers
+                  </a>
+                  , which is now my purpose too, if that makes sense.
                 </div>
                 <br />
                 <div>

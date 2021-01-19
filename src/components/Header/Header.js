@@ -7,42 +7,50 @@ import {
   withRouter,
   useHistory,
 } from 'react-router-dom'
-// import { CSSTransition } from 'react-transition-group'
-// import onClickOutside from 'react-onclickoutside'
-// import GuideBook from '../GuideBook/GuideBook'
-// import { GUIDE_IS_OPEN } from '../GuideBook/guideIsOpen'
 import './Header.css'
-// import Avatar from '../Avatar/Avatar'
-// import Icon from '../Icon/Icon'
-// import ListExport from '../ListExport/ListExport'
-// import Preferences from '../Preferences/Preferences'
-// import Modal from '../Modal/Modal'
 
 function Header ({ openShowInviteModal, hasJoinedGame }) {
   const history = useHistory()
+  const location = useLocation()
 
   return (
     <div className='header-wrapper'>
       <div className='header'>
         <div className='left-panel'>
           <div
-            className='header-item'
+            className={`header-item ${
+              location.pathname.includes('/converse')
+                ? 'active-header-item'
+                : ''
+            }`}
             onClick={() => history.push('/converse')}>
             Converse
           </div>
           <div
-            className='header-item'
+            className={`header-item ${
+              location.pathname.includes('/play') ? 'active-header-item' : ''
+            }`}
             onClick={() => history.push('/play/intro')}>
             Play
           </div>
           <div
-            className='header-item'
+            className={`header-item last ${
+              location.pathname.includes('/glossary')
+                ? 'active-header-item'
+                : ''
+            }`}
             onClick={() => history.push('/glossary')}>
             Glossary
           </div>
         </div>
         <div className='center-panel'>
-          <div className='page-title'>Page Title</div>
+          <div className='page-title'>
+            <Route path='/intro' component={() => <>Welcome</>} />
+            <Route path='/play' component={() => <>Transact Game</>} />
+            <Route path='/glossary' component={() => <>Glossary</>} />
+            <Route path='/converse' component={() => <>Chat with IamP2P</>} />
+            <Route path='/you' component={() => <>Your Profile</>} />
+          </div>
         </div>
         <div className='right-panel'>
           {hasJoinedGame && (
@@ -52,8 +60,25 @@ function Header ({ openShowInviteModal, hasJoinedGame }) {
               Invite a Friend
             </div>
           )}
-          {!hasJoinedGame && <div className='header-item'>Join a Game</div>}
-          <div className='header-item'>You</div>
+          {!hasJoinedGame && (
+            <>
+              <div
+                className='header-item'
+                onClick={() => history.push('/play/intro')}>
+                Start a Game
+              </div>
+              <div
+                className='header-item'
+                onClick={() => history.push('/play/intro')}>
+                Join a Game
+              </div>
+            </>
+          )}
+          {hasJoinedGame && (
+            <div className='header-item' onClick={() => history.push('/you')}>
+              You
+            </div>
+          )}
         </div>
       </div>
     </div>

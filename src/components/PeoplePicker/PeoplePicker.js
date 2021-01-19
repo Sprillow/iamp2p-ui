@@ -13,167 +13,60 @@ import {
 import Avatar from '../Avatar/Avatar'
 import moment from 'moment'
 
-function PeoplePicker({
-  people,
-  goalAddress,
-  createGoalMember,
-  archiveGoalMember,
-  onClose,
-}) {
-  const [filterText, setFilterText] = useState('')
-
+function PeoplePicker ({ people, address, setAddress, onClose }) {
   return (
     <PickerTemplate
       className='people-picker'
-      heading='squirrels'
+      // heading='Recipient'
       onClose={onClose}>
-      <div className='people-picker-search'>
-        <Icon name='search.svg' size='small' className='not-hoverable' />
-        <input
-          type='text'
-          onChange={e => setFilterText(e.target.value)}
-          value={filterText}
-          placeholder='search squirrels...'
-          autoFocus
-        />
-        {filterText !== '' && (
-          <button
-            onClick={() => {
-              setFilterText('')
-            }}
-            className='clear-button'>
-            clear
-          </button>
-        )}
-      </div>
-      <div className='people-picker-spacer' />
       <ul className='people-picker-people'>
-        {people
-          // filter people out if there's filter text defined, and don't bother case matching
-          // also match anywhere in the string, not just the start
-          .filter(person => {
-            const name = `${person.first_name} ${person.last_name}`
-            return (
-              !filterText ||
-              name.toLowerCase().indexOf(filterText.toLowerCase()) > -1
-            )
-          })
-          // sort members (people attached to Goal) to the top of the list
-          .sort((p1, p2) => {
-            if (p1.is_member && !p2.is_member) return -1
-            else if (p1.is_member && p2.is_member) return 0
-            else if (!p1.is_member && p2.is_member) return 1
-          })
-          .map((person, index) => {
-            const onClick = () => {
-              if (person.is_member)
-                archiveGoalMember(person.goal_member_address)
-              else createGoalMember(goalAddress, person.address)
-            }
-            return (
-              <li
-                key={index}
-                className={person.is_member ? 'member' : ''}
-                onClick={onClick}>
-                <Avatar
-                  first_name={person.first_name}
-                  last_name={person.last_name}
-                  avatar_url={person.avatar_url}
-                  medium
+        {people.map((person, index) => {
+          const onClick = () => {
+            // do something
+            setAddress(person.address)
+          }
+          const isSelected = person.address === address
+          return (
+            <li
+              key={index}
+              className={isSelected ? 'member' : ''}
+              onClick={onClick}>
+              <Avatar
+                handle={person.handle}
+                avatar_url={person.avatar_url}
+                medium
+              />
+              <div className='person-nameANDhandle'>
+                <span className='person-name'>{person.handle}</span>
+              </div>
+              {!isSelected && (
+                <Icon
+                  name='radio-button.svg'
+                  size='small'
+                  className='light-grey radio-button'
                 />
-                <div className='person-nameANDhandle'>
-                  <span className='person-name'>
-                    {person.first_name} {person.last_name}
-                  </span>
-                  <div className='person-handle'>{person.handle}</div>
-                </div>
-                {!person.is_member && (
-                  <Icon
-                    name='radio-button.svg'
-                    size='small'
-                    className='light-grey radio-button'
-                  />
-                )}
-                {person.is_member && (
-                  <Icon
-                    name='radio-button-checked.svg'
-                    size='small'
-                    className='purple radio-button'
-                  />
-                )}
-              </li>
-            )
-          })}
+              )}
+              {isSelected && (
+                <Icon
+                  name='radio-button-checked.svg'
+                  size='small'
+                  className='purple radio-button'
+                />
+              )}
+            </li>
+          )
+        })}
       </ul>
     </PickerTemplate>
   )
 }
 
-PeoplePicker.propTypes = {
-  projectId: PropTypes.string,
-  people: PropTypes.arrayOf(
-    PropTypes.shape({
-      address: PropTypes.string.isRequired,
-      first_name: PropTypes.string.isRequired,
-      last_name: PropTypes.string.isRequired,
-      handle: PropTypes.string.isRequired,
-      avatar_url: PropTypes.string.isRequired,
-      is_member: PropTypes.bool.isRequired,
-      goal_member_address: PropTypes.string,
-    })
-  ).isRequired,
-  goalAddress: PropTypes.string.isRequired,
-  createGoalMember: PropTypes.func.isRequired,
-  archiveGoalMember: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
+function mapStateToProps (state, ownProps) {
+  return {}
 }
 
-function mapStateToProps(state, ownProps) {
-  const goalAddress = state.ui.goalForm.isOpen
-    ? state.ui.goalForm.editAddress
-    : state.ui.expandedView.goalAddress
-  const { projectId } = ownProps
-  const goalMembers = state.projects.goalMembers[projectId] || {}
-  const members = state.projects.members[projectId] || {}
-  const membersOfGoal = Object.keys(goalMembers)
-    .map(address => goalMembers[address])
-    .filter(goalMember => goalMember.goal_address === goalAddress)
-  const agents = Object.keys(members).map(address => state.agents[address])
-  return {
-    people: agents.map(agent => {
-      const member = membersOfGoal.find(
-        goalMember => goalMember.agent_address === agent.address
-      )
-
-      return {
-        ...agent, // address, name, avatar_url
-        is_member: member ? true : false,
-        goal_member_address: member ? member.address : null,
-      }
-    }),
-    goalAddress,
-  }
-}
-
-function mapDispatchToProps(dispatch, ownProps) {
-  const { projectId: cellIdString } = ownProps
-  return {
-    createGoalMember: (goal_address, agent_address) => {
-      return dispatch(
-        createGoalMember.create({
-          cellIdString,
-          payload: {
-            goal_address,
-            agent_address,
-            unix_timestamp: moment().unix(),
-          },
-        })
-      )
-    },
-    archiveGoalMember: payload => {
-      return dispatch(archiveGoalMember.create({ cellIdString, payload }))
-    },
-  }
+function mapDispatchToProps (dispatch) {
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PeoplePicker)
