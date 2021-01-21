@@ -35,3 +35,9 @@
     height: 1px;
     margin-bottom: 20px;
 }
+
+.profile_edit_form.you-screen input.with_at_symbol {
+    color: grey;
+    cursor: default;
+    background: #e3e3e3;
+}

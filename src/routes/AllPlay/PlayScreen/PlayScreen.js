@@ -10,14 +10,20 @@ import { dismissNotif } from '../../../dismissed-notifs/actions'
 
 import './PlayScreen.css'
 
-import InviteMembersModal from '../../../components/InviteMembersModal/InviteMembersModal'
 import Button from '../../../components/Button/Button'
 import Icon from '../../../components/Icon/Icon'
 import Avatar from '../../../components/Avatar/Avatar'
 import LoadingScreen from '../../../components/LoadingScreen/LoadingScreen'
 
 import Modal from '../../../components/Modal/Modal'
+import {
+  ProjectModalButton,
+  ProjectModalContent,
+  ProjectModalContentSpacer,
+  ProjectModalHeading,
+} from '../../../components/ProjectModal/ProjectModal'
 import SendCCModal from '../../../components/SendCCModal/SendCCModal'
+import InviteMembersModal from '../../../components/InviteMembersModal/InviteMembersModal'
 import ProgressExplainer from '../../../components/ProgressExplainer/ProgressExplainer'
 
 function WalletHistory ({ myHistory, walletBalance, agentAddress, agents }) {
@@ -130,6 +136,36 @@ function ReceivedCCActivityUpdate ({ onClose, handle, amount }) {
   )
 }
 
+function LeaveGameModal () {
+  const leaveGame = async () => {
+    //get active apps from holochain
+    const adminClient = await getAdminWs()
+    const activeApps = await adminClient.listActiveApps()
+    console.log(activeApps)
+    // deactivate the active app
+    await adminClient.deactivateApp({
+      installed_app_id: activeApps[0],
+    })
+    // window.location.reload
+    window.location.reload()
+  }
+
+  return (
+    <>
+      <ProjectModalHeading title='Leaving the Game' />
+      <ProjectModalContent>
+        <div className='leave-game-modal-content'>
+          Leaving the game will disable access to your current profile and game.
+          You can then join or start a new game. Are you sure you want to leave
+          the game?
+        </div>
+      </ProjectModalContent>
+
+      <ProjectModalButton text='Yes, leave the game' onClick={leaveGame} />
+    </>
+  )
+}
+
 function PlayScreen ({
   cellIdString,
   agents,
@@ -148,6 +184,7 @@ function PlayScreen ({
   const [inGame, setInGame] = useState(false)
   const [hasCheckedInGame, setHasCheckedInGame] = useState(false)
   const [showSendCCModal, setShowSendCCModal] = useState(false)
+  const [showLeaveGameModal, setShowLeaveGameModal] = useState(false)
 
   const [sendingCCStep, setSendingCCStep] = useState(0)
   const [isSendingCC, setIsSendingCC] = useState(false)
@@ -376,6 +413,19 @@ function PlayScreen ({
         showModal={showInviteMembersModal}
         onClose={() => setShowInviteMembersModal(false)}
       />
+      <Modal
+        white
+        active={showLeaveGameModal}
+        onClose={() => setShowLeaveGameModal(false)}>
+        <LeaveGameModal />
+      </Modal>
+      {agents.length === 1 && (
+        <div
+          className='leave-game-button'
+          onClick={() => setShowLeaveGameModal(true)}>
+          Leave the game
+        </div>
+      )}
     </>
   )
 }

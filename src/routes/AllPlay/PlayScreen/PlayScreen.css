@@ -39,8 +39,7 @@
   height: 100%;
 }
 
-.your-wallet-wrapper,
-.your-network-wrapper {
+.your-wallet-wrapper, .your-network-wrapper {
   padding: 19px;
   display: flex;
   flex-direction: row;
@@ -56,8 +55,7 @@
   flex-wrap: wrap;
 }
 
-.your-wallet-title,
-.your-network-title {
+.your-wallet-title, .your-network-title {
   font-family: 'hk-grotesk-semibold', Helvetica, Sans-Serif;
   margin-right: 20px;
 }
@@ -107,7 +105,7 @@
 
 .header-send-button-wrapper {
   padding: 20px;
-  font-size: 18px;
+  font-size: 17px;
   box-sizing: border-box;
   border-left: #000000 1px solid;
   font-family: 'gilroyextrabold', Helvetica, sans-serif;
@@ -198,7 +196,26 @@ a {
   padding: 6px 20px;
 }
 
-.wallet-history-item.right,
-.wallet-history-title.right {
+.wallet-history-item.right, .wallet-history-title.right {
   text-align: right;
+}
+
+.leave-game-button {
+  cursor: pointer;
+  border: 1px solid;
+  padding: 8px 10px;
+  margin-left: 10px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: 'hk-grotesk-semibold', Helvetica, sans-serif;
+  ;
+}
+
+.leave-game-button:hover {
+  color: #3f7800;
+}
+
+.leave-game-modal-content {
+  margin-bottom: 20px;
 }

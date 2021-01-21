@@ -12,6 +12,10 @@
   margin-bottom: 30px;
 }
 
+.project-modal-content {
+  font-size: 18px;
+}
+
 .project-modal-content-spacer {
   margin-bottom: 50px;
   margin-top: 50px;

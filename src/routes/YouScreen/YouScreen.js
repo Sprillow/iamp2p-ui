@@ -87,6 +87,7 @@ function ViewProfilePage ({ whoami, cellIdString, agentAddress, dispatch }) {
               label='PeerName'
               helpText={usernameHelp}
               withAtSymbol
+              readOnly
             />
           </div>
 

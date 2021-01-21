@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import './Header.css'
 
-function Header ({ openShowInviteModal, hasJoinedGame }) {
+function Header ({ openShowInviteModal, hasJoinedGame, whoami }) {
   const history = useHistory()
   const location = useLocation()
 
@@ -53,7 +53,7 @@ function Header ({ openShowInviteModal, hasJoinedGame }) {
           </div>
         </div>
         <div className='right-panel'>
-          {hasJoinedGame && (
+          {whoami && (
             <div
               className='header-item with-left-border'
               onClick={openShowInviteModal}>
@@ -74,9 +74,9 @@ function Header ({ openShowInviteModal, hasJoinedGame }) {
               </div>
             </>
           )}
-          {hasJoinedGame && (
+          {whoami && (
             <div className='header-item' onClick={() => history.push('/you')}>
-              You
+              Your Profile
             </div>
           )}
         </div>

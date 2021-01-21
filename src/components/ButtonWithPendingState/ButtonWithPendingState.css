@@ -1,7 +1,7 @@
 .pending-iamp2p {
-  display: flex;
-  flex-direction: row;
   text-align: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .pending-iamp2p .icon {

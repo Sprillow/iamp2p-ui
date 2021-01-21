@@ -25,7 +25,7 @@ import JoinProjectModal from '../../../components/JoinProjectModal/JoinProjectMo
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-function PlayIntroScreen({ dispatch }) {
+function PlayIntroScreen({ dispatch, whoami }) {
   const history = useHistory()
 
   const [showJoinModal, setShowJoinModal] = useState(false)
@@ -88,8 +88,10 @@ function PlayIntroScreen({ dispatch }) {
   if (!hasCheckedInGame) {
     return <LoadingScreen />
   }
-  if (hasCheckedInGame && inGame) {
+  if (hasCheckedInGame && inGame && whoami) {
     return <Redirect to='/play' />
+  } else if  (hasCheckedInGame && inGame && !whoami) {
+    return <Redirect to='/play/create-profile' />
   }
 
   return (
@@ -113,8 +115,11 @@ function PlayIntroScreen({ dispatch }) {
                 <div>
                   If you have received a secret phrase from a friend of yours,
                   select Join a Game. If you want to initiate a game an invite
-                  friends, click Start a Game.
-                </div>
+                  friends, click Start a Game.</div>
+                  <br/>
+                  <div>
+                  <b>After you initiate  or join a game, you won't be able to join another game (unless you first leave that one).</b>
+                  </div>
                 <br />
               </div>
             </div>
@@ -398,7 +403,9 @@ async function holochainJoinGame(passphrase, setJoiningGameStep, dispatch) {
 }
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    whoami: state.whoami
+  }
 }
 function mapDispatchToProps(dispatch) {
   return {

@@ -40,10 +40,13 @@
 .right-panel {
   position: relative;
   display: flex;
+  min-width: 303px;
+  justify-content: flex-end;
 }
 
 .right-panel .header-item {
   border-left: #000000 1px solid;
+  flex: 1;
 }
 
 /* Top Left Panel */

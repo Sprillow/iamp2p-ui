@@ -64,6 +64,8 @@ function App ({
     }
   }, [cellIdString])
 
+  const joinedGameNoProfile = agentAddress && !whoami
+
   return (
     <ErrorBoundaryScreen>
       <Router>
