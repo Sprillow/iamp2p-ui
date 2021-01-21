@@ -676,7 +676,7 @@ const howTosItems = [
               <div className='guidebook-separate-line'>
                 In complex projects as the number of goals (and sometimes number
                 of team members) expands, it gets more difficult to determine
-                ‘what to focus on next'.
+                'what to focus on next'.
               </div>
               <div className='guidebook-separate-line'>
                 All the team members (who have editing permssion) would be able
@@ -816,7 +816,7 @@ const Content = ({ title, description }) => (
   </div>
 )
 
-function NavItem({ navItem: { submenu, title }, expanded, expand }) {
+function NavItem ({ navItem: { submenu, title }, expanded, expand }) {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const openEntry = searchParams.get(GUIDE_IS_OPEN)
@@ -847,7 +847,7 @@ function NavItem({ navItem: { submenu, title }, expanded, expand }) {
   )
 }
 
-function HowTosNav({ navList, openNav }) {
+function HowTosNav ({ navList, openNav }) {
   // store false, or the index of the currently expanded nav item
   // only one can be expanded at a time this way
   const [expanded, setExpanded] = useState(false)
@@ -879,11 +879,11 @@ function HowTosNav({ navList, openNav }) {
 }
 
 // DEFAULT / TOP LEVEL EXPORT
-export default function HowTos() {
+export default function HowTos () {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const openEntryKey = searchParams.get(GUIDE_IS_OPEN)
-  function isOpenEntry(subItem) {
+  function isOpenEntry (subItem) {
     return subItem.guide_id === openEntryKey
   }
   const openNav = howTosItems.find(navItem => {

@@ -65,7 +65,7 @@ const gettingStartedItems = [
               <div className='guidebook-separate-line'>
                 As in complex projects the number of goals (and sometimes number
                 of team members) expands, it gets more difficult to determine
-                ‘what to focus on next'.
+                'what to focus on next'.
               </div>
               <div className='guidebook-separate-line'>
                 All the team members (who have editing permssion) would be able
@@ -166,7 +166,7 @@ const Content = ({ goBack, title, description }) => (
   </div>
 )
 
-export default function GettingStarted({
+export default function GettingStarted ({
   sectionSelected,
   goBack,
   selectSection,

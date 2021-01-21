@@ -219,7 +219,7 @@ const humanMessages = {
   // s1 responses
   h1: 'What is a protocol?',
   h2: `So how are you different from, let's say other apps or websites I've used before (you kind of look normal)?`,
-  h3: `What do you mean by ‘peer-to-peer'?`,
+  h3: `What do you mean by 'peer-to-peer'?`,
   h4: 'What can you do for me?',
   h5: 'Can you show me an example of how you function?',
   // s2 responses
